@@ -19,3 +19,17 @@ shell-server@0.3.1            # Server-side component of the `meteor shell` comm
 
 momentjs:moment
 meteorhacks:aggregate
+
+kadira:flow-router
+kadira:blaze-layout
+
+## style
+zimme:active-route
+stolinski:stylus-multi
+alexwine:bootstrap-4
+
+## account
+accounts-base
+accounts-password
+alanning:roles
+chuikoff:accounts-ui-bootstrap-4
