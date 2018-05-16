@@ -1,6 +1,6 @@
 Template.customLogin.helpers({
-  create: function(){
-
+  currentUserEmail: function(){
+    return Meteor.user().emails[0].address
   },
   rendered: function(){
 
@@ -17,5 +17,8 @@ Template.customLogin.events({
     const password = document.getElementById('passwordInput').value.trim()
 
     Meteor.loginWithPassword(username, password)
+  },
+  "click #logout": function() {
+    Meteor.logout()
   }
 });
