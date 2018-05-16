@@ -37,7 +37,7 @@ lcenterFee = (startDate, endDate, lcentername) => {
     }
   }]
 
-  let result = Transactions.aggregate(pipeline)
+  let result = Transactionsus(pipeline)
 
   console.log(result)
 }

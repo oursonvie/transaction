@@ -1,6 +1,6 @@
 let oracledb = require('oracledb');
 
-testTransaction = () => {
+updateTransactionDB = () => {
 
   console.log('Transaction fetching')
   // start timing
