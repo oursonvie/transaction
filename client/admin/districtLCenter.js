@@ -7,3 +7,9 @@ Template.districtLCenter.onCreated(function() {
   })
   .catch(err => console.log(err))
 });
+
+Template.districtLCenter.helpers({
+  lcenterList: function(){
+    return Session.get('lcenterList')
+  }
+});
