@@ -2,7 +2,7 @@ let getTotalResult = () => {
   return Session.get('totalFeeResult')
 }
 
-Template.admin.onCreated(function() {
+Template.timeSetting.onCreated(function() {
   Session.set('datePicker', false)
   Session.set('totalFeeResult', false)
 
@@ -22,7 +22,7 @@ Template.admin.onCreated(function() {
   });
 });
 
-Template.admin.helpers({
+Template.timeSetting.helpers({
   ifSearch: function() {
     return Session.get('datePicker')
   },
@@ -42,13 +42,21 @@ Template.admin.helpers({
     if (number) {
       return numberWithCommas(number)
     }
+  },
+  fullResult: function() {
+    return getTotalResult()
   }
 });
 
-Template.admin.events({
+Template.timeSetting.events({
   "click .btn-date-input": function(event, template){
-     startDate = document.getElementById('startdate').value.trim()
-     endDate = document.getElementById('enddate').value.trim()
+
+     //startDate = document.getElementById('startdate').value.trim()
+     //endDate = document.getElementById('enddate').value.trim()
+
+     // fast testing
+     startDate = '2017-11-1'
+     endDate = '2018-4-30'
 
      formatedStartDate = moment(startDate).toISOString()
      formatedEndDate = moment(endDate).toISOString()
@@ -68,5 +76,12 @@ Template.admin.events({
   },
   "click .btn-reset": function() {
     Session.set('datePicker', false)
+  },
+  "click .btn-yes": function() {
+    PromiseMeteorCall('copyToWorking', Session.get('datePicker').startDate, Session.get('datePicker').endDate)
+    .then(res => {
+      console.log(res)
+    })
+    .catch(err => console.log(err))
   }
 });

@@ -1,4 +1,4 @@
-<template name="admin">
+<template name="timeSetting">
 
   <div class="card">
     <div class="card-body">
@@ -48,41 +48,33 @@
 
           </div>
 
-          <div class="col-sm">
+          <div class="col-sm-6">
 
             <div class="card">
               <h5 class="card-header">付款细分</h5>
               <div class="card-body">
 
-                <table class="table">
+                <table class="table table-striped">
                   <thead>
                     <tr>
-                      <th scope="col">#</th>
-                      <th scope="col">First</th>
-                      <th scope="col">Last</th>
-                      <th scope="col">Handle</th>
+                      <th scope="col">学生身份</th>
+                      <th scope="col">人次</th>
+                      <th scope="col">总额</th>
                     </tr>
                   </thead>
+
                   <tbody>
-                    <tr>
-                      <th scope="row">1</th>
-                      <td>Mark</td>
-                      <td>Otto</td>
-                      <td>@mdo</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">2</th>
-                      <td>Jacob</td>
-                      <td>Thornton</td>
-                      <td>@fat</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">3</th>
-                      <td>Larry</td>
-                      <td>the Bird</td>
-                      <td>@twitter</td>
-                    </tr>
+
+                    {{#each fullResult}}
+                      <tr>
+                        <td>{{_id}}</td>
+                        <td>{{count}}</td>
+                        <td>￥: {{commaNumber totalFee}}</td>
+                      </tr>
+                    {{/each}}
+
                   </tbody>
+
                 </table>
 
               </div>
@@ -92,14 +84,23 @@
 
         </div>
 
+        <div class="row">
 
+          <div class="card card-confirm">
+            <div class="card-body">
+              <h5 class="card-title">确认使用数据</h5>
+              <p class="card-text">确认使用以上数据进行返款处理</p>
+              <button class="btn btn-primary btn-yes">确定</button>
+            </div>
+          </div>
 
-
+        </div>
 
       </div>
     </div>
 
-    {{> transactionTable}}
+
+
   {{else}}
   {{/if}}
 

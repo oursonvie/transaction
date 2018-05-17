@@ -21,8 +21,6 @@ Meteor.methods({
 
     let result = Transactions.aggregate(pipeline);
 
-    console.log(result)
-
     return result
   }
 });
