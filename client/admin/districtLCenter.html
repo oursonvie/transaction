@@ -34,6 +34,11 @@
             <div class="card-body">
               <h5 class="card-title">区域学习中心</h5>
 
+                <ul class="list-group">
+                  {{#each liveLcenterList}}
+                    <li class="list-group-item {{#unless this.singleEnd}} active {{/unless}}">{{name}}</li>
+                  {{/each}}
+                </ul>
 
             </div>
           </div>
