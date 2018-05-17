@@ -1,21 +1,43 @@
+let getTotalResult = () => {
+  return Session.get('totalFeeResult')
+}
+
 Template.admin.onCreated(function() {
   Session.set('datePicker', false)
+  Session.set('totalFeeResult', false)
 
   var self = this;
   self.autorun(function() {
     if (Session.get('datePicker')) {
-      self.subscribe('dateSubscribe', Session.get('datePicker').startDate, Session.get('datePicker').endDate);
+
+      PromiseMeteorCall('totalFee', Session.get('datePicker').startDate, Session.get('datePicker').endDate)
+      .then(res => {
+        console.log(res)
+        Session.set('totalFeeResult', res)
+      })
+      .catch(err => console.log(err))
+
+      // self.subscribe('dateSubscribe', Session.get('datePicker').startDate, Session.get('datePicker').endDate);
     }
   });
 });
 
 Template.admin.helpers({
-  Transactions: function(){
-    return Transactions.find()
-  },
   ifSearch: function() {
     return Session.get('datePicker')
-  }
+  },
+  totalPeopleTime: function() {
+    if (getTotalResult()) {
+      let total = getTotalResult()
+      return sum(total.map(x => Number(x.count)));
+    }
+  },
+  totalPaid: function() {
+    if (getTotalResult()) {
+      let total = getTotalResult()
+      return sum(total.map(x => Number(x.totalFee)));
+    }
+  },
 });
 
 Template.admin.events({

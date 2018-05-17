@@ -18,32 +18,58 @@
   </div>
 
   {{#if ifSearch}}
+
     <div class="card">
       <div class="card-body">
 
-        <table class="table">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">First</th>
-              <th scope="col">Last</th>
-              <th scope="col">Handle</th>
-            </tr>
-          </thead>
-          <tbody>
-            {{#each Transactions}}
-              <tr>
-                <td>{{RECORDID}}</td>
-                <td>{{RECRUITBATCHCODE}}</td>
-                <td>{{REALNAME}}</td>
-                <td>{{MONEY}}</td>
-              </tr>
-            {{/each}}
-          </tbody>
-        </table>
+        <div class="row">
+
+          <div class="col-sm">
+
+            <div class="card">
+              <h5 class="card-header">付款人次</h5>
+              <div class="card-body">
+                <h5 class="card-title">{{totalPeopleTime}}</h5>
+
+              </div>
+            </div>
+
+          </div>
+
+          <div class="col-sm">
+
+            <div class="card">
+              <h5 class="card-header">款项总数</h5>
+              <div class="card-body">
+                <h5 class="card-title">{{totalPaid}}</h5>
+
+              </div>
+            </div>
+
+          </div>
+
+          <div class="col-sm">
+
+            <div class="card">
+              <h5 class="card-header">付款细分</h5>
+              <div class="card-body">
+                <h5 class="card-title">Special title treatment</h5>
+
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+
+
+
 
       </div>
     </div>
+
+    {{> transactionTable}}
   {{else}}
   {{/if}}
 
