@@ -12,7 +12,7 @@ Template.admin.onCreated(function() {
 
       PromiseMeteorCall('totalFee', Session.get('datePicker').startDate, Session.get('datePicker').endDate)
       .then(res => {
-        console.log(res)
+        //console.log(res)
         Session.set('totalFeeResult', res)
       })
       .catch(err => console.log(err))
@@ -38,6 +38,11 @@ Template.admin.helpers({
       return sum(total.map(x => Number(x.totalFee)));
     }
   },
+  commaNumber: function(number) {
+    if (number) {
+      return numberWithCommas(number)
+    }
+  }
 });
 
 Template.admin.events({
