@@ -4,7 +4,7 @@ Meteor.publish('dateSubscribe', function(startDate, endDate) {
     return Transactions.find({
       CREATEDATE:{
         $lt: new Date(endDate),
-        $gt: new Date(startDate)
+        $gte: new Date(startDate)
       }
     })
   } else {
