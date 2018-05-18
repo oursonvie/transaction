@@ -31,5 +31,8 @@ Meteor.methods({
   },
   getLcenterList: function() {
     return Promise.await(Transactions.rawCollection().distinct('LCENTERNAME'))
+  },
+  getLearingCenterList: function() {
+    return Promise.await(LearningCenter.rawCollection().distinct('name'))
   }
 });
