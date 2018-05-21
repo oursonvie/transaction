@@ -43,6 +43,20 @@ DLearningCenter.attachSchema(new SimpleSchema({
       }
     }
   },
+  sublearningcenter: {
+    label: "",
+    type: Array,
+    optional: false
+  },
+  'sublearningcenter.$':{
+    label: "",
+    type: Object
+  },
+  'sublearningcenter.$.name':{
+    type: String,
+    label: "选择学习中心",
+    allowedValues: ['1','2','3'],
+  },
   createdBy: {
     type: String,
     autoValue:function(){

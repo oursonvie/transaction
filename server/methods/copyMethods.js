@@ -35,6 +35,9 @@ Meteor.methods({
   getLearingCenterList: function() {
     return Promise.await(LearningCenter.rawCollection().distinct('name'))
   },
+  getActiveLearingCenterList: function() {
+    return Promise.await(WorkingPlace.rawCollection().distinct('LCENTERNAME'))
+  },
   setLearingCenterListStatus: function() {
     let activeList = Promise.await(WorkingPlace.rawCollection().distinct('LCENTERNAME'))
 
