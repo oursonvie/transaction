@@ -8,11 +8,20 @@ Template.districtLCenter.onCreated(function() {
     Session.set('activeLearningCenter', res)
   })
 
+  // sub to lcenter db
+  var self = this;
+  self.autorun(function() {
+    self.subscribe('DistrictLearningCenterList')
+  })
+
 });
 
 Template.districtLCenter.helpers({
-  addMode: function(){
+  addMode: function() {
     return Session.get('addNewDLCenter')
+  },
+  districtLCenter: function() {
+    return DLearningCenter.find()
   }
 });
 

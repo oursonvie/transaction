@@ -2,6 +2,7 @@ Template.singleLCenter.onCreated(function() {
 
   // init Session
   Session.set('selected', false)
+  Session.set('selectedID', false)
 
   // init check on learning center
   PromiseMeteorCall('getLcenterList')

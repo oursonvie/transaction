@@ -19,3 +19,11 @@ Meteor.publish('LearningCenterList', function() {
     throw new Meteor.Error( '500', 'No Premission' );
   }
 })
+
+Meteor.publish('DistrictLearningCenterList', function() {
+  if (this.userId) {
+    return DLearningCenter.find()
+  } else {
+    throw new Meteor.Error( '500', 'No Premission' );
+  }
+})
