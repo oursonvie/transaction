@@ -5,7 +5,16 @@ Template.updateDLCenter.helpers({
 });
 
 Template.updateDLCenter.events({
-  "click .btn-secondary": function(event, template){
+  "click .fa-times-circle": function() {
     Session.set('selectedID', false)
   }
 });
+
+AutoForm.addHooks(['updateDLcenterForm'], {
+  onSuccess: function(formType, result) {
+    if (formType == 'update' && result == 1) {
+      alert('更新成功')
+      Session.set('selectedID', false)
+    }
+  }
+})

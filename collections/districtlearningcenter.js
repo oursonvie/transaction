@@ -31,6 +31,7 @@ DLearningCenter.attachSchema(new SimpleSchema({
   name: {
     type: String,
     label: "学习中心名称",
+    optional: true
   },
   type: {
     type: String,

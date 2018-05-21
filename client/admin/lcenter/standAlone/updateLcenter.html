@@ -1,17 +1,7 @@
 <template name="updateLcenter">
   {{#if selected}}
-    {{#autoForm id="afUpdateDemo" type=formType collection="LearningCenter" doc=selected autosave=autoSaveMode}}
-      {{> afQuickField name="name" disabled=true}}
-      {{> afQuickField name="type" disabled=true}}
-      <div class="form-group">
-        <button type="submit" class="btn btn-primary">提交</button>
-        <button type="reset" class="btn btn-secondary">关闭</button>
-      </div>
-    {{/autoForm}}
+
+    {{> quickForm collection="LearningCenter" doc=selected id="updateLcenterForm" type="update"}}
 
   {{/if}}
-</template>
-
-<template name="singleRowUpdate">
-  {{> quickForm collection="LearningCenter" doc=selected id="updateLcenterForm" type="update"}}
 </template>
