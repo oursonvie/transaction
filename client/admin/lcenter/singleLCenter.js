@@ -1,4 +1,7 @@
-Template.districtLCenter.onCreated(function() {
+Template.singleLCenter.onCreated(function() {
+
+  // init Session
+  Session.set('selected', false)
 
   // init check on learning center
   PromiseMeteorCall('getLcenterList')
@@ -10,7 +13,7 @@ Template.districtLCenter.onCreated(function() {
     _.forEach(res, function(lcenter) {
       lcenterObject = {}
       lcenterObject.name = lcenter
-      lcenterObject.type = 'single'
+      lcenterObject.type = 'standalone'
       lcenterObject.createdAt = new Date()
       lcenterArray.push(lcenterObject)
     })
@@ -44,14 +47,14 @@ Template.districtLCenter.onCreated(function() {
 
 });
 
-Template.districtLCenter.helpers({
+Template.singleLCenter.helpers({
   lcenterList: function(){
     return LearningCenter.find()
   }
 });
 
-Template.districtLCenter.events({
+Template.singleLCenter.events({
   'click li': function(event, template) {
-    console.log(this)
+    Session.set('selectedID', this._id)
   }
 })

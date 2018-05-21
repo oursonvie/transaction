@@ -13,6 +13,6 @@ Template.eachLCenter.helpers({
 
 Template.eachLCenter.events({
   'click li': function(event, template) {
-    template.actived.set(!Template.instance().actived.get())
+    // template.actived.set(!Template.instance().actived.get())
   }
 })
