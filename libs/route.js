@@ -11,3 +11,10 @@ FlowRouter.route('/singleLCenter', {
         BlazeLayout.render('AdminLayout', {main: 'singleLCenter'});
     }
 });
+
+FlowRouter.route('/districtLCenter', {
+   name: 'districtLCenter',
+    action() {
+        BlazeLayout.render('AdminLayout', {main: 'districtLCenter'});
+    }
+});

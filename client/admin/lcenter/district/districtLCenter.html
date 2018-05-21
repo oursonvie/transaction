@@ -1,0 +1,55 @@
+<template name="districtLCenter">
+
+  <div class="card text-center">
+    <div class="card-header">
+      区域学习中心
+    </div>
+    <div class="card-body">
+
+
+      <div class="row">
+
+        <div class="col-sm">
+
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">区域学习中心列表</h5>
+
+              123
+
+            </div>
+          </div>
+
+
+
+        </div>
+
+
+        <div class="col-sm">
+
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">区域学习中心详情</h5>
+
+              {{#if addMode}}
+                {{> addNewDLCenter}}
+              {{/if}}
+            </div>
+
+          </div>
+
+          <button type="button" class="btn btn-primary btn-add">添加区域学习中心</button>
+
+        </div>
+
+      </div>
+
+
+
+    </div>
+    <div class="card-footer text-muted">
+      数据库内学习中心
+    </div>
+  </div>
+
+</template>
