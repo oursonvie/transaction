@@ -1,3 +1,12 @@
 <template name="eachLCenter">
-  <li class="list-group-item {{#unless reactActive}} active {{/unless}}">{{name}}</li>
+  <li class="list-group-item {{#unless reactActive}} active {{/unless}}" style="text-align: left">
+
+    {{#if actived}}
+      <i class="fa fa-check-circle" style="color:green"></i>
+    {{else}}
+      <i class="fa fa-check-circle"></i>
+    {{/if}}
+
+    {{name}}
+  </li>
 </template>

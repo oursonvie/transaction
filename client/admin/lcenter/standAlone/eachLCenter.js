@@ -8,6 +8,9 @@ Template.eachLCenter.helpers({
   },
   reactActive: function() {
     return !Template.instance().actived.get()
+  },
+  actived: function() {
+    return this.active
   }
 });
 

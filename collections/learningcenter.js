@@ -59,6 +59,18 @@ LearningCenter.attachSchema(new SimpleSchema({
       }
     }
   },
+  active: {
+    type: Boolean,
+    label: "使用中",
+    autoValue: function() {
+      if (this.isInsert) {
+        if (!this.value) {
+          return false
+        }
+      }
+    }
+
+  },
   createdBy: {
     type: String,
     autoValue:function(){

@@ -39,6 +39,12 @@ Template.singleLCenter.onCreated(function() {
   })
   .catch(err => console.log(err))
 
+  // check learning center status
+  PromiseMeteorCall('setLearingCenterListStatus')
+  .then(res => {
+    console.log(res)
+  })
+
   // sub to lcenter db
   var self = this;
   self.autorun(function() {
@@ -49,7 +55,8 @@ Template.singleLCenter.onCreated(function() {
 
 Template.singleLCenter.helpers({
   lcenterList: function(){
-    return LearningCenter.find()
+    // sort result
+    return LearningCenter.find({}, {sort: { active : -1, name : 1 }})
   }
 });
 

@@ -34,5 +34,14 @@ Meteor.methods({
   },
   getLearingCenterList: function() {
     return Promise.await(LearningCenter.rawCollection().distinct('name'))
+  },
+  setLearingCenterListStatus: function() {
+    let activeList = Promise.await(WorkingPlace.rawCollection().distinct('LCENTERNAME'))
+
+    _.forEach(activeList, function(center) {
+      LearningCenter.update({name:center}, {$set:{active:true}})
+    })
+
+    return 'Learning center status updated'
   }
 });
