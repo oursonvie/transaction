@@ -7,7 +7,11 @@ Template.eachLCenter.helpers({
     return Session.get('lcenterList')
   },
   reactActive: function() {
-    return !Template.instance().actived.get()
+    if(this.type == 'standalone') {
+      return true
+    } else {
+      return false
+    }
   },
   actived: function() {
     return this.active
