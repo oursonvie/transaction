@@ -5,7 +5,7 @@ Template.updateLcenter.helpers({
 });
 
 Template.updateLcenter.events({
-  "click .btn-secondary": function(event, template){
+  "click .fa-times-circle": function() {
     Session.set('selectedID', false)
   }
 });

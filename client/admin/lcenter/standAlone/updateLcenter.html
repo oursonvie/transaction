@@ -1,7 +1,15 @@
 <template name="updateLcenter">
   {{#if selected}}
 
+  <div class="card">
+    <div class="card-body">
+
+      <i class="fa fa-times-circle pull-right"></i>
+
     {{> quickForm collection="LearningCenter" doc=selected id="updateLcenterForm" type="update"}}
+
+    </div>
+  </div>
 
   {{/if}}
 </template>
