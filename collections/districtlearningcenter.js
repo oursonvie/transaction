@@ -56,7 +56,18 @@ DLearningCenter.attachSchema(new SimpleSchema({
   'sublearningcenter.$.name':{
     type: String,
     label: "选择学习中心",
-    allowedValues: ['1','2','3'],
+    autoform: {
+      type: "select",
+      options: () => {
+        let list = lcenterList()
+        return _.map(list, function(value) {
+          return {
+            label:value,
+            value:value
+          }
+        })
+      }
+    }
   },
   createdBy: {
     type: String,
