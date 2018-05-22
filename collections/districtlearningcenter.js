@@ -60,12 +60,13 @@ DLearningCenter.attachSchema(new SimpleSchema({
       type: "select",
       options: () => {
         let list = lcenterList()
-        return _.map(list, function(value) {
+        let result =  _.map(list, function(value) {
           return {
             label:value,
             value:value
           }
         })
+        return _.sortBy(result, ['label'])
       }
     }
   },

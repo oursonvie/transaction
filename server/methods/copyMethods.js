@@ -46,5 +46,18 @@ Meteor.methods({
     })
 
     return 'Learning center status updated'
+  },
+  checkStandAlone: function() {
+    let cursors = DLearningCenter.find().fetch()
+    let plainArray = []
+    _.forEach(cursors, function(dcenter) {
+      _.forEach(dcenter.sublearningcenter, function(center) {
+        LearningCenter.update({name:center.name}, {
+          $set:{
+            type: 'multiple'
+          }
+        })
+      })
+    })
   }
 });
