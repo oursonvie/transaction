@@ -17,6 +17,15 @@ Template.updateDLCenter.events({
       PromiseMeteorCall('removeDLCenter', id)
       .then(res => {
         console.log(res)
+        // success delete will return 1
+        if (res == 1) {
+          // check standalone leaerning center
+          PromiseMeteorCall('checkStandAlone')
+          .then(res => {
+            console.log(res)
+          })
+          .catch(err => console.log(err))
+        }
       })
       .catch(err => console.log(err))
     } else {
@@ -30,6 +39,7 @@ Template.updateDLCenter.events({
 
 AutoForm.addHooks(['updateDLcenterForm'], {
   onSuccess: function(formType, result) {
+    console.log(formType)
     if (formType == 'update' && result == 1) {
 
       alert('更新成功')
@@ -43,6 +53,5 @@ AutoForm.addHooks(['updateDLcenterForm'], {
       .catch(err => console.log(err))
 
     }
-
   }
 })

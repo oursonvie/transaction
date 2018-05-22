@@ -50,14 +50,27 @@ Meteor.methods({
   checkStandAlone: function() {
     let cursors = DLearningCenter.find().fetch()
     let plainArray = []
-    _.forEach(cursors, function(dcenter) {
-      _.forEach(dcenter.sublearningcenter, function(center) {
-        LearningCenter.update({name:center.name}, {
-          $set:{
-            type: 'multiple'
-          }
+
+    console.log('reset lcenters status')
+    // batch change status to standalone first
+    LearningCenter.update({},{$set:{type:'standalone'}},{multi: true})
+
+    try {
+      _.forEach(cursors, function(dcenter) {
+        _.forEach(dcenter.sublearningcenter, function(center) {
+          LearningCenter.update({name:center.name}, {
+            $set:{
+              type: 'multiple'
+            }
+          })
         })
       })
-    })
+      console.log('lcenter status checked')
+      return 1
+    } catch(err) {
+      return err
+    }
+
+
   }
 });
