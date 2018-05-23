@@ -3,6 +3,7 @@
   <div class="card text-center">
     <div class="card-header">
       区域学习中心
+      <button class="btn btn-primary float-right btn-add">添加区域学习中心</button>
     </div>
     <div class="card-body">
 
@@ -33,16 +34,13 @@
             <div class="card-body">
               <h5 class="card-title">区域学习中心详情</h5>
 
-              {{> updateDLCenter}}
+              {{> viewDistrictLCenter}}
 
-              {{#if addMode}}
-                {{> addNewDLCenter}}
-              {{/if}}
+
             </div>
 
           </div>
 
-          <button type="button" class="btn btn-primary btn-add">添加区域学习中心</button>
 
         </div>
 

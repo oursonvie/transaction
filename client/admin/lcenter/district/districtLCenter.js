@@ -1,6 +1,5 @@
 Template.districtLCenter.onCreated(function() {
-  Session.set('addNewDLCenter', false)
-  Session.set('activeLearningCenter', false)
+  Session.set('action', false)
 
   // check local learning center list
   PromiseMeteorCall('getActiveLearingCenterList')
@@ -17,8 +16,8 @@ Template.districtLCenter.onCreated(function() {
 });
 
 Template.districtLCenter.helpers({
-  addMode: function() {
-    return Session.get('addNewDLCenter')
+  actionStatus: function() {
+    return Session.get('action')
   },
   districtLCenter: function() {
     return DLearningCenter.find()
@@ -27,7 +26,6 @@ Template.districtLCenter.helpers({
 
 Template.districtLCenter.events({
   "click .btn-add": function(event, template){
-     Session.set('addNewDLCenter', !Session.get('addNewDLCenter'))
-     Session.set('selectedID', false)
+     Session.set('action', {type:'add'} )
   }
 });
