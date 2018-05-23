@@ -1,6 +1,5 @@
 Template.eachDLCenter.events({
   "click li": function() {
-    Session.set('selectedID', this._id)
-    Session.set('addNewDLCenter', false)
+    Session.set('action', { type:'view',  id: this._id} )
   }
 });

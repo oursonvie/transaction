@@ -2,11 +2,19 @@
   <div class="card">
     <div class="card-body">
 
-      {{#if action}}
-        <i class="fa fa-times-circle pull-right"></i>
+
+      <i class="fa fa-times-circle pull-right btn-close"></i>
+
+      {{#if $.Session.equals 'actionType' 'add'}}
+        {{> addNewDLCenter}}
+      {{else if $.Session.equals 'actionType' 'view'}}
+        {{> DLCenterDetail}}
+      {{else if $.Session.equals 'actionType' 'edit'}}
+        edit
       {{else}}
         请选择区域学习中心
       {{/if}}
+
 
 
     </div>
@@ -15,8 +23,4 @@
 
 <template name="asd">
   {{> updateDLCenter}}
-
-  {{#if addMode}}
-    {{> addNewDLCenter}}
-  {{/if}}
 </template>

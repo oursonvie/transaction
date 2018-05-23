@@ -1,12 +1,3 @@
-Template.addNewDLCenter.onCreated(function() {
-  // sub to lcenter db
-  var self = this;
-  self.autorun(function() {
-    self.subscribe('Settings')
-  })
-
-});
-
 AutoForm.addHooks(['insertDLCenterForm'], {
   onSuccess: function(formType, result) {
     if (formType == 'insert') {

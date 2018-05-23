@@ -26,6 +26,6 @@ Template.districtLCenter.helpers({
 
 Template.districtLCenter.events({
   "click .btn-add": function(event, template){
-     Session.set('action', {type:'add'} )
+     Session.set('action', { type:'add' } )
   }
 });

@@ -5,9 +5,6 @@ Template.updateDLCenter.helpers({
 });
 
 Template.updateDLCenter.events({
-  "click .fa-times-circle": function() {
-    Session.set('selectedID', false)
-  },
   "click .btn-danger": function() {
     let id = Session.get("selectedID")
 
