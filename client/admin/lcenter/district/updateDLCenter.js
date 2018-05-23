@@ -1,12 +1,12 @@
 Template.updateDLCenter.helpers({
   selected: function(){
-      return DLearningCenter.findOne({_id:Session.get('selectedID')})
+      return DLearningCenter.findOne({_id:Session.get('action').id})
   }
 });
 
 Template.updateDLCenter.events({
   "click .btn-danger": function() {
-    let id = Session.get("selectedID")
+    let id = Session.get('action').id
 
     let decision = confirm("确认删除区域学习中心");
 

@@ -12,16 +12,6 @@ Template.districtLCenter.onCreated(function() {
 
 });
 
-Template.viewDistrictLCenter.helpers({
-  actionType: function(action){
-    console.log(action)
-    if (Session.get(action)) {
-      console.log(Session.get(action))
-      return Session.get(action).type
-    }
-  }
-});
-
 Template.viewDistrictLCenter.events({
   "click .btn-close": function() {
     Session.set('action', false)
