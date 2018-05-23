@@ -44,6 +44,23 @@ DLearningCenter.attachSchema(new SimpleSchema({
       }
     }
   },
+  returnratio: {
+    type: Number,
+    label: "返款比例",
+    autoform: {
+      type: "select",
+      options: () => {
+        let avalibleSelection = [0.35, 0.4, 0.6]
+        let result = _.map(avalibleSelection, function(value) {
+          return {
+            label: `${100-value*100}% : ${value*100}%`,
+            value: value
+          }
+        })
+        return result
+      }
+    }
+  },
   sublearningcenter: {
     label: "",
     type: Array,

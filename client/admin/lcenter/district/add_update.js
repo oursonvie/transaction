@@ -7,18 +7,6 @@ Template.addNewDLCenter.onCreated(function() {
 
 });
 
-Template.addNewDLCenter.helpers({
-  lcenterarray: function(){
-     let centerlist = Settings.findOne({valuename:'fullcenterlist'}).value
-     return _.map(centerlist, function(value) {
-       return {
-         label:value,
-         value:value
-       }
-     })
-  }
-});
-
 AutoForm.addHooks(['insertDLCenterForm'], {
   onSuccess: function(formType, result) {
     if (formType == 'insert') {

@@ -7,12 +7,12 @@
 
 </template>
 
-
 <template name="insertDLCenterForm">
   {{#autoForm collection="DLearningCenter" id="insertDLCenterForm" type="insert"}}
     <fieldset>
       <legend>添加区域学习中心</legend>
       {{> afQuickField name='name'}}
+      {{> afQuickField name='returnratio'}}
       {{> afQuickField name='sublearningcenter'}}
     </fieldset>
     <button type="submit" class="btn btn-primary">添加</button>
