@@ -60,27 +60,6 @@ LearningCenter.attachSchema(new SimpleSchema({
       }
     }
   },
-  returntype: {
-    type: String,
-    label: "返款规则",
-    optional: true,
-    allowedValues: [
-      'fixedratio',
-      'otherratio'
-    ],
-    autoform: {
-         options: [
-            {
-               label: '固定返款',
-               value: 'fixedratio'
-            },
-            {
-               label: '阶梯返款',
-               value: 'otherratio'
-            }
-         ]
-    }
-  },
   active: {
     type: Boolean,
     label: "使用中",
