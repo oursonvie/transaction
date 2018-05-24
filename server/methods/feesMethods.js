@@ -23,11 +23,11 @@ Meteor.methods({
 
     return result
   },
-  districtCenterPersonFees: function(centerName) {
-    let lcenterList = DLearningCenter.findOne({name:centerName}).sublearningcenter
+  districtCenterPersonFees: function(DCenterId) {
+    let lcenterObjList = DLearningCenter.findOne({_id:DCenterId}).sublearningcenter
 
-    if (lcenterList.length != 2) {
-      return arrayCenterTotalFees(centerName)
+    if (lcenterObjList.length != 2) {
+      return arrayCenterTotalFees(lcenterObjList)
     }
   }
 });

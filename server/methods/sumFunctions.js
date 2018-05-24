@@ -5,13 +5,14 @@ Array.prototype.unique = function() {
   });
 }
 
-arrayCenterTotalFees = (centerName) => {
+//convert district learning center id to array of sub learning center
+
+arrayCenterTotalFees = (lcenterListArray) => {
   // applicatiable for 1 and more than 2 learning center
-  let lcenterList = DLearningCenter.findOne({name:centerName}).sublearningcenter
   let centerArrayList = []
 
   // array with only center name
-  _.forEach(lcenterList, function(center) {
+  _.forEach(lcenterListArray, function(center) {
     centerArrayList.push(center.name)
   })
 
@@ -21,6 +22,10 @@ arrayCenterTotalFees = (centerName) => {
         LCENTERNAME:
         {
             $in: centerArrayList
+        },
+        STUDENTSTYLE:
+        {
+          $ne: '退学生'
         }
       }
     },
