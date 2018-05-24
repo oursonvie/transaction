@@ -1,23 +1,57 @@
 <template name="DLCenterDetail">
   {{#with selectDlcenter}}
 
-  <div class="card">
-    <div class="card-header">
-      {{name}}
+  <div class="row">
+
+    <div class="col-sm">
+      <div class="card">
+        <div class="card-header">
+          {{name}}
+        </div>
+
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">返款起始比例: {{returnratio}}</li>
+          <li class="list-group-item">学习中心数：{{lcenterCount}}</li>
+          <li class="list-group-item">缴费情况：{{numberDisplay totalFees}}</li>
+        </ul>
+
+        <div class="card-body">
+
+          <a href="#" class="btn btn-primary">缴费记录</a>
+          <button class="btn btn-primary btn-edit">修改</button>
+        </div>
+      </div>
     </div>
 
-    <ul class="list-group list-group-flush">
-      <li class="list-group-item">返款起始比例: {{returnratio}}</li>
-      <li class="list-group-item">学习中心数：{{lcenterCount}}</li>
-      <li class="list-group-item">缴费情况：{{totalFees}}</li>
-    </ul>
+    <div class="col-sm">
+      <div class="card">
 
-    <div class="card-body">
+        <table class="table">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">批次</th>
+              <th scope="col">人数</th>
+              <th scope="col">缴费金额</th>
+            </tr>
+          </thead>
 
-      <a href="#" class="btn btn-primary">缴费记录</a>
-      <button class="btn btn-primary btn-edit">修改</button>
+          <tbody>
+            {{#each feesObjects}}
+              <tr>
+                <td>{{_id}}</td>
+                <td>{{studentcount}}</td>
+                <td>{{numberDisplay totalFee}}</td>
+              </tr>
+            {{/each}}
+          </tbody>
+        </table>
+
+      </div>
     </div>
+
   </div>
+
+
 
   {{/with}}
 </template>
