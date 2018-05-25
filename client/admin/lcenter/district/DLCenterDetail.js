@@ -1,5 +1,7 @@
 Template.DLCenterDetail.onCreated(function() {
   Session.set('feesDetail', false)
+  Session.set('returnRatio', false)
+  Session.set('totalAmount', false)
   // sub to lcenter db
   var self = this;
   self.autorun(function() {
@@ -30,6 +32,8 @@ Template.DLCenterDetail.helpers({
         total += lodash.sumBy(center.paymentdetail, 'totalFee')
       })
 
+      Session.set('totalAmount', total)
+
       return total
     }
   },
@@ -48,6 +52,14 @@ Template.DLCenterDetail.helpers({
     } else {
       return false
     }
+  },
+  currentReturnRatio: function(value, lowestRatio) {
+    let result = getRatio(value, lowestRatio)
+    Session.set('returnRatio', result)
+    return result
+  },
+  returnAmount: function(total, ratio) {
+    return Session.get('returnRatio') * Session.get('totalAmount')
   }
 });
 
