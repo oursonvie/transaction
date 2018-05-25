@@ -5,16 +5,24 @@ FlowRouter.route('/admin', {
     }
 });
 
-FlowRouter.route('/singleLCenter', {
+FlowRouter.route('/singlelcenter', {
    name: 'singleLCenter',
     action() {
         BlazeLayout.render('AdminLayout', {main: 'singleLCenter'});
     }
 });
 
-FlowRouter.route('/districtLCenter', {
+FlowRouter.route('/districtlcenter', {
    name: 'districtLCenter',
     action() {
         BlazeLayout.render('AdminLayout', {main: 'districtLCenter'});
+    }
+});
+
+
+FlowRouter.route('/districtcenter/:id', {
+   name: 'districtcenterID',
+    action() {
+        BlazeLayout.render('AdminLayout', {main: 'districtcenterID'});
     }
 });

@@ -1,0 +1,40 @@
+<template name="districtcenterID">
+  {{#if Template.subscriptionsReady}}
+
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">支付总金额</th>
+          <th scope="col">创建日期</th>
+          <th scope="col">账号ID</th>
+          <th scope="col">学生报名编号</th>
+          <th scope="col">学生类型</th>
+          <th scope="col">学习中心名称</th>
+          <th scope="col">入学批次</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        {{#each transactions}}
+          <tr>
+            <th>{{RECORDID}}</th>
+            <td>{{AMOUNT}}</td>
+            <td>{{timeFormatter CREATEDATE}}</td>
+            <td>{{SUBJECTID}}</td>
+            <td>{{UNIVERSITYSTUNO}}</td>
+            <td>{{STUDENTSTYLE}}</td>
+            <td>{{LCENTERNAME}}</td>
+            <td>{{RECRUITBATCHCODE}}</td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+
+
+  {{else}}
+    {{> loader}}
+  {{/if}}
+
+</template>

@@ -27,3 +27,21 @@ Meteor.publish('DistrictLearningCenterList', function() {
     throw new Meteor.Error( '500', 'No Premission' );
   }
 })
+
+Meteor.publish('DistrictLearningCenter', function(id) {
+  if (this.userId) {
+    return DLearningCenter.find({_id:id})
+  } else {
+    throw new Meteor.Error( '500', 'No Premission' );
+  }
+})
+
+Meteor.publish('sublearningCenter', function(id) {
+  if (this.userId) {
+    let subClist = DLearningCenter.findOne({_id:id}).sublearningcenter
+    let array = lodash.map(subClist, 'name')
+    return WorkingPlace.find({LCENTERNAME: {$in: array}})
+  } else {
+    throw new Meteor.Error( '500', 'No Premission' );
+  }
+})
