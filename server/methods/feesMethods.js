@@ -26,8 +26,31 @@ Meteor.methods({
   districtCenterPersonFees: function(DCenterId) {
     let lcenterObjList = DLearningCenter.findOne({_id:DCenterId}).sublearningcenter
 
-    if (lcenterObjList.length != 2) {
-      return arrayCenterTotalFees(lcenterObjList)
+    if (lcenterObjList.length == 2) {
+      let result = []
+      _.forEach(lcenterObjList, function(center) {
+        let tempArray = []
+        let temp = {}
+        temp.name = center.name
+
+        // convert object into array
+        tempArray.push(center)
+
+        temp.paymentdetail = arrayCenterTotalFees(tempArray)
+        result.push(temp)
+      })
+
+      result.type = 1
+      return result
+    } else {
+      // return array of objects with one object
+      let array = []
+      let result = {}
+      result.name = DLearningCenter.findOne({_id:DCenterId}).name
+      result.paymentdetail = arrayCenterTotalFees(lcenterObjList)
+      // push array
+      array.push(result)
+      return array
     }
   }
 });

@@ -24,10 +24,16 @@
     </div>
 
     <div class="col-sm">
+
       <div class="card">
+
+        {{#each feesObjects}}
 
         <table class="table">
           <thead class="thead-dark">
+            <tr>
+              <td colspan="3">{{name}}</td>
+            </tr>
             <tr>
               <th scope="col">批次</th>
               <th scope="col">人数</th>
@@ -36,17 +42,22 @@
           </thead>
 
           <tbody>
-            {{#each feesObjects}}
-              <tr>
-                <td>{{_id}}</td>
-                <td>{{studentcount}}</td>
-                <td>{{numberDisplay totalFee}}</td>
-              </tr>
-            {{/each}}
+
+              {{#each paymentdetail}}
+                <tr>
+                  <td>{{_id}}</td>
+                  <td>{{studentcount}}</td>
+                  <td>{{numberDisplay totalFee}}</td>
+                </tr>
+              {{/each}}
+
           </tbody>
         </table>
 
+        {{/each}}
+
       </div>
+
     </div>
 
   </div>

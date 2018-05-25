@@ -8,6 +8,9 @@ Array.prototype.unique = function() {
 //convert district learning center id to array of sub learning center
 
 arrayCenterTotalFees = (lcenterListArray) => {
+
+  console.log(lcenterListArray)
+
   // applicatiable for 1 and more than 2 learning center
   let centerArrayList = []
 
@@ -37,8 +40,6 @@ arrayCenterTotalFees = (lcenterListArray) => {
       }
     }
   ]
-
-  console.log(centerArrayList)
 
   let result = Promise.await(WorkingPlace.aggregate(pipeline))
   let sortedResult = _.sortBy(result, ['_id']);

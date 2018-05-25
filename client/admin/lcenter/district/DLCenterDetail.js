@@ -22,8 +22,15 @@ Template.DLCenterDetail.helpers({
   },
   totalFees: function() {
     if (Session.get('feesDetail')) {
-      let result = lodash.sumBy(Session.get('feesDetail'), 'totalFee')
-      return result
+      // sum array
+      let arrayFees = Session.get('feesDetail')
+      let total = 0
+
+      _.forEach(arrayFees, function(center) {
+        total += lodash.sumBy(center.paymentdetail, 'totalFee')
+      })
+
+      return total
     }
   },
   feesObjects: function() {
@@ -34,6 +41,13 @@ Template.DLCenterDetail.helpers({
   numberDisplay: function(number) {
     let fixed = parseFloat(number).toFixed(2)
     return numberWithCommas(fixed)
+  },
+  specialDCenter: function() {
+    if (DLearningCenter.findOne({_id:Session.get('action').id}).sublearningcenter.length == 2) {
+      return true
+    } else {
+      return false
+    }
   }
 });
 
