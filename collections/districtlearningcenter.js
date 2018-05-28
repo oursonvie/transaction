@@ -61,6 +61,43 @@ DLearningCenter.attachSchema(new SimpleSchema({
       }
     }
   },
+  bankaccountdetail: {
+    label: '',
+    type: Object
+  },
+  'bankaccountdetail.name':{
+    label: '银行账户名称',
+    type: String
+  },
+  'bankaccountdetail.accountno':{
+    label: '账号',
+    type: Number
+  },
+  'bankaccountdetail.branchname':{
+    label: '开户行',
+    type: String
+  },
+  'bankaccountdetail.province':{
+    label: '汇款省市',
+    type: String
+  },
+  'bankaccountdetail.contact':{
+    label: '联系人',
+    type: String
+  },
+  'bankaccountdetail.contactno':{
+    label: '联系电话',
+    type: String
+  },
+  'bankaccountdetail.fax':{
+    label: '传真',
+    type: String,
+    optional: true
+  },
+  'bankaccountdetail.address':{
+    label: '详细地址',
+    type: String,
+  },
   sublearningcenter: {
     label: "",
     type: Array,
