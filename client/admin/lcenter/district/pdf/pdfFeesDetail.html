@@ -1,0 +1,40 @@
+<template name="pdfFeesDetail">
+
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>批次</th>
+        <th>人数</th>
+        <th>缴费方式</th>
+        <th>缴费金额（元）</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each feesDetail}}
+        {{#each paymentdetail}}
+          <tr>
+            <td>{{_id}}</td>
+            <td>{{studentcount}}</td>
+            <td>银联缴费</td>
+            <td>{{totalFee}}</td>
+          </tr>
+        {{/each}}
+      {{/each}}
+
+      <tr>
+        <td></td>
+        <td></td>
+        <td>汇款缴费</td>
+        <td>123</td>
+      </tr>
+
+      <tr>
+        <th colspan="2">合计</th>
+        <th></th>
+        <th>{{feesInfo.total}}</th>
+      </tr>
+
+    </tbody>
+  </table>
+
+</template>

@@ -1,139 +1,120 @@
 <template name="dcenterpdf">
-  {{#with districtCenter}}
+  <div class="container">
 
-  <h3>学费结算确认函</h3>
-  {{name}} 学习中心
+    {{#with districtCenter}}
 
-  <p>本次结算期间为</p>
+    <h3>学费结算确认函</h3>
+    {{name}} 学习中心
 
-  <p>学生缴费情况：</p>
+    <p>本次结算期间为{{dateRage.startDate}}至 {{dateRage.endDate}}</p>
 
-  <table class="table table-bordered">
-    <thead>
-      <tr>
-        <th>批次</th>
-        <th>人数</th>
-        <th>缴费方式</th>
-        <th>缴费金额（元）</th>
-      </tr>
-    </thead>
-    <tbody>
-      {{#each feesDetail}}
-        {{#each paymentdetail}}
-          <tr>
-            <th>{{_id}}</th>
-            <td>{{studentcount}}</td>
-            <td>银联缴费</td>
-            <td>{{totalFee}}</td>
-          </tr>
-        {{/each}}
-      {{/each}}
+    <p>学生缴费情况：</p>
 
-    </tbody>
-  </table>
+    {{> pdfFeesDetail}}
 
-  <p>学费结算情况：</p>
+    <p>学费结算情况：</p>
 
-  <table class="table table-bordered">
-    <thead>
-      <tr>
-        <th rowspan="2">结算金额</th>
-        <th colspan="2">学习中心</th>
-        <th colspan="2">学校</th>
-      </tr>
-      <tr>
-        <th>分配比例</th>
-        <th>分配金额（元）</th>
-        <th>分配比例</th>
-        <th>分配金额（元）</th>
-      </tr>
-    </thead>
-    <tbody>
+    <table class="table table-bordered">
+      <thead>
         <tr>
-          <td>{{totalFees}}</td>
-          {{#with feesInfo}}
-            <td>{{currentratio}}</td>
-            <td>{{lcenterAmount}}</td>
-            <td>{{xjturatio}}</td>
-            <td>{{xjtuamount}}</td>
-          {{/with}}
+          <th rowspan="2">结算金额</th>
+          <th colspan="2">学习中心</th>
+          <th colspan="2">学校</th>
+        </tr>
+        <tr>
+          <th>分配比例</th>
+          <th>分配金额（元）</th>
+          <th>分配比例</th>
+          <th>分配金额（元）</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr>
+            <td>{{feesInfo.total}}</td>
+            {{#with feesInfo}}
+              <td>{{currentratio}}</td>
+              <td>{{lcenterAmount}}</td>
+              <td>{{xjturatio}}</td>
+              <td>{{xjtuamount}}</td>
+            {{/with}}
+          </tr>
+
+      </tbody>
+    </table>
+
+    <p>结算账户信息：</p>
+
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>项目</th>
+          <th>学习中心</th>
+          <th>学校</th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+        <tr>
+          <th>银行账户名</th>
+          <td>{{bankaccountdetail.name}}</td>
+          <td>{{xjtuDetail.name}}</td>
         </tr>
 
-    </tbody>
-  </table>
+        <tr>
+          <th>账号</th>
+          <td>{{bankaccountdetail.accountno}}</td>
+          <td>{{xjtuDetail.accountno}}</td>
+        </tr>
 
-  <p>结算账户信息：</p>
+        <tr>
+          <th>开户行</th>
+          <td>{{bankaccountdetail.branchname}}</td>
+          <td>{{xjtuDetail.branchname}}</td>
+        </tr>
 
-  <table class="table table-bordered">
-    <thead>
-      <tr>
-        <th>项目</th>
-        <th>学习中心</th>
-        <th>学校</th>
-      </tr>
-    </thead>
+        <tr>
+          <th>汇款省市</th>
+          <td>{{bankaccountdetail.province}}</td>
+          <td>{{xjtuDetail.province}}</td>
+        </tr>
 
-    <tbody>
+        <tr>
+          <th>汇款备注</th>
+          <td>汇款备注</td>
+          <td>demo</td>
+        </tr>
 
-      <tr>
-        <th>银行账户名</th>
-        <td>{{bankaccountdetail.name}}</td>
-        <td>{{xjtuDetail.name}}</td>
-      </tr>
+        <tr>
+          <th>联系人</th>
+          <td>{{bankaccountdetail.contact}}</td>
+          <td>{{xjtuDetail.contact}}</td>
+        </tr>
 
-      <tr>
-        <th>账号</th>
-        <td>{{bankaccountdetail.accountno}}</td>
-        <td>{{xjtuDetail.accountno}}</td>
-      </tr>
+        <tr>
+          <th>联系电话</th>
+          <td>{{bankaccountdetail.contactno}}</td>
+          <td>{{xjtuDetail.contactno}}</td>
+        </tr>
 
-      <tr>
-        <th>开户行</th>
-        <td>{{bankaccountdetail.branchname}}</td>
-        <td>{{xjtuDetail.branchname}}</td>
-      </tr>
+        <tr>
+          <th>传真</th>
+          <td>{{bankaccountdetail.fax}}</td>
+          <td>{{xjtuDetail.fax}}</td>
+        </tr>
 
-      <tr>
-        <th>汇款省市</th>
-        <td>{{bankaccountdetail.province}}</td>
-        <td>{{xjtuDetail.province}}</td>
-      </tr>
+        <tr>
+          <th>详细地址</th>
+          <td>{{bankaccountdetail.address}}</td>
+          <td>{{xjtuDetail.address}}</td>
+        </tr>
 
-      <tr>
-        <th>汇款备注</th>
-        <td>汇款备注</td>
-        <td>demo</td>
-      </tr>
+      </tbody>
 
-      <tr>
-        <th>联系人</th>
-        <td>{{bankaccountdetail.contact}}</td>
-        <td>{{xjtuDetail.contact}}</td>
-      </tr>
-
-      <tr>
-        <th>联系电话</th>
-        <td>{{bankaccountdetail.contactno}}</td>
-        <td>{{xjtuDetail.contactno}}</td>
-      </tr>
-
-      <tr>
-        <th>传真</th>
-        <td>{{bankaccountdetail.fax}}</td>
-        <td>{{xjtuDetail.fax}}</td>
-      </tr>
-
-      <tr>
-        <th>详细地址</th>
-        <td>{{bankaccountdetail.address}}</td>
-        <td>{{xjtuDetail.address}}</td>
-      </tr>
+    </table>
 
 
-    </tbody>
+    {{/with}}
 
-  </table>
-
-
-  {{/with}}
+  </div>
 </template>
