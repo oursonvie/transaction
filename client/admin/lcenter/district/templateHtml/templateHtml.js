@@ -1,4 +1,4 @@
-Template.dcenterpdf.onCreated(function() {
+Template.templateHtml.onCreated(function() {
   Session.set('feesDetail', false)
   Session.set('feesInfo', false)
   Session.set('dateRange', false)
@@ -42,19 +42,20 @@ Template.dcenterpdf.onCreated(function() {
 
 });
 
-Template.dcenterpdf.helpers({
+Template.templateHtml.helpers({
   districtCenter: function() {
      return DLearningCenter.findOne()
-  },
-  feesInfo: function() {
-    if (Session.get('feesInfo')) {
-      return Session.get('feesInfo')
-    }
   },
   xjtuDetail: function() {
     return Meteor.settings.public.xjtuaccountdetail
   },
   dateRage: function() {
     return Session.get('dateRange')
+  }
+});
+
+Template.templateHtml.events({
+  'click .date-change': function() {
+     Session.set('eventModel', {type:'edit', target:'date'} )
   }
 });

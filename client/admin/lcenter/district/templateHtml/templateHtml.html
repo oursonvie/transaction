@@ -1,0 +1,25 @@
+<template name="templateHtml">
+  <div class="container">
+
+
+    <h3>学费结算确认函</h3>
+
+
+    {{districtCenter.name}} 学习中心
+
+    <p>{{showForm}}本次结算期间为{{dateRage.startDate}}至 {{dateRage.endDate}}</p>
+
+    <p>学生缴费情况：</p>
+
+    {{> pdfFeesDetail}}
+
+    <p>学费结算情况：</p>
+
+    {{> feesTable}}
+
+    <p>结算账户信息：</p>
+
+    {{> accountDetailTable}}
+
+  </div>
+</template>

@@ -27,9 +27,9 @@ FlowRouter.route('/districtcenter/:id', {
     }
 });
 
-FlowRouter.route('/districtcenter/pdf/:id', {
+FlowRouter.route('/districtcenter/templatehtml/:id', {
    name: 'dcenterpdf',
     action() {
-        BlazeLayout.render('PrintLayout', {main: 'dcenterpdf'});
+        BlazeLayout.render('PrintLayout', {main: 'templateHtml'});
     }
 });

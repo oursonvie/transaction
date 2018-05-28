@@ -1,0 +1,72 @@
+<template name="accountDetailTable">
+
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>项目</th>
+        <th>学习中心</th>
+        <th>学校</th>
+      </tr>
+    </thead>
+
+    <tbody>
+
+      <tr>
+        <th>银行账户名</th>
+        <td>{{districtCenter.bankaccountdetail.name}}</td>
+        <td>{{xjtuDetail.name}}</td>
+      </tr>
+
+      <tr>
+        <th>账号</th>
+        <td>{{districtCenter.bankaccountdetail.accountno}}</td>
+        <td>{{xjtuDetail.accountno}}</td>
+      </tr>
+
+      <tr>
+        <th>开户行</th>
+        <td>{{districtCenter.bankaccountdetail.branchname}}</td>
+        <td>{{xjtuDetail.branchname}}</td>
+      </tr>
+
+      <tr>
+        <th>汇款省市</th>
+        <td>{{districtCenter.bankaccountdetail.province}}</td>
+        <td>{{xjtuDetail.province}}</td>
+      </tr>
+
+      <tr>
+        <th>汇款备注</th>
+        <td>汇款备注</td>
+        <td>demo</td>
+      </tr>
+
+      <tr>
+        <th>联系人</th>
+        <td>{{districtCenter.bankaccountdetail.contact}}</td>
+        <td>{{xjtuDetail.contact}}</td>
+      </tr>
+
+      <tr>
+        <th>联系电话</th>
+        <td>{{districtCenter.bankaccountdetail.contactno}}</td>
+        <td>{{xjtuDetail.contactno}}</td>
+      </tr>
+
+      <tr>
+        <th>传真</th>
+        <td>{{districtCenter.bankaccountdetail.fax}}</td>
+        <td>{{xjtuDetail.fax}}</td>
+      </tr>
+
+      <tr>
+        <th>详细地址</th>
+        <td>{{districtCenter.bankaccountdetail.address}}</td>
+        <td>{{xjtuDetail.address}}</td>
+      </tr>
+
+    </tbody>
+
+  </table>
+
+</template>

@@ -1,0 +1,46 @@
+<template name="feesTable">
+
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th rowspan="2">结算金额</th>
+        <th colspan="2">学习中心</th>
+        <th colspan="2">学校</th>
+      </tr>
+      <tr>
+        <th>分配比例</th>
+        <th>分配金额（元）</th>
+        <th>分配比例</th>
+        <th>分配金额（元）</th>
+      </tr>
+    </thead>
+    <tbody>
+
+        <tr>
+          <td>{{feesInfo.total}}</td>
+          <td>{{feesInfo.currentratio}}</td>
+          <td>{{feesInfo.lcenterAmount}}</td>
+          <td>{{feesInfo.xjturatio}}</td>
+          <td>{{feesInfo.xjtuamount}}</td>
+        </tr>
+
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+
+        <tr>
+          <td>合计</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+
+    </tbody>
+  </table>
+
+</template>
