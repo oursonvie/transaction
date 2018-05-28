@@ -1,0 +1,90 @@
+<template name="dcenterpdf">
+  {{#with districtCenter}}
+
+  <h3>学费结算确认函</h3>
+  {{name}} 学习中心
+
+  <p>本次结算期间为</p>
+
+  <p>学生缴费情况：</p>
+
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>批次</th>
+        <th>人数</th>
+        <th>缴费方式</th>
+        <th>缴费金额（元）</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each feesDetail}}
+        {{#each paymentdetail}}
+          <tr>
+            <th>{{_id}}</th>
+            <td>{{studentcount}}</td>
+            <td>银联缴费</td>
+            <td>{{totalFee}}</td>
+          </tr>
+        {{/each}}
+      {{/each}}
+
+    </tbody>
+  </table>
+
+  <p>学费结算情况：</p>
+
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th rowspan="2">结算金额</th>
+        <th colspan="2">学习中心</th>
+        <th colspan="2">学校</th>
+      </tr>
+      <tr>
+        <th>分配比例</th>
+        <th>分配金额（元）</th>
+        <th>分配比例</th>
+        <th>分配金额（元）</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td>{{totalFees}}</td>
+          {{#with feesInfo}}
+            <td>{{currentratio}}</td>
+            <td>{{lcenterAmount}}</td>
+            <td>{{xjturatio}}</td>
+            <td>{{xjtuamount}}</td>
+          {{/with}}
+        </tr>
+
+    </tbody>
+  </table>
+
+  <p>结算账户信息：</p>
+
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>项目</th>
+        <th>学习中心</th>
+        <th>学校</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <th>账户名称</th>
+        <td>demo</td>
+        <td>demo</td>
+      </tr>
+
+
+    </tbody>
+
+  </table>
+
+
+  {{/with}}
+</template>

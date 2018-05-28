@@ -26,3 +26,10 @@ FlowRouter.route('/districtcenter/:id', {
         BlazeLayout.render('AdminLayout', {main: 'districtcenterID'});
     }
 });
+
+FlowRouter.route('/districtcenter/pdf/:id', {
+   name: 'dcenterpdf',
+    action() {
+        BlazeLayout.render('PrintLayout', {main: 'dcenterpdf'});
+    }
+});

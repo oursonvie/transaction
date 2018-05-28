@@ -11,6 +11,7 @@
     "lodash": "^4.17.10",
     "meteor-node-stubs": "^0.3.2",
     "oracledb": "^2.2.0",
+    "pdfmake": "^0.1.36",
     "simpl-schema": "^0.3.2"
   }
 }
