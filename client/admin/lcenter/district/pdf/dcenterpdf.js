@@ -53,4 +53,7 @@ Template.dcenterpdf.helpers({
       return Session.get('feesInfo')
     }
   },
+  xjtuDetail: function() {
+    return Meteor.settings.public.xjtuaccountdetail
+  }
 });
