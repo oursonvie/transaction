@@ -51,12 +51,12 @@ Template.timeSetting.helpers({
 Template.timeSetting.events({
   "click .btn-date-input": function(event, template){
 
-     //startDate = document.getElementById('startdate').value.trim()
-     //endDate = document.getElementById('enddate').value.trim()
+     startDate = document.getElementById('startdate').value.trim()
+     endDate = document.getElementById('enddate').value.trim()
 
      // fast testing
-     startDate = '2017-11-1'
-     endDate = '2018-4-30'
+     // startDate = '2017-11-1'
+     // endDate = '2018-4-30'
 
      formatedStartDate = moment(startDate).toISOString()
      formatedEndDate = moment(endDate).toISOString()
