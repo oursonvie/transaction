@@ -31,7 +31,6 @@ DLearningCenter.attachSchema(new SimpleSchema({
   name: {
     type: String,
     label: "学习中心名称",
-    optional: true
   },
   type: {
     type: String,
@@ -63,7 +62,8 @@ DLearningCenter.attachSchema(new SimpleSchema({
   },
   bankaccountdetail: {
     label: '',
-    type: Object
+    type: Object,
+    optional: true
   },
   'bankaccountdetail.name':{
     label: '银行账户名称',
@@ -80,6 +80,11 @@ DLearningCenter.attachSchema(new SimpleSchema({
   'bankaccountdetail.province':{
     label: '汇款省市',
     type: String
+  },
+  'bankaccountdetail.memo':{
+    label: '汇款备注',
+    type: String,
+    optional: true
   },
   'bankaccountdetail.contact':{
     label: '联系人',
@@ -123,6 +128,23 @@ DLearningCenter.attachSchema(new SimpleSchema({
         return _.sortBy(result, ['label'])
       }
     }
+  },
+  allowAccess: {
+    type: Boolean,
+    label: "访问限制",
+    defaultValue: false,
+    autoform: {
+      type: 'boolean-select',
+        trueLabel: '允许访问',
+        falseLabel: '禁止访问',
+        firstOption: '(请选择访问方式)'
+    }
+  },
+  extraAmount: {
+    type: Number,
+    label: "汇款缴费",
+    defaultValue: 0,
+    optional: true
   },
   createdBy: {
     type: String,
