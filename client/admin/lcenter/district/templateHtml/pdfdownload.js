@@ -14,7 +14,7 @@ Template.pdfdownload.events({
     pdfMake.fonts = {
      Roboto: {
           normal: 'Microsoft YaHei.ttf',
-          bold: 'Microsoft YaHei Bold.ttf',
+          bold: 'Microsoft YaHei.ttf',
           italics: 'Microsoft YaHei.ttf',
           bolditalics: 'Microsoft YaHei.ttf'
         }
