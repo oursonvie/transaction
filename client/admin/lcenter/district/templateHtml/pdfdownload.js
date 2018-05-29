@@ -10,6 +10,7 @@ Template.pdfdownload.events({
     renderObject.feesInfo = Session.get('feesInfo')
     renderObject.dateRange = Session.get('dateRange')
     renderObject.districtCenter = DLearningCenter.findOne()
+    renderObject.xjtuAccount = Meteor.settings.public.xjtuaccountdetail
 
     pdfMake.fonts = {
      Roboto: {
