@@ -11,11 +11,12 @@
     </thead>
     <tbody>
       {{#each feesDetail}}
+      {{name}}
         {{#each paymentdetail}}
           <tr>
             <td>{{_id}}</td>
             <td>{{studentcount}}</td>
-            <td>银联缴费</td>
+            <td>{{ifFirst @index}}</td>
             <td style="text-align:right">{{numberDisplay totalFee}}</td>
           </tr>
         {{/each}}
@@ -25,7 +26,7 @@
         <td></td>
         <td></td>
         <td>汇款缴费</td>
-        <td style="text-align:right">{{numberDisplay extraFees}}</td>
+        <td style="text-align:right">{{numberDisplay feesInfo.extraAmount}}</td>
       </tr>
 
       <tr>

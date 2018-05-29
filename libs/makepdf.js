@@ -1,6 +1,4 @@
-let convertFeesTable = (feesDetail, extraAmount) => {
-
-  console.log(feesDetail, extraAmount)
+let convertFeesTable = (feesDetail, feesInfo) => {
 
   let centerView = []
 
@@ -26,10 +24,6 @@ let convertFeesTable = (feesDetail, extraAmount) => {
       centerView.push(row)
     })
 
-
-
-
-
   })
 
   // add extra at the end
@@ -37,10 +31,22 @@ let convertFeesTable = (feesDetail, extraAmount) => {
     '',
     '',
     '汇款缴费',
-    ((!extraAmount) ? '' : extraAmount)
+    ((!feesInfo.extraAmount) ? '' : feesInfo.extraAmount)
   ]
 
   centerView.push(extraRow)
+
+  // push last sum row at the end
+
+  let sumRow = [
+    `合计`,
+    ``,
+    ``,
+    `${feesInfo.total}`
+  ]
+
+  centerView.push(sumRow)
+
 
   return centerView
 
@@ -71,16 +77,14 @@ let feesSplitTable = (feesInfo) => {
   view.push(secondRow)
 
   let dataRow = [
-    feesInfo.total,
-    feesInfo.currentratio,
-    feesInfo.lcenterAmount,
-    feesInfo.xjturatio,
-    feesInfo.xjtuamount
+    {text: feesInfo.total, alignment: 'right'},
+    {text: feesInfo.currentratio, alignment: 'right'},
+    {text: feesInfo.lcenterAmount, alignment: 'right'},
+    {text: feesInfo.xjturatio, alignment: 'right'},
+    {text: feesInfo.xjtuamount, alignment: 'right'},
   ]
 
   view.push(dataRow)
-
-  console.log(view)
 
   return view
 }
@@ -114,7 +118,7 @@ makeRenderObject = (object) => {
 
       {
   			table: {
-  				body: (convertFeesTable(object.feesDetail, object.feesInfo.extraAmount))
+  				body: (convertFeesTable(object.feesDetail, object.feesInfo))
   			}
   		},
 

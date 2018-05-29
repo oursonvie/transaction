@@ -17,5 +17,13 @@ Template.pdfFeesDetail.helpers({
   numberDisplay: function(number) {
     let fixed = parseFloat(number).toFixed(2)
     return numberWithCommas(fixed)
+  },
+  ifFirst: function(index) {
+    console.log(index)
+    if (index == 0) {
+      return '银联缴费'
+    } else {
+      return false
+    }
   }
 });
