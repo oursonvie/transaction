@@ -86,6 +86,22 @@ let feesSplitTable = (feesInfo) => {
 
   view.push(dataRow)
 
+  //empty row
+
+  let emptyRow = [' ', ' ', ' ', ' ', ' ']
+  view.push(emptyRow)
+
+  // sumrow
+  let sumRow = [
+    {text: `合计`, alignment: 'center'},
+    ``,
+    {text: `${feesInfo.lcenterAmount}`, alignment: 'right'},
+    ``,
+    {text: `${feesInfo.xjtuamount}`, alignment: 'right'},
+  ]
+
+  view.push(sumRow)
+
   return view
 }
 

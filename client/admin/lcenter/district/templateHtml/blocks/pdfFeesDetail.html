@@ -1,7 +1,13 @@
 <template name="pdfFeesDetail">
 
   <table class="table table-bordered">
+    {{#each feesDetail}}
     <thead>
+      <tr>
+        <th colspan="4">{{name}}</th>
+
+      </tr>
+
       <tr>
         <th>批次</th>
         <th>人数</th>
@@ -9,9 +15,9 @@
         <th>缴费金额（元）</th>
       </tr>
     </thead>
+
     <tbody>
-      {{#each feesDetail}}
-      {{name}}
+
         {{#each paymentdetail}}
           <tr>
             <td>{{_id}}</td>
@@ -20,8 +26,11 @@
             <td style="text-align:right">{{numberDisplay totalFee}}</td>
           </tr>
         {{/each}}
-      {{/each}}
 
+    </tbody>
+    {{/each}}
+
+    <tbody>
       <tr>
         <td></td>
         <td></td>

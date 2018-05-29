@@ -19,7 +19,6 @@ Template.pdfFeesDetail.helpers({
     return numberWithCommas(fixed)
   },
   ifFirst: function(index) {
-    console.log(index)
     if (index == 0) {
       return '银联缴费'
     } else {
