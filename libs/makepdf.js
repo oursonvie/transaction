@@ -1,10 +1,10 @@
-convertFeesTable = (arrayObject) => {
+let convertFeesTable = (feesDetail, extraAmount) => {
 
-  console.log(arrayObject)
+  console.log(feesDetail, extraAmount)
 
   let centerView = []
 
-  _.forEach(arrayObject, function(center) {
+  _.forEach(feesDetail, function(center) {
     // for each center in the list
 
     header = [
@@ -27,10 +27,62 @@ convertFeesTable = (arrayObject) => {
     })
 
 
+
+
+
   })
+
+  // add extra at the end
+  let extraRow = [
+    '',
+    '',
+    '汇款缴费',
+    ((!extraAmount) ? '' : extraAmount)
+  ]
+
+  centerView.push(extraRow)
 
   return centerView
 
+}
+
+let feesSplitTable = (feesInfo) => {
+
+  let view = []
+
+  let header = [
+    {text:'结算金额', rowSpan: 2, alignment: 'center'},
+    {text:'学习中心', colSpan: 2, alignment: 'center'},
+    {},
+    {text:'学校', colSpan: 2, alignment: 'center'},
+    {}
+   ]
+
+   view.push(header)
+
+  let secondRow = [
+    '',
+    '分配比例',
+    '分配金额（元）',
+    '分配比例',
+    '分配金额（元）'
+  ]
+
+  view.push(secondRow)
+
+  let dataRow = [
+    feesInfo.total,
+    feesInfo.currentratio,
+    feesInfo.lcenterAmount,
+    feesInfo.xjturatio,
+    feesInfo.xjtuamount
+  ]
+
+  view.push(dataRow)
+
+  console.log(view)
+
+  return view
 }
 
 makeRenderObject = (object) => {
@@ -62,9 +114,19 @@ makeRenderObject = (object) => {
 
       {
   			table: {
-  				body: (convertFeesTable(object.feesDetail))
+  				body: (convertFeesTable(object.feesDetail, object.feesInfo.extraAmount))
   			}
-  		}
+  		},
+
+      {
+        text: '学费结算情况:'
+      },
+
+      {
+  			table: {
+  				body: (feesSplitTable(object.feesInfo))
+  			}
+  		},
 
     ]
 
