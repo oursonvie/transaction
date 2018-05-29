@@ -23,11 +23,11 @@ convertFeesTable = (feesDetail, feesInfo) => {
 
     centerView.push(headerName)
 
-    _.forEach(center.paymentdetail, function(payment) {
+    _.forEach(center.paymentdetail, function(payment, index) {
       let row = [
         {text:`${payment._id}`, alignment: 'center'},
         {text:`${payment.studentcount}`, alignment: 'center'},
-        {text:`银联缴费`, alignment: 'center'},
+        {text:`${(index == 0) ? '银联缴费' : ''}`, alignment: 'center'},
         {text:`${payment.totalFee}`, alignment: 'right'}
       ]
       centerView.push(row)
@@ -39,8 +39,8 @@ convertFeesTable = (feesDetail, feesInfo) => {
   let extraRow = [
     '',
     '',
-    '汇款缴费',
-    ((!feesInfo.extraAmount) ? '' : feesInfo.extraAmount)
+    {text:`汇款缴费`, alignment: 'center'},
+    {text:`${(!feesInfo.extraAmount) ? '' : feesInfo.extraAmount}`, alignment: 'right'}
   ]
 
   centerView.push(extraRow)
