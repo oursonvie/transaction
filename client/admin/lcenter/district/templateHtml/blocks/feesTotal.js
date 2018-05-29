@@ -4,4 +4,11 @@ Template.feesTable.helpers({
       return Session.get('feesInfo')
     }
   },
+  numberDisplay: function(number) {
+    let fixed = parseFloat(number).toFixed(2)
+    return numberWithCommas(fixed)
+  },
+  displayPercentage: function(number) {
+    return `${number * 100}%`
+  }
 });

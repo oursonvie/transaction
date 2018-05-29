@@ -16,7 +16,7 @@
             <td>{{_id}}</td>
             <td>{{studentcount}}</td>
             <td>银联缴费</td>
-            <td>{{totalFee}}</td>
+            <td style="text-align:right">{{numberDisplay totalFee}}</td>
           </tr>
         {{/each}}
       {{/each}}
@@ -25,13 +25,13 @@
         <td></td>
         <td></td>
         <td>汇款缴费</td>
-        <td>{{extraFees}}</td>
+        <td style="text-align:right">{{numberDisplay extraFees}}</td>
       </tr>
 
       <tr>
         <th colspan="2">合计</th>
         <th></th>
-        <th>{{feesInfo.total}}</th>
+        <th style="text-align:right">{{numberDisplay feesInfo.total}}</th>
       </tr>
 
     </tbody>

@@ -16,12 +16,12 @@
     </thead>
     <tbody>
 
-        <tr>
-          <td>{{feesInfo.total}}</td>
-          <td>{{feesInfo.currentratio}}</td>
-          <td>{{feesInfo.lcenterAmount}}</td>
-          <td>{{feesInfo.xjturatio}}</td>
-          <td>{{feesInfo.xjtuamount}}</td>
+        <tr style="text-align:right">
+          <td>{{numberDisplay feesInfo.total}}</td>
+          <td>{{displayPercentage feesInfo.currentratio}}</td>
+          <td>{{numberDisplay feesInfo.lcenterAmount}}</td>
+          <td>{{displayPercentage feesInfo.xjturatio}}</td>
+          <td>{{numberDisplay feesInfo.xjtuamount}}</td>
         </tr>
 
         <tr>

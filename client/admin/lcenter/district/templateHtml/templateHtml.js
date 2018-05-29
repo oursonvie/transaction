@@ -13,7 +13,7 @@ Template.templateHtml.onCreated(function() {
         .then(res => {
           Session.set('feesDetail', res)
 
-          // calculate fees detail with ratio a
+          // calculate fees detail with ratio
           let total = 0
           _.forEach(res, function(center) {
             total += lodash.sumBy(center.paymentdetail, 'totalFee')
@@ -29,7 +29,7 @@ Template.templateHtml.onCreated(function() {
           feesInfo.currentratio = getRatio(feesInfo.total, feesInfo.lowratio)
           feesInfo.xjturatio = 1 - feesInfo.currentratio
           feesInfo.lcenterAmount = feesInfo.total * feesInfo.currentratio
-          feesInfo.xjtuamount = total - feesInfo.lcenterAmount
+          feesInfo.xjtuamount = feesInfo.total - feesInfo.lcenterAmount
 
           Session.set('feesInfo', feesInfo)
         })

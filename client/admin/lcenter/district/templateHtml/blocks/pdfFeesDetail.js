@@ -13,5 +13,9 @@ Template.pdfFeesDetail.helpers({
     if (Session.get('feesInfo').extraAmount) {
       return Session.get('feesInfo').extraAmount
     }
+  },
+  numberDisplay: function(number) {
+    let fixed = parseFloat(number).toFixed(2)
+    return numberWithCommas(fixed)
   }
 });
