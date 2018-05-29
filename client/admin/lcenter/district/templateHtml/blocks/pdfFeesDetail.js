@@ -9,4 +9,9 @@ Template.pdfFeesDetail.helpers({
       return Session.get('feesInfo')
     }
   },
+  extraFees: function() {
+    if (Session.get('feesInfo').extraAmount) {
+      return Session.get('feesInfo').extraAmount
+    }
+  }
 });

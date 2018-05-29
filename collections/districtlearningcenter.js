@@ -143,8 +143,7 @@ DLearningCenter.attachSchema(new SimpleSchema({
   extraAmount: {
     type: Number,
     label: "汇款缴费",
-    defaultValue: 0,
-    optional: true
+    defaultValue: 0
   },
   createdBy: {
     type: String,

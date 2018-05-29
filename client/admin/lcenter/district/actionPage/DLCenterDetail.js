@@ -1,16 +1,38 @@
 Template.DLCenterDetail.onCreated(function() {
   Session.set('feesDetail', false)
-  Session.set('returnRatio', false)
-  Session.set('totalAmount', false)
+  Session.set('feesInfo', false)
+
   // sub to lcenter db
   var self = this;
   self.autorun(function() {
-    if (Session.get('action') && Session.get('action').type == 'view')
-    PromiseMeteorCall('districtCenterPersonFees', Session.get('action').id)
-    .then(res => {
-      Session.set('feesDetail', res)
-    })
-    .catch(err => {console.log(err)})
+    if (Session.get('action') && Session.get('action').type == 'view') {
+      let id = Session.get('action').id
+      PromiseMeteorCall('districtCenterPersonFees', id)
+      .then(res => {
+
+        //set fees detail put in session, also get extraAmount
+        Session.set('feesDetail', res)
+
+        // calculate fees detail with ratio
+        let total = 0
+        _.forEach(res, function(center) {
+          total += lodash.sumBy(center.paymentdetail, 'totalFee')
+        })
+
+        // get feesInfo the further reference
+        let feesInfo = {}
+        feesInfo.extraAmount = DLearningCenter.findOne({_id:id}).extraAmount
+        feesInfo.unionPay = total
+        feesInfo.total = total + feesInfo.extraAmount
+        feesInfo.lowratio = DLearningCenter.findOne({_id:id}).returnratio
+        feesInfo.currentratio = getRatio(feesInfo.total, feesInfo.lowratio)
+
+        Session.set('feesInfo', feesInfo)
+
+      })
+      .catch(err => {console.log(err)})
+    }
+
   })
 
 });
@@ -22,20 +44,8 @@ Template.DLCenterDetail.helpers({
   lcenterCount: function() {
     return DLearningCenter.findOne({_id:Session.get('action').id}).sublearningcenter.length
   },
-  totalFees: function() {
-    if (Session.get('feesDetail')) {
-      // sum array
-      let arrayFees = Session.get('feesDetail')
-      let total = 0
-
-      _.forEach(arrayFees, function(center) {
-        total += lodash.sumBy(center.paymentdetail, 'totalFee')
-      })
-
-      Session.set('totalAmount', total)
-
-      return total
-    }
+  feesInfo: function() {
+    return Session.get('feesInfo')
   },
   feesObjects: function() {
     if (Session.get('feesDetail')) {
@@ -46,20 +56,14 @@ Template.DLCenterDetail.helpers({
     let fixed = parseFloat(number).toFixed(2)
     return numberWithCommas(fixed)
   },
-  specialDCenter: function() {
-    if (DLearningCenter.findOne({_id:Session.get('action').id}).sublearningcenter.length == 2) {
-      return true
-    } else {
-      return false
-    }
-  },
-  currentReturnRatio: function(value, lowestRatio) {
-    let result = getRatio(value, lowestRatio)
-    Session.set('returnRatio', result)
-    return result
+  simpleMultiple: function(value, ratio) {
+    return value * ratio
   },
   returnAmount: function(total, ratio) {
-    return Session.get('returnRatio') * Session.get('totalAmount')
+    return Session.get('feesInfo').total * Session.get('feesInfo').currentratio
+  },
+  extraAmount: function() {
+    return Session.get('extraAmount')
   }
 });
 

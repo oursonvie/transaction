@@ -20,7 +20,11 @@ Template.templateHtml.onCreated(function() {
           })
 
           let feesInfo = {}
-          feesInfo.total = total
+          // get extra money amount first
+          feesInfo.extraAmount = DLearningCenter.findOne().extraAmount
+
+          feesInfo.total = total + feesInfo.extraAmount
+          feesInfo.extraAmount = DLearningCenter.findOne().extraAmount
           feesInfo.lowratio = DLearningCenter.findOne().returnratio
           feesInfo.currentratio = getRatio(feesInfo.total, feesInfo.lowratio)
           feesInfo.xjturatio = 1 - feesInfo.currentratio

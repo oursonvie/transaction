@@ -12,7 +12,8 @@
         <ul class="list-group list-group-flush">
           <li class="list-group-item">返款起始比例: {{returnratio}}</li>
           <li class="list-group-item">学习中心数：{{lcenterCount}}</li>
-          <li class="list-group-item">缴费情况：{{numberDisplay totalFees}}</li>
+          <li class="list-group-item">缴费情况：{{numberDisplay feesInfo.unionPay}}</li>
+          <li class="list-group-item">汇款缴费：{{numberDisplay feesInfo.extraAmount}}</li>
         </ul>
 
         <table class="table">
@@ -28,7 +29,7 @@
 
           <tbody>
               <tr>
-                <td>{{currentReturnRatio totalFees returnratio}}</td>
+                <td>{{feesInfo.currentratio}}</td>
                 <td>{{numberDisplay returnAmount}}</td>
               </tr>
           </tbody>
@@ -64,7 +65,7 @@
           <tbody>
 
               {{#each paymentdetail}}
-                <tr>
+                <tr style="text-align:right">
                   <td>{{_id}}</td>
                   <td>{{studentcount}}</td>
                   <td>{{numberDisplay totalFee}}</td>
