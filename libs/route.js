@@ -33,3 +33,11 @@ FlowRouter.route('/districtcenter/templatehtml/:id', {
         BlazeLayout.render('PrintLayout', {main: 'templateHtml'});
     }
 });
+
+
+FlowRouter.route('/user/district/:id', {
+   name: 'dcenterDownload',
+    action() {
+        BlazeLayout.render('UserLayout', {main: 'downloadPage'});
+    }
+});
