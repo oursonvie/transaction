@@ -28,7 +28,7 @@ convertFeesTable = (feesDetail, feesInfo) => {
         {text:`${payment._id}`, alignment: 'center'},
         {text:`${payment.studentcount}`, alignment: 'center'},
         {text:`${(index == 0) ? '银联缴费' : ''}`, alignment: 'center'},
-        {text:`${payment.totalFee}`, alignment: 'right'}
+        {text:`${numberFormatter(payment.totalFee)}`, alignment: 'right'}
       ]
       centerView.push(row)
     })
@@ -40,7 +40,7 @@ convertFeesTable = (feesDetail, feesInfo) => {
     '',
     '',
     {text:`汇款缴费`, alignment: 'center'},
-    {text:`${(!feesInfo.extraAmount) ? '' : feesInfo.extraAmount}`, alignment: 'right'}
+    {text:`${(!feesInfo.extraAmount) ? '' : numberFormatter(feesInfo.extraAmount)}`, alignment: 'right'}
   ]
 
   centerView.push(extraRow)
@@ -51,7 +51,7 @@ convertFeesTable = (feesDetail, feesInfo) => {
     `合计`,
     ``,
     ``,
-    {text:`${feesInfo.total}`, alignment: 'right'}
+    {text:`${numberFormatter(feesInfo.total)}`, alignment: 'right'}
   ]
 
   centerView.push(sumRow)

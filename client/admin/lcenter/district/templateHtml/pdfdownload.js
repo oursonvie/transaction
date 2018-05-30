@@ -13,11 +13,11 @@ Template.pdfdownload.events({
     renderObject.xjtuAccount = Meteor.settings.public.xjtuaccountdetail
 
     pdfMake.fonts = {
-     Roboto: {
-          normal: 'Microsoft YaHei.ttf',
-          bold: 'Microsoft YaHei.ttf',
-          italics: 'Microsoft YaHei.ttf',
-          bolditalics: 'Microsoft YaHei.ttf'
+     msyh: {
+          normal: 'msyh.ttf',
+          bold: 'msyh_bold.ttf',
+          italics: 'msyh.ttf',
+          bolditalics: 'msyh.ttf'
         }
     }
 

@@ -23,11 +23,11 @@ feesSplitTable = (feesInfo) => {
   view.push(secondRow)
 
   let dataRow = [
-    {text: feesInfo.total, alignment: 'right'},
-    {text: feesInfo.currentratio, alignment: 'right'},
-    {text: feesInfo.lcenterAmount, alignment: 'right'},
-    {text: feesInfo.xjturatio, alignment: 'right'},
-    {text: feesInfo.xjtuamount, alignment: 'right'},
+    {text: numberFormatter(feesInfo.total), alignment: 'right'},
+    {text: percentageFormatter(feesInfo.currentratio), alignment: 'right'},
+    {text: numberFormatter(feesInfo.lcenterAmount), alignment: 'right'},
+    {text: percentageFormatter(feesInfo.xjturatio), alignment: 'right'},
+    {text: numberFormatter(feesInfo.xjtuamount), alignment: 'right'},
   ]
 
   view.push(dataRow)
@@ -41,9 +41,9 @@ feesSplitTable = (feesInfo) => {
   let sumRow = [
     {text: `合计`, alignment: 'center'},
     ``,
-    {text: `${feesInfo.lcenterAmount}`, alignment: 'right'},
+    {text: `${numberFormatter(feesInfo.lcenterAmount)}`, alignment: 'right'},
     ``,
-    {text: `${feesInfo.xjtuamount}`, alignment: 'right'},
+    {text: `${numberFormatter(feesInfo.xjtuamount)}`, alignment: 'right'},
   ]
 
   view.push(sumRow)

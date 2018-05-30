@@ -4,6 +4,17 @@ numberWithCommas = (x) => {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
+numberFormatter = (number)  => {
+  let fixed = parseFloat(number).toFixed(2)
+  return numberWithCommas(fixed)
+}
+
+percentageFormatter = (float) => {
+  let result = parseFloat(float * 100).toFixed(0)
+  return `${result}%`
+}
+
+
 guid = () => {
   function s4() {
     return Math.floor((1 + Math.random()) * 0x10000)
