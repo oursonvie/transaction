@@ -72,5 +72,12 @@ Template.downloadPage.helpers({
   },
   validNumber: function() {
     return Session.get('valideNumber')
-  }
+  },
+  feesObjects: function() {
+    return Session.get('feesDetail')
+  },
+  numberDisplay: function(number) {
+    let fixed = parseFloat(number).toFixed(2)
+    return numberWithCommas(fixed)
+  },
 });
