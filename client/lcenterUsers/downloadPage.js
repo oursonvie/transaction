@@ -79,5 +79,19 @@ Template.downloadPage.helpers({
   numberDisplay: function(number) {
     let fixed = parseFloat(number).toFixed(2)
     return numberWithCommas(fixed)
-  },
+  }
 });
+
+Template.downloadPage.events({
+  'change .custom-file-input': function(event, template) {
+    FS.Utility.eachFile(event, function(file) {
+      Images.insert(file, function (err, fileObj) {
+        if (err) {
+          console.log(err)
+        } else {
+          console.log(fileObj)
+        }
+      })
+    })
+  }
+})

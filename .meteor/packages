@@ -43,3 +43,6 @@ fortawesome:fontawesome
 raix:handlebar-helpers
 
 stevezhu:lodash
+
+cfs:standard-packages
+cfs:gridfs
