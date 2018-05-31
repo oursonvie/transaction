@@ -145,6 +145,23 @@ DLearningCenter.attachSchema(new SimpleSchema({
     label: "汇款缴费",
     defaultValue: 0
   },
+  uploadedPic: {
+    label: '',
+    type: Array,
+    optional: true
+  },
+  'uploadedPic.$':{
+    label:'',
+    type: Object
+  },
+  'uploadedPic.$.batchcode':{
+    label:'批次',
+    type: String
+  },
+  'uploadedPic.$.photoid':{
+    label:'相片编号',
+    type: String
+  },
   createdBy: {
     type: String,
     autoValue:function(){

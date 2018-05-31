@@ -29,11 +29,7 @@ Meteor.publish('DistrictLearningCenterList', function() {
 })
 
 Meteor.publish('DistrictLearningCenter', function(id) {
-  if (this.userId) {
-    return DLearningCenter.find({_id:id})
-  } else {
-    throw new Meteor.Error( '500', 'No Premission' );
-  }
+  return DLearningCenter.find({_id:id})
 })
 
 Meteor.publish('sublearningCenter', function(id) {
@@ -41,6 +37,22 @@ Meteor.publish('sublearningCenter', function(id) {
     let subClist = DLearningCenter.findOne({_id:id}).sublearningcenter
     let array = lodash.map(subClist, 'name')
     return WorkingPlace.find({LCENTERNAME: {$in: array}})
+  } else {
+    throw new Meteor.Error( '500', 'No Premission' );
+  }
+})
+
+Meteor.publish('imageStore', function() {
+  if (this.userId) {
+    return Images.find()
+  } else {
+    throw new Meteor.Error( '500', 'No Premission' );
+  }
+})
+
+Meteor.publish('oneImageStore', function(id) {
+  if (this.userId) {
+    return Images.findOne({_id:id})
   } else {
     throw new Meteor.Error( '500', 'No Premission' );
   }
