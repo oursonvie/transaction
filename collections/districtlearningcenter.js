@@ -162,6 +162,10 @@ DLearningCenter.attachSchema(new SimpleSchema({
     label:'相片编号',
     type: String
   },
+  'uploadedPic.$.createdAt':{
+    label:'创建时间',
+    type: Date
+  },
   createdBy: {
     type: String,
     autoValue:function(){

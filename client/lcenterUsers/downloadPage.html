@@ -58,8 +58,11 @@
           <div class="col-sm-6">
             <div class="card">
               <div class="card-body">
-                <h5 class="card-title">Special title treatment</h5>
-                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+
+                {{#with lastestPhoto}}
+                  <img src="{{picUrl}}" class="img-fluid" alt="Responsive image">
+                {{/with}}
+
 
                 <div class="input-group mb-3">
                   <div class="custom-file">

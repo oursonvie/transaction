@@ -4,21 +4,41 @@ Meteor.methods({
 
      let updateObj = {
        batchcode: batchId,
-       photoid: photoId
+       photoid: photoId,
+       createdAt: new Date
      }
 
      console.log(updateObj)
 
-     result = Images.update(
-       { _id:dcenterId },
-       { $push:
-         {
-           'uploadedPic': updateObj
-         }
-       }
-     )
+     // check if batch no already exist in the nested object
 
-     return result
+     if (DLearningCenter.find( { _id:dcenterId, 'uploadedPic.batchcode':batchId }).count() == 0) {
+       // new batchID just add to the array
+       result = DLearningCenter.update(
+         { _id:dcenterId },
+         { $push:
+           {
+             uploadedPic: updateObj
+           }
+         }
+       )
+
+       let message = {type: 'add', result: result}
+       return message
+     } else {
+       result = DLearningCenter.update(
+         { _id: dcenterId, 'uploadedPic.batchcode': batchId },
+         { $set :
+           {
+            'uploadedPic.$.photoid': photoId,
+            'uploadedPic.$.createdAt': new Date,
+            }
+          }
+       )
+     }
+
+
+
 
 
 

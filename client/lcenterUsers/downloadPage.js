@@ -7,13 +7,19 @@ Template.downloadPage.onCreated(function() {
 
     var self = this;
     self.autorun(function() {
-       self.subscribe('imageStore')
-
       var id = FlowRouter.getParam('id');
-
-      console.log(id)
-
       self.subscribe('DistrictLearningCenter', id);
+
+      // subsribe to only picture belong to this district center
+      if (DLearningCenter.findOne()) {
+        let picObjArr = DLearningCenter.findOne().uploadedPic
+        let picIdArray = []
+        _.forEach(picObjArr, function(photo) {
+          picIdArray.push(photo.photoid)
+        })
+        self.subscribe('districtImageStore', picIdArray);
+      }
+
 
       if (DLearningCenter.find().count() != 0) {
 
@@ -81,6 +87,12 @@ Template.downloadPage.helpers({
   numberDisplay: function(number) {
     let fixed = parseFloat(number).toFixed(2)
     return numberWithCommas(fixed)
+  },
+  lastestPhoto: function() {
+    return Images.findOne({},{sort: {uploadedAt: -1} })
+  },
+  picUrl: function() {
+    return Meteor.absoluteUrl() + Images.findOne({},{sort: {uploadedAt: -1} }).url()
   }
 });
 

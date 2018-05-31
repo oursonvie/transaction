@@ -50,10 +50,7 @@ Meteor.publish('imageStore', function() {
   }
 })
 
-Meteor.publish('oneImageStore', function(id) {
-  if (this.userId) {
-    return Images.findOne({_id:id})
-  } else {
-    throw new Meteor.Error( '500', 'No Premission' );
-  }
+Meteor.publish('districtImageStore', function(ids) {
+  console.log(ids)
+  return Images.find({_id:{$in: ids}})
 })
