@@ -1,18 +1,20 @@
 <template name="viewDistrictLCenter">
 
-
-      {{#if $.Session.equals 'actionType' 'add'}}
-        <i class="fa fa-times-circle pull-right btn-close"></i>
-        {{> addNewDLCenter}}
-      {{else if $.Session.equals 'actionType' 'view'}}
-        <i class="fa fa-times-circle pull-right btn-close"></i>
-        {{> DLCenterDetail}}
-      {{else if $.Session.equals 'actionType' 'edit'}}
-        <i class="fa fa-times-circle pull-right btn-close"></i>
-        {{> updateDLCenter}}
-      {{else}}
-        请选择区域学习中心
-      {{/if}}
+  {{#if $.Session.equals 'actionType' 'add'}}
+    <i class="fa fa-times-circle pull-right btn-close"></i>
+    {{> addNewDLCenter}}
+  {{else if $.Session.equals 'actionType' 'view'}}
+    <i class="fa fa-times-circle pull-right btn-close"></i>
+    {{> DLCenterDetail}}
+  {{else if $.Session.equals 'actionType' 'edit'}}
+    <i class="fa fa-times-circle pull-right btn-close"></i>
+    {{> updateDLCenter}}
+  {{else if $.Session.equals 'actionType' 'photo'}}
+    <i class="fa fa-times-circle pull-right btn-close"></i>
+    {{> viewPhoto}}
+  {{else}}
+    请选择区域学习中心
+  {{/if}}
 
 
 </template>

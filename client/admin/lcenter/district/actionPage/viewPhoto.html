@@ -1,0 +1,37 @@
+<template name="viewPhoto">
+  <div class="row">
+
+    <div class="col-sm-4">
+      <div class="card">
+        <div class="card-header">
+          {{selectDlcenter.name}} 回执单
+        </div>
+
+        <ul class="list-group">
+          {{#each selectDlcenter.uploadedPic}}
+            <li class="list-group-item">{{batchcode}}</li>
+          {{/each}}
+        </ul>
+
+      </div>
+
+    </div>
+
+    {{#if Images}}
+
+      <div class="col-sm-8">
+
+        <div class="card">
+          {{#with Images}}
+            <img src="{{picUrl this}}" class="img-fluid" alt="Responsive image">
+
+            <a download="{{original.name}}" class="btn btn-primary" href="{{picUrl this}}">下载回执</a>
+          {{/with}}
+        </div>
+
+      </div>
+
+    {{/if}}
+
+  </div>
+</template>
