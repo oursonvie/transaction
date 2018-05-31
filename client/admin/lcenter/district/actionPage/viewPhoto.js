@@ -24,9 +24,6 @@ Template.viewPhoto.helpers({
     if (Session.get('photoSelector')) {
       return Images.findOne(Session.get('photoSelector'))
     }
-  },
-  picUrl: function(image) {
-    return Meteor.absoluteUrl() + image.url()
   }
 });
 

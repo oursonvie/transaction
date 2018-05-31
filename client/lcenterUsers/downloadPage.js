@@ -90,9 +90,6 @@ Template.downloadPage.helpers({
   },
   lastestPhoto: function() {
     return Images.findOne({},{sort: {uploadedAt: -1} })
-  },
-  picUrl: function() {
-    return Meteor.absoluteUrl() + Images.findOne({},{sort: {uploadedAt: -1} }).url()
   }
 });
 
