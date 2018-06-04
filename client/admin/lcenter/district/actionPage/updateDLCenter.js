@@ -34,7 +34,7 @@ Template.updateDLCenter.events({
   }
 });
 
-AutoForm.addHooks(['updateDLcenterForm'], {
+AutoForm.addHooks(['updateDLcenterForm', 'updateLearningCenter', 'updateBankDetail'], {
   onSuccess: function(formType, result) {
     console.log(formType)
     if (formType == 'update' && result == 1) {

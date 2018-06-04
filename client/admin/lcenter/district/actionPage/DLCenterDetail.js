@@ -1,10 +1,12 @@
 Template.DLCenterDetail.onCreated(function() {
   Session.set('feesDetail', false)
   Session.set('feesInfo', false)
+  Session.set('subActionType', false)
 
   // sub to lcenter db
   var self = this;
   self.autorun(function() {
+    // get view of perticular dcenter
     if (Session.get('action') && Session.get('action').type == 'view') {
       let id = Session.get('action').id
       PromiseMeteorCall('districtCenterPersonFees', id)
@@ -47,11 +49,6 @@ Template.DLCenterDetail.helpers({
   feesInfo: function() {
     return Session.get('feesInfo')
   },
-  feesObjects: function() {
-    if (Session.get('feesDetail')) {
-      return Session.get('feesDetail')
-    }
-  },
   numberDisplay: function(number) {
     let fixed = parseFloat(number).toFixed(2)
     return numberWithCommas(fixed)
@@ -73,5 +70,14 @@ Template.DLCenterDetail.events({
   },
   'click .btn-photo': function() {
     Session.set('action', { type:'photo',  id: this._id} )
+  },
+  'click .btn-bankdetail': function() {
+    Session.set('subActionType', 'editbankdetail')
+  },
+  'click .btn-lcenter': function() {
+    Session.set('subActionType', 'editlearningcenter')
+  },
+  'click .btn-baseinfo': function() {
+    Session.set('subActionType', 'baseinfo')
   }
 })

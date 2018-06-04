@@ -32,17 +32,6 @@ DLearningCenter.attachSchema(new SimpleSchema({
     type: String,
     label: "学习中心名称",
   },
-  type: {
-    type: String,
-    label: "学习中心类型",
-    autoValue: function() {
-      if (this.isInsert) {
-        if (!this.value) {
-          return 'districtLearningCenter'
-        }
-      }
-    }
-  },
   returnratio: {
     type: Number,
     label: "返款比例",
@@ -102,6 +91,9 @@ DLearningCenter.attachSchema(new SimpleSchema({
   'bankaccountdetail.address':{
     label: '详细地址',
     type: String,
+    autoform: {
+      rows: 4
+    }
   },
   sublearningcenter: {
     label: "",
@@ -148,7 +140,10 @@ DLearningCenter.attachSchema(new SimpleSchema({
   uploadedPic: {
     label: '',
     type: Array,
-    optional: true
+    optional: true,
+    autoform: {
+      type:"hidden"
+    }
   },
   'uploadedPic.$':{
     label:'',
@@ -195,6 +190,6 @@ DLearningCenter.attachSchema(new SimpleSchema({
     },
     autoform: {
        type: 'hidden'
-     }
+    }
   }
 }, { tracker: Tracker }));

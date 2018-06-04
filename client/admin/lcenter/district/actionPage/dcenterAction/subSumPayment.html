@@ -1,0 +1,39 @@
+<template name="subSumPayment">
+  <div class="card">
+
+    {{#each feesObjects}}
+
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <td colspan="3">{{name}}</td>
+        </tr>
+        <tr>
+          <th>批次</th>
+          <th>人数</th>
+          <th>缴费金额</th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+          {{#each paymentdetail}}
+            <tr style="text-align:right">
+              <td>{{_id}}</td>
+              <td>{{studentcount}}</td>
+              <td>{{numberDisplay totalFee}}</td>
+            </tr>
+          {{/each}}
+
+      </tbody>
+    </table>
+
+    {{/each}}
+
+  </div>
+
+  <div class="card-body">
+    <a href="/districtcenter/{{this._id}}" class="btn btn-primary">缴费记录</a>
+    <a href="/districtcenter/templatehtml/{{this._id}}" class="btn btn-primary">对账单</a>
+  </div>
+</template>

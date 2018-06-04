@@ -39,10 +39,15 @@
 
         <div class="card-body">
 
-          <a href="/districtcenter/{{this._id}}" class="btn btn-primary">缴费记录</a>
-          <a href="/districtcenter/templatehtml/{{this._id}}" class="btn btn-primary">对账单</a>
-          <button class="btn btn-primary btn-edit">修改</button>
-          <button class="btn btn-primary btn-photo">对账单回执</button>
+          <div class="btn-group" role="group" aria-label="Basic example">
+            <button class="btn btn-primary btn-baseinfo">基本信息</button>
+            <button class="btn btn-primary btn-lcenter">学习中心</button>
+            <button class="btn btn-primary btn-bankdetail">账号信息</button>
+            <button class="btn btn-primary btn-photo">账单回执</button>
+          </div>
+
+
+
         </div>
       </div>
 
@@ -52,34 +57,15 @@
 
       <div class="card">
 
-        {{#each feesObjects}}
-
-        <table class="table">
-          <thead class="thead-dark">
-            <tr>
-              <td colspan="3">{{name}}</td>
-            </tr>
-            <tr>
-              <th>批次</th>
-              <th>人数</th>
-              <th>缴费金额</th>
-            </tr>
-          </thead>
-
-          <tbody>
-
-              {{#each paymentdetail}}
-                <tr style="text-align:right">
-                  <td>{{_id}}</td>
-                  <td>{{studentcount}}</td>
-                  <td>{{numberDisplay totalFee}}</td>
-                </tr>
-              {{/each}}
-
-          </tbody>
-        </table>
-
-        {{/each}}
+        {{#if $.Session.equals 'subActionType' 'editbankdetail'}}
+          {{> editBankDetail}}
+        {{else if $.Session.equals 'subActionType' 'editlearningcenter'}}
+          {{> subEditLcenter}}
+        {{else if $.Session.equals 'subActionType' 'baseinfo'}}
+          {{> baseInfo}}
+        {{else}}
+          {{> subSumPayment}}
+        {{/if}}
 
       </div>
 

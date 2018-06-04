@@ -15,5 +15,6 @@ Template.districtLCenter.onCreated(function() {
 Template.viewDistrictLCenter.events({
   "click .btn-close": function() {
     Session.set('action', false)
+    Session.set('subActionType', false)
   },
 });
