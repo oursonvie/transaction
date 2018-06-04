@@ -24,6 +24,13 @@ guid = () => {
   return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
 }
 
+currentBatchId = () => {
+  let batchList = Promise.await(Transactions.rawCollection().distinct('RECRUITBATCHCODE'))
+
+  return batchList.sort()[batchList.length - 1]
+
+}
+
 lcenterList = () => {
   return [
   "江苏泰州学习中心",

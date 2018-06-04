@@ -21,6 +21,13 @@ Meteor.methods({
 
     let result = Transactions.aggregate(pipeline);
 
+    // update current batchID
+    Settings.upsert({
+      valuename:"batchId"
+    }, {
+      $set:{value:currentBatchId()}
+    })
+
     return result
   },
   districtCenterPersonFees: function(DCenterId) {

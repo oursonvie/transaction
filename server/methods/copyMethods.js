@@ -4,9 +4,16 @@ Meteor.methods({
     if (WorkingPlace.find().count() != 0) {
       console.log('start clearning working DB')
       WorkingPlace.remove({})
-    } else {
-
     }
+
+    console.log('setting batchID to current')
+
+    // update current batchID
+    Settings.upsert({
+      valuename:"batchId"
+    }, {
+      $set:{value:currentBatchId()}
+    })
 
     console.log('start copying data into working DB')
 
