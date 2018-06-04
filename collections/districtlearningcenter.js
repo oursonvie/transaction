@@ -140,10 +140,7 @@ DLearningCenter.attachSchema(new SimpleSchema({
   uploadedPic: {
     label: '',
     type: Array,
-    optional: true,
-    autoform: {
-      type:"hidden"
-    }
+    optional: true
   },
   'uploadedPic.$':{
     label:'',

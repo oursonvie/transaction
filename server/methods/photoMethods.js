@@ -10,6 +10,8 @@ Meteor.methods({
 
      console.log(updateObj)
 
+
+
      // check if batch no already exist in the nested object
 
      if (DLearningCenter.find( { _id:dcenterId, 'uploadedPic.batchcode':batchId }).count() == 0) {

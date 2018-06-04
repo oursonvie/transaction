@@ -10,6 +10,9 @@ Template.downloadPage.onCreated(function() {
       var id = FlowRouter.getParam('id');
       self.subscribe('DistrictLearningCenter', id);
 
+      //subscribe batch id in Settings
+      self.subscribe('batchId');
+
       // subsribe to only picture belong to this district center
       if (DLearningCenter.findOne()) {
         let picObjArr = DLearningCenter.findOne().uploadedPic
@@ -101,7 +104,10 @@ Template.downloadPage.events({
           console.log(err)
         } else {
           console.log(fileObj)
-          PromiseMeteorCall('updatePhotoId', DLearningCenter.findOne()._id, '1709', fileObj._id)
+
+          let batchId = Settings.findOne({valuename:"batchId"}).value
+
+          PromiseMeteorCall('updatePhotoId', DLearningCenter.findOne()._id, batchId, fileObj._id)
           .then(res => {
             console.log(res)
           })
