@@ -51,6 +51,9 @@ Meteor.publish('imageStore', function() {
 })
 
 Meteor.publish('districtImageStore', function(ids) {
-  console.log(ids)
   return Images.find({_id:{$in: ids}})
+})
+
+Meteor.publish('batchId', function() {
+  return Settings.find({valuename: 'batchId'})
 })
