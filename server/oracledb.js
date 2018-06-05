@@ -50,7 +50,16 @@ updateTransactionDB = () => {
 
   let message = `Transaction fetched: ${queryingResult.length}, process took ${proc_duration}ms`
 
+  console.log(message)
+
   doClose(connection, resultSet);
+
+  // update current batchID
+  Settings.upsert({
+    valuename:"oracleUpdateBy"
+  }, {
+    $set:{value:new Date}
+  })
 
   return queryingResult
 
