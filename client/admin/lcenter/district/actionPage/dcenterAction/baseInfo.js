@@ -1,5 +1,8 @@
 Template.baseInfo.helpers({
-  selected: function(){
+  selected: function() {
     return DLearningCenter.findOne({_id:Session.get('action').id})
+  },
+  editMode: function() {
+
   }
 });

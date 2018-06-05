@@ -65,9 +65,6 @@ Template.DLCenterDetail.helpers({
 });
 
 Template.DLCenterDetail.events({
-  'click .btn-edit': function() {
-    Session.set('action', { type:'edit',  id: this._id} )
-  },
   'click .btn-photo': function() {
     Session.set('action', { type:'photo',  id: this._id} )
   },
