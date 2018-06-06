@@ -14,5 +14,17 @@ Template.baseInfo.helpers({
 Template.baseInfo.events({
   'click .btn-form-type-edit': function() {
     Session.set('formType', 'update')
+  },
+  'click .btn-delete': function() {
+    let result = confirm('确认删除区域学习中心？')
+
+    if (result) {
+      PromiseMeteorCall('removeDLCenter', this._id)
+      .then(res => {
+        console.log(res)
+      })
+      .catch(err => console.log(err))
+    } 
+
   }
 })
