@@ -1,5 +1,16 @@
 <template name="eachDLCenter">
-    <li class="list-group-item" style="text-align: left">
-      {{name}}
-    </li>
+
+  <li class="list-group-item" style="text-align: left">
+    {{#if allowAccess}}
+      <span id='clickableAwesomeFont'> <i class="fa fa-power-off" style="color:green"></i> </span> {{name}}
+    {{else}}
+
+      <span id='clickableAwesomeFont'> <i class="fa fa-power-off"></i> </span> {{name}}
+
+    {{/if}}
+
+    <button type="button" class="btn btn-outline-secondary btn-sm pull-right">查看</button>
+  </li>
+
+
 </template>
