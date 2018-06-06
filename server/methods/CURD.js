@@ -26,5 +26,13 @@ Meteor.methods({
     } else {
       throw new Meteor.Error( '500', 'No Premission' );
     }
+  },
+  turnOffallDCenter: function() {
+    result = DLearningCenter.update({},{$set: { allowAccess: false }}, {multi:true})
+    return result
+  },
+  turnONallDCenter: function() {
+    result = DLearningCenter.update({},{$set: { allowAccess: true }}, {multi:true})
+    return result
   }
 });
