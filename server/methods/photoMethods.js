@@ -37,6 +37,9 @@ Meteor.methods({
             }
           }
        )
+
+       let message = {type: 'update', result: result}
+       return message
      }
 
 
