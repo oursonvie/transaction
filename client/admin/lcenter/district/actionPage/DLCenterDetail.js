@@ -2,6 +2,7 @@ Template.DLCenterDetail.onCreated(function() {
   Session.set('feesDetail', false)
   Session.set('feesInfo', false)
   Session.set('subActionType', false)
+  Session.set('formType', 'disabled')
 
   // sub to lcenter db
   var self = this;

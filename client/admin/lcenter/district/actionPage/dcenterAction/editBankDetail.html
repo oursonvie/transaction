@@ -1,6 +1,10 @@
 <template name="editBankDetail">
-  <div class="container">
-    {{> quickForm id="updateBankDetail" collection="DLearningCenter" fields="bankaccountdetail" doc=selected type="update"}}
+  <div class="sub-update-form">
+    {{> quickForm id="updateBankDetail" collection="DLearningCenter" fields="bankaccountdetail" doc=selected type=formType}}
+
+    {{#if $.Session.equals 'formType' 'disabled'}}
+      <button class="btn btn-primary btn-form-type-edit">编辑</button>
+    {{/if}}
   </div>
 
 </template>

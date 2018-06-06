@@ -41,6 +41,7 @@ AutoForm.addHooks(['updateDLcenterForm', 'updateLearningCenter', 'updateBankDeta
 
       alert('更新成功')
       Session.set('selectedID', false)
+      Session.set('formType', 'disabled')
 
       // check standalone leaerning center
       PromiseMeteorCall('checkStandAlone')

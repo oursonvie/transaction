@@ -1,3 +1,9 @@
 <template name="subEditLcenter">
-  {{> quickForm id="updateLearningCenter" collection="DLearningCenter" fields="sublearningcenter" doc=selected type="update"}}
+  <div class="sub-update-form">
+    {{> quickForm id="updateLearningCenter" collection="DLearningCenter" fields="sublearningcenter" doc=selected type=formType}}
+
+    {{#if $.Session.equals 'formType' 'disabled'}}
+      <button class="btn btn-primary btn-form-type-edit">编辑</button>
+    {{/if}}
+  </div>
 </template>
