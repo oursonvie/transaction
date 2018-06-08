@@ -30,8 +30,7 @@ LearningCenter.allow({
 LearningCenter.attachSchema(new SimpleSchema({
   name: {
     type: String,
-    label: "学习中心名称",
-    optional: false
+    label: "学习中心名称"
   },
   type: {
     type: String,
@@ -71,6 +70,11 @@ LearningCenter.attachSchema(new SimpleSchema({
       }
     }
 
+  },
+  lcentercode: {
+    type: String,
+    label: "学习中心编码",
+    optional: true
   },
   createdBy: {
     type: String,

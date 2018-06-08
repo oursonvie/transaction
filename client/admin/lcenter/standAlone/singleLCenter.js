@@ -16,32 +16,47 @@ Template.singleLCenter.onCreated(function() {
       lcenterObject.name = lcenter
       lcenterObject.type = 'standalone'
       lcenterObject.createdAt = new Date()
+
       lcenterArray.push(lcenterObject)
     })
 
     // check local learning center list
-    PromiseMeteorCall('getLearingCenterList')
+    PromiseMeteorCall('getLearningCenterList')
     .then(LCdb => {
       let diff = _.difference(res, LCdb)
 
       console.log(diff)
 
-      // add missing learning center to db
-      _.forEach(diff, function(name){
-        if ( LearningCenter.find({name:name}).count() == 0 )
-        // insert objct
-        result = _.find(lcenterArray, function(lcenter) { return lcenter.name = name; });
+      if (diff.length > 0) {
+        // add missing learning center to db
+        _.forEach(diff, function(name){
+          if ( LearningCenter.find({name:name}).count() == 0 )
 
-        LearningCenter.insert(result)
+          // insert objct
+          result = _.find(lcenterArray, function(lcenter) {
+            return lcenter.name = name;
+          });
 
-      })
+          LearningCenter.insert(result)
+
+        })
+
+        // update lcode
+        PromiseMeteorCall('setLearningCenterCode')
+        .then(res => {
+          console.log(res)
+        })
+
+      }
+
+
     })
 
   })
   .catch(err => console.log(err))
 
   // check learning center status
-  PromiseMeteorCall('setLearingCenterListStatus')
+  PromiseMeteorCall('setLearningCenterListStatus')
   .then(res => {
     console.log(res)
   })

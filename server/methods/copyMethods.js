@@ -39,13 +39,13 @@ Meteor.methods({
   getLcenterList: function() {
     return Promise.await(Transactions.rawCollection().distinct('LCENTERNAME'))
   },
-  getLearingCenterList: function() {
+  getLearningCenterList: function() {
     return Promise.await(LearningCenter.rawCollection().distinct('name'))
   },
   getActiveLearingCenterList: function() {
     return Promise.await(WorkingPlace.rawCollection().distinct('LCENTERNAME'))
   },
-  setLearingCenterListStatus: function() {
+  setLearningCenterListStatus: function() {
     let activeList = Promise.await(WorkingPlace.rawCollection().distinct('LCENTERNAME'))
 
     _.forEach(activeList, function(center) {
@@ -79,5 +79,23 @@ Meteor.methods({
     }
 
 
+  },
+  setLearningCenterCode: function() {
+    let arr = LearningCenter.find().fetch()
+
+    _.forEach(arr, function(center) {
+      let lcentercode = Transactions.findOne({LCENTERNAME:center.name}).LCENTERCODE
+
+      console.log(lcentercode)
+
+      let result = LearningCenter.update(
+        {_id: center._id},
+        {$set:{lcentercode: lcentercode}}
+      )
+
+      console.log(result)
+    })
+
+    return 'checked lcenter code'
   }
 });

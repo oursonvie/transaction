@@ -41,3 +41,10 @@ FlowRouter.route('/user/district/:id', {
         BlazeLayout.render('UserLayout', {main: 'downloadPage'});
     }
 });
+
+FlowRouter.route('/landingpage/:appId', {
+   name: 'landingPage',
+    action() {
+        BlazeLayout.render('UserLayout', {main: 'landingPage'});
+    }
+});

@@ -13,5 +13,15 @@ Meteor.methods({
     } else {
       throw new Meteor.Error( '500', 'No Premission' );
     }
+  },
+  updateOracleDB: function() {
+    if (this.userId) {
+      let result = Transactions.remove({})
+      console.log(`Removed ${result} in transaction`)
+      updateTransactionDB()
+      return 1
+    } else {
+      throw new Meteor.Error( '500', 'No Premission' );
+    }
   }
 });
