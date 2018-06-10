@@ -86,14 +86,10 @@ Meteor.methods({
     _.forEach(arr, function(center) {
       let lcentercode = Transactions.findOne({LCENTERNAME:center.name}).LCENTERCODE
 
-      console.log(lcentercode)
-
       let result = LearningCenter.update(
         {_id: center._id},
         {$set:{lcentercode: lcentercode}}
       )
-
-      console.log(result)
     })
 
     return 'checked lcenter code'

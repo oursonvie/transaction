@@ -59,6 +59,11 @@ LearningCenter.attachSchema(new SimpleSchema({
       }
     }
   },
+  lcentercode: {
+    type: String,
+    label: "学习中心编码",
+    optional: true
+  },
   active: {
     type: Boolean,
     label: "使用中",
@@ -69,12 +74,6 @@ LearningCenter.attachSchema(new SimpleSchema({
         }
       }
     }
-
-  },
-  lcentercode: {
-    type: String,
-    label: "学习中心编码",
-    optional: true
   },
   createdBy: {
     type: String,
