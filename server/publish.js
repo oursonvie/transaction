@@ -37,14 +37,14 @@ Meteor.publish('DistrictLearningCenterList', function() {
 })
 
 Meteor.publish('DistrictLearningCenter', function(id) {
+  console.log(id)
   return DLearningCenter.find({_id:id})
 })
 
-Meteor.publish('DLCCode'), function(lcentercode) {
+Meteor.publish('DLCCode', function(lcentercode) {
   console.log(lcentercode)
-
-  return DLearningCenter.find()
-}
+  return DLearningCenter.find({'sublearningcenter.lcentercode':lcentercode})
+})
 
 Meteor.publish('sublearningCenter', function(id) {
   if (this.userId) {
