@@ -43,7 +43,11 @@ Meteor.publish('DistrictLearningCenter', function(id) {
 
 Meteor.publish('DLCCode', function(lcentercode) {
   console.log(lcentercode)
-  return DLearningCenter.find({'sublearningcenter.lcentercode':lcentercode})
+  return [
+    DLearningCenter.find({'sublearningcenter.lcentercode':lcentercode}),
+    Settings.find({valuename:'batchId'})
+  ]
+
 })
 
 Meteor.publish('sublearningCenter', function(id) {
