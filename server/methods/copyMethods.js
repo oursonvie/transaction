@@ -73,7 +73,7 @@ Meteor.methods({
         })
       })
       console.log('lcenter status checked')
-      return 1
+      return 'lcenter status checked'
     } catch(err) {
       return err
     }

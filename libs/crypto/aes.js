@@ -1,7 +1,7 @@
 // import crypto to do the AES-128
 var crypto = require('crypto');
 
-// local var for AES encryption  
+// local var for AES encryption
 const key = "b90126c9a326d6a9";
 const iv = "b90126c9a326d6a9";
 
@@ -26,7 +26,7 @@ decryptAES = function(crypted) {
 }
 
 Meteor.methods({
-  convertCert: function(certno) {
+  aes: function(certno) {
     // encrypt certno
     let encrypted = encryptAES(certno)
     //console.log(`encrypted string: ${encrypted.toString()}`)

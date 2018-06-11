@@ -11,6 +11,13 @@ Template.districtLCenter.onCreated(function() {
   var self = this;
   self.autorun(function() {
     self.subscribe('DistrictLearningCenterList')
+    // filtered list when adding new dcenter, full list otherwise
+    if (Session.get('actionType') == 'add') {
+      self.subscribe('AloneLearningCenter')
+    } else {
+      self.subscribe('LearningCenterList')
+    }
+
   })
 
 });

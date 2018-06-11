@@ -110,15 +110,33 @@ DLearningCenter.attachSchema(new SimpleSchema({
     autoform: {
       type: "select",
       options: () => {
-        let list = lcenterList()
-        let result =  _.map(list, function(value) {
-          return {
-            label:value,
-            value:value
-          }
-        })
-        return _.sortBy(result, ['label'])
+        // have to define on client otherwise things get wired
+        if (Meteor.isClient) {
+          objArtList = LearningCenter.find({},{fields:{name:1}}).fetch()
+          let list = ObjToArr(objArtList, 'name')
+
+          let result =  _.map(list, function(value) {
+            return {
+              label:value,
+              value:value
+            }
+          })
+          return _.sortBy(result, ['label'])
+        }
       }
+    }
+  },
+  'sublearningcenter.$.lcentercode':{
+    type: String,
+    label: '学习中心编号',
+    optional: true,
+    autoValue: function() {
+      let name = this.siblingField('name').value
+      let lcentercode = LearningCenter.findOne({name: name}).lcentercode
+      return lcentercode
+    },
+    autoform: {
+       type: 'hidden'
     }
   },
   allowAccess: {

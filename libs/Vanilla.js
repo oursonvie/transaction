@@ -31,6 +31,16 @@ currentBatchId = () => {
 
 }
 
+// turn object array list into straight array
+
+ObjToArr = (objectArray, fieldName) => {
+  let result = []
+  _.forEach(objectArray, function(obj) {
+    result.push(obj[fieldName])
+  })
+  return result
+}
+
 lcenterList = () => {
   return [
   "江苏泰州学习中心",

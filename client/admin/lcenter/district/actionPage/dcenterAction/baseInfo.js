@@ -22,9 +22,18 @@ Template.baseInfo.events({
       PromiseMeteorCall('removeDLCenter', this._id)
       .then(res => {
         console.log(res)
+        // success delete will return 1
+        if (res == 1) {
+          // check standalone leaerning center
+          PromiseMeteorCall('checkStandAlone')
+          .then(res => {
+            console.log(res)
+          })
+          .catch(err => console.log(err))
+        }
       })
       .catch(err => console.log(err))
-    } 
+    }
 
   }
 })
