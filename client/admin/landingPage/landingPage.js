@@ -42,11 +42,6 @@ Template.landingPage.onCreated(function() {
         self.subscribe('DLCCode', lcentercode)
       })
 
-      result = DLearningCenter.findOne()
-
-      console.log(result)
-
-
     } else {
       console.log('bad time')
     }
@@ -147,6 +142,11 @@ Template.landingPage.events({
           PromiseMeteorCall('updatePhotoId', DLearningCenter.findOne()._id, batchId, fileObj._id)
           .then(res => {
             console.log(res)
+            // refresh page upon uploaded
+            if (res.result == 1) {
+              location.reload();
+            }
+
           })
           .catch(err => console.log(err))
         }
