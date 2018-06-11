@@ -2,7 +2,6 @@ Template.downloadPage.onCreated(function() {
   Session.set('feesDetail', false)
   Session.set('feesInfo', false)
   Session.set('dateRange', false)
-
   Session.set('valideNumber', false)
 
     var self = this;

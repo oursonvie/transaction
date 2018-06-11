@@ -1,6 +1,6 @@
 //check if timestamp within 10mins, 5mins before and 5 mins after
 let validationTimeStamp = (time) => {
-  let duration = 10 * 60// 10 mins
+  let duration = 60 * 60// 10 mins
   let current_time = moment().unix()
   let start_time = current_time - duration/2
   let end_time = current_time + duration/2
@@ -12,6 +12,10 @@ let validationTimeStamp = (time) => {
 }
 
 Template.landingPage.onCreated(function() {
+  Session.set('feesDetail', false)
+  Session.set('feesInfo', false)
+  Session.set('dateRange', false)
+  Session.set('valideNumber', false)
 
   // print methods
   let appId = FlowRouter.getParam("appId");
@@ -19,12 +23,15 @@ Template.landingPage.onCreated(function() {
 
   try {
     // get learning center code
-    let lcentercode = decryptStamp(FlowRouter.getQueryParam("lcentercode"));
-    console.log(lcentercode);
+    let query = FlowRouter.getQueryParam("query").replace(/ /g, '%2B')
+    console.log(`query: ${query}`);
 
-    // get timestamp
-    let timestamp = decryptStamp(FlowRouter.getQueryParam("timestamp"));
-    console.log(timestamp)
+
+    let decrptedString = decryptStamp(query).split('&')
+    console.log(`decrptedString: ${decrptedString}`);
+
+    let timestamp = decrptedString[1]
+    let lcentercode = decrptedString[0]
 
     if (validationTimeStamp(timestamp)) {
       console.log('valid Time')
@@ -34,6 +41,11 @@ Template.landingPage.onCreated(function() {
       self.autorun(function() {
         self.subscribe('DLCCode', lcentercode)
       })
+
+      result = DLearningCenter.findOne()
+
+      console.log(result)
+
 
     } else {
       console.log('bad time')
@@ -45,22 +57,100 @@ Template.landingPage.onCreated(function() {
   }
 
 
+
+
 });
 
 Template.landingPage.helpers({
-  create: function(){
+  something: function() {
+
+    if (DLearningCenter.find().count() != 0) {
+
+      Session.set('valideNumber', true)
+
+      // aggrate fees detail into batch number, sutdent count and total amount
+      let id = DLearningCenter.findOne()._id
+      PromiseMeteorCall('districtCenterPersonFees', id)
+      .then(res => {
+        Session.set('feesDetail', res)
+
+        // calculate fees detail with ratio
+        let total = 0
+        _.forEach(res, function(center) {
+          total += lodash.sumBy(center.paymentdetail, 'totalFee')
+        })
+
+        let feesInfo = {}
+        // get extra money amount first
+        feesInfo.extraAmount = DLearningCenter.findOne().extraAmount
+
+        feesInfo.total = total + feesInfo.extraAmount
+        feesInfo.extraAmount = DLearningCenter.findOne().extraAmount
+        feesInfo.lowratio = DLearningCenter.findOne().returnratio
+        feesInfo.currentratio = getRatio(feesInfo.total, feesInfo.lowratio)
+        feesInfo.xjturatio = 1 - feesInfo.currentratio
+        feesInfo.lcenterAmount = feesInfo.total * feesInfo.currentratio
+        feesInfo.xjtuamount = feesInfo.total - feesInfo.lcenterAmount
+
+        Session.set('feesInfo', feesInfo)
+      })
+      .catch(err => {console.log(err)})
+
+      // get start and end date for daterange
+      PromiseMeteorCall('getDateRange', id)
+      .then(res => {
+        Session.set('dateRange', res)
+      }).
+      catch(err => {console.log(err)})
+
+    } else {
+      Session.set('valideNumber', false)
+      console.log('no matching student')
+    }
 
   },
-  rendered: function(){
-
+  districtCenter: function() {
+     return DLearningCenter.findOne()
   },
-  destroyed: function(){
-
+  xjtuDetail: function() {
+    return Meteor.settings.public.xjtuaccountdetail
   },
+  dateRage: function() {
+    return Session.get('dateRange')
+  },
+  validNumber: function() {
+    return Session.get('valideNumber')
+  },
+  feesObjects: function() {
+    return Session.get('feesDetail')
+  },
+  numberDisplay: function(number) {
+    let fixed = parseFloat(number).toFixed(2)
+    return numberWithCommas(fixed)
+  },
+  lastestPhoto: function() {
+    return Images.findOne({},{sort: {uploadedAt: -1} })
+  }
 });
 
 Template.landingPage.events({
-  "click #foo": function(event, template){
+  'change .custom-file-input': function(event, template) {
+    FS.Utility.eachFile(event, function(file) {
+      Images.insert(file, function (err, fileObj) {
+        if (err) {
+          console.log(err)
+        } else {
+          console.log(fileObj)
 
+          let batchId = Settings.findOne({valuename:"batchId"}).value
+
+          PromiseMeteorCall('updatePhotoId', DLearningCenter.findOne()._id, batchId, fileObj._id)
+          .then(res => {
+            console.log(res)
+          })
+          .catch(err => console.log(err))
+        }
+      })
+    })
   }
 });
