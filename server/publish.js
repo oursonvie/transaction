@@ -40,6 +40,12 @@ Meteor.publish('DistrictLearningCenter', function(id) {
   return DLearningCenter.find({_id:id})
 })
 
+Meteor.publish('DLCCode'), function(lcentercode) {
+  console.log(lcentercode)
+
+  return DLearningCenter.find()
+}
+
 Meteor.publish('sublearningCenter', function(id) {
   if (this.userId) {
     let subClist = DLearningCenter.findOne({_id:id}).sublearningcenter

@@ -25,16 +25,27 @@ decryptAES = function(crypted) {
   return decoded;
 }
 
-Meteor.methods({
-  aes: function(certno) {
-    // encrypt certno
-    let encrypted = encryptAES(certno)
-    //console.log(`encrypted string: ${encrypted.toString()}`)
+decryptStamp = function(encodedString) {
+  return decryptAES(decodeURIComponent(encodedString))
+}
 
-    // encode url
-    let encodedString = encodeURIComponent(encrypted.toString())
-    let result = `doc=${encodedString}`;
-    // console.log(result)
-    return result
+encodeString = (string) => {
+  let encrypt = encryptAES(string.toString())
+  return encodeURIComponent(encrypt)
+}
+
+Meteor.methods({
+  encryptStamp: function(lcentercode) {
+    if (this.userId) {
+      // encrypt string
+      let string = `lcentercode=${encodeString(lcentercode)}&timestamp=${encodeString(moment().unix())}`
+
+      console.log(string)
+
+      return string
+    } else {
+      throw new Meteor.Error( '500', 'No Premission' );
+    }
+
   }
 });
