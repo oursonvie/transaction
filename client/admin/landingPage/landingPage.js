@@ -19,16 +19,16 @@ Template.landingPage.onCreated(function() {
 
   // print methods
   let appId = FlowRouter.getParam("appId");
-  console.log(appId);
+  // console.log(appId);
 
   try {
     // get learning center code
     let query = FlowRouter.getQueryParam("query").replace(/ /g, '%2B')
-    console.log(`query: ${query}`);
+    // console.log(`query: ${query}`);
 
 
     let decrptedString = decryptStamp(query).split('&')
-    console.log(`decrptedString: ${decrptedString}`);
+    // console.log(`decrptedString: ${decrptedString}`);
 
     let timestamp = decrptedString[1]
     let lcentercode = decrptedString[0]
