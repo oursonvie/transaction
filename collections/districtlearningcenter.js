@@ -39,7 +39,7 @@ DLearningCenter.attachSchema(new SimpleSchema({
       type: "select",
       options: () => {
         let avalibleSelection = [0.35, 0.4, 0.6]
-        let result = _.map(avalibleSelection, function(value) {
+        let result = lodash.map(avalibleSelection, function(value) {
           return {
             label: `${100-value*100}% : ${value*100}%`,
             value: value
@@ -115,13 +115,13 @@ DLearningCenter.attachSchema(new SimpleSchema({
           objArtList = LearningCenter.find({},{fields:{name:1}}).fetch()
           let list = ObjToArr(objArtList, 'name')
 
-          let result =  _.map(list, function(value) {
+          let result =  lodash.map(list, function(value) {
             return {
               label:value,
               value:value
             }
           })
-          return _.sortBy(result, ['label'])
+          return lodash.sortBy(result, ['label'])
         }
       }
     }

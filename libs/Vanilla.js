@@ -35,7 +35,7 @@ currentBatchId = () => {
 
 ObjToArr = (objectArray, fieldName) => {
   let result = []
-  _.forEach(objectArray, function(obj) {
+  lodash.forEach(objectArray, function(obj) {
     result.push(obj[fieldName])
   })
   return result

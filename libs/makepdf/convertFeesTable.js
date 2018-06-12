@@ -2,7 +2,7 @@ convertFeesTable = (feesDetail, feesInfo) => {
 
   let centerView = []
 
-  _.forEach(feesDetail, function(center) {
+  lodash.forEach(feesDetail, function(center) {
     // for each center in the list
 
     let header = [
@@ -23,7 +23,7 @@ convertFeesTable = (feesDetail, feesInfo) => {
 
     centerView.push(headerName)
 
-    _.forEach(center.paymentdetail, function(payment, index) {
+    lodash.forEach(center.paymentdetail, function(payment, index) {
       let row = [
         {text:`${payment._id}`, alignment: 'center'},
         {text:`${payment.studentcount}`, alignment: 'center'},

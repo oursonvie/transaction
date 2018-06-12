@@ -18,7 +18,7 @@ Template.DLCenterDetail.onCreated(function() {
 
         // calculate fees detail with ratio
         let total = 0
-        _.forEach(res, function(center) {
+        lodash.forEach(res, function(center) {
           total += lodash.sumBy(center.paymentdetail, 'totalFee')
         })
 

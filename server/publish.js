@@ -47,7 +47,7 @@ Meteor.publish('DLCCode', function(lcentercode) {
   // get image related to this district center
   let picObjArr = DLearningCenter.findOne({'sublearningcenter.lcentercode':lcentercode}).uploadedPic
   let picIdArray = []
-  _.forEach(picObjArr, function(photo) {
+  lodash.forEach(picObjArr, function(photo) {
     picIdArray.push(photo.photoid)
   })
 

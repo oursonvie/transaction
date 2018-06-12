@@ -26,7 +26,7 @@ Meteor.methods({
     }).fetch()
 
     try {
-      _.forEach(result, function(document) {
+      lodash.forEach(result, function(document) {
         document.batchID = guid()
         document.createdAt = new Date()
         WorkingPlace.insert(document)
@@ -48,7 +48,7 @@ Meteor.methods({
   setLearningCenterListStatus: function() {
     let activeList = Promise.await(WorkingPlace.rawCollection().distinct('LCENTERNAME'))
 
-    _.forEach(activeList, function(center) {
+    lodash.forEach(activeList, function(center) {
       LearningCenter.update({name:center}, {$set:{active:true}})
     })
 
@@ -63,8 +63,8 @@ Meteor.methods({
     LearningCenter.update({},{$set:{type:'standalone'}},{multi: true})
 
     try {
-      _.forEach(cursors, function(dcenter) {
-        _.forEach(dcenter.sublearningcenter, function(center) {
+      lodash.forEach(cursors, function(dcenter) {
+        lodash.forEach(dcenter.sublearningcenter, function(center) {
           LearningCenter.update({name:center.name}, {
             $set:{
               type: 'multiple'
@@ -83,7 +83,7 @@ Meteor.methods({
   setLearningCenterCode: function() {
     let arr = LearningCenter.find().fetch()
 
-    _.forEach(arr, function(center) {
+    lodash.forEach(arr, function(center) {
       let lcentercode = Transactions.findOne({LCENTERNAME:center.name}).LCENTERCODE
 
       let result = LearningCenter.update(
@@ -93,5 +93,12 @@ Meteor.methods({
     })
 
     return 'checked lcenter code'
+  },
+  resetOracleDB: function() {
+    console.log('clearing db')
+    let result = Transactions.remove({})
+    console.log(`${result} transaction removed`)
+
+    updateTransactionDB()
   }
 });

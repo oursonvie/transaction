@@ -8,7 +8,7 @@ Template.viewPhoto.onCreated(function() {
     if (DLearningCenter.findOne({_id:dcenterid})) {
       let picObjArr = DLearningCenter.findOne({_id:dcenterid}).uploadedPic
       let picIdArray = []
-      _.forEach(picObjArr, function(photo) {
+      lodash.forEach(picObjArr, function(photo) {
         picIdArray.push(photo.photoid)
       })
       self.subscribe('districtImageStore', picIdArray);

@@ -15,7 +15,7 @@ arrayCenterTotalFees = (lcenterListArray) => {
   let centerArrayList = []
 
   // array with only center name
-  _.forEach(lcenterListArray, function(center) {
+  lodash.forEach(lcenterListArray, function(center) {
     centerArrayList.push(center.name)
   })
 
@@ -42,9 +42,9 @@ arrayCenterTotalFees = (lcenterListArray) => {
   ]
 
   let result = Promise.await(WorkingPlace.aggregate(pipeline))
-  let sortedResult = _.sortBy(result, ['_id']);
+  let sortedResult = lodash.sortBy(result, ['_id']);
 
-  _.forEach(sortedResult, function(obj) {
+  lodash.forEach(sortedResult, function(obj) {
     obj.studentcount = obj.studentcount.unique().length
   })
 

@@ -11,7 +11,7 @@ Template.singleLCenter.onCreated(function() {
 
     // init lcenterList as object
     let lcenterArray = []
-    _.forEach(res, function(lcenter) {
+    lodash.forEach(res, function(lcenter) {
       lcenterObject = {}
       lcenterObject.name = lcenter
       lcenterObject.type = 'standalone'
@@ -23,17 +23,17 @@ Template.singleLCenter.onCreated(function() {
     // check local learning center list
     PromiseMeteorCall('getLearningCenterList')
     .then(LCdb => {
-      let diff = _.difference(res, LCdb)
+      let diff = lodash.difference(res, LCdb)
 
       console.log(diff)
 
       if (diff.length > 0) {
         // add missing learning center to db
-        _.forEach(diff, function(name){
+        lodash.forEach(diff, function(name){
           if ( LearningCenter.find({name:name}).count() == 0 )
 
           // insert objct
-          result = _.find(lcenterArray, function(lcenter) {
+          result = lodash.find(lcenterArray, function(lcenter) {
             return lcenter.name = name;
           });
 

@@ -1,5 +1,5 @@
 Meteor.methods({
-  totalFee:function(startDate, endDate) {
+  totalFee: async function(startDate, endDate) {
 
     let pipeline = [
       { $match :
@@ -19,7 +19,7 @@ Meteor.methods({
       }
     ]
 
-    let result = Transactions.aggregate(pipeline);
+    let result = await Transactions.aggregate(pipeline);
 
     return result
   },
@@ -28,7 +28,7 @@ Meteor.methods({
 
     if (lcenterObjList.length == 2) {
       let result = []
-      _.forEach(lcenterObjList, function(center) {
+      lodash.forEach(lcenterObjList, function(center) {
         let tempArray = []
         let temp = {}
         temp.name = center.name

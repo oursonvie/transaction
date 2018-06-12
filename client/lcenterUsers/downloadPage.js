@@ -16,7 +16,7 @@ Template.downloadPage.onCreated(function() {
       if (DLearningCenter.findOne()) {
         let picObjArr = DLearningCenter.findOne().uploadedPic
         let picIdArray = []
-        _.forEach(picObjArr, function(photo) {
+        lodash.forEach(picObjArr, function(photo) {
           picIdArray.push(photo.photoid)
         })
         self.subscribe('districtImageStore', picIdArray);
@@ -34,7 +34,7 @@ Template.downloadPage.onCreated(function() {
 
           // calculate fees detail with ratio
           let total = 0
-          _.forEach(res, function(center) {
+          lodash.forEach(res, function(center) {
             total += lodash.sumBy(center.paymentdetail, 'totalFee')
           })
 

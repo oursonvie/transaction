@@ -12,7 +12,7 @@ Template.timeSetting.onCreated(function() {
 
       PromiseMeteorCall('totalFee', Session.get('datePicker').startDate, Session.get('datePicker').endDate)
       .then(res => {
-        //console.log(res)
+        console.log(res)
         Session.set('totalFeeResult', res)
       })
       .catch(err => console.log(err))
@@ -51,12 +51,12 @@ Template.timeSetting.helpers({
 Template.timeSetting.events({
   "click .btn-date-input": function(event, template){
 
-     startDate = document.getElementById('startdate').value.trim()
-     endDate = document.getElementById('enddate').value.trim()
+     // startDate = document.getElementById('startdate').value.trim()
+     // endDate = document.getElementById('enddate').value.trim()
 
      // fast testing
-     // startDate = '2017-11-1'
-     // endDate = '2018-4-30'
+     startDate = '2017-11-1'
+     endDate = '2018-4-30'
 
      formatedStartDate = moment(startDate).toISOString()
      formatedEndDate = moment(endDate).toISOString()
@@ -82,6 +82,10 @@ Template.timeSetting.events({
     .then(res => {
       console.log(res)
     })
+    .catch(err => console.log(err))
+  },
+  "click .btn-update": function() {
+    PromiseMeteorCall('resetOracleDB')
     .catch(err => console.log(err))
   }
 });
