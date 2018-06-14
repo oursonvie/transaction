@@ -15,7 +15,7 @@ Template.pdfdownload.events({
     pdfMake.fonts = {
      msyh: {
           normal: 'msyh.ttf',
-          bold: 'msyh_bold.ttf',
+          bold: 'msyh.ttf',
           italics: 'msyh.ttf',
           bolditalics: 'msyh.ttf'
         }

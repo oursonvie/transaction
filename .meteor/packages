@@ -47,3 +47,5 @@ stevezhu:lodash
 cfs:standard-packages
 cfs:gridfs
 underscore
+
+session
