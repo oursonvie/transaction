@@ -23,6 +23,7 @@ makeRenderObject = (object) => {
       {
         text: `${object.districtCenter.name} 学习中心:`,
         alignment: 'left',
+        style: 'title'
       },
 
       {
@@ -71,8 +72,8 @@ makeRenderObject = (object) => {
           widths: [200, 200],
   				body: [
             [
-              {text: `财务主管`, alignment: 'left'},
-              {text: `复核`, alignment: 'left'}
+              {text: `财务主管:`, alignment: 'left'},
+              {text: `复核:`, alignment: 'left'}
             ]
           ]
   			},
@@ -107,12 +108,24 @@ makeRenderObject = (object) => {
 
       {
         text: '6. 返款金额超过万元的，要附上发票真伪证明。同返款发票、确认函原件一并寄回高校。'
+      },
+
+      {
+        text: `${moment().format('YYYY-MM-DD HH:mm:ss')}`,
+        alignment: 'right',
       }
 
 
     ],
     styles: {
       subtitle: {
+        marginTop: 5,
+        fontSize: 14,
+        bold: true,
+        decorationStyle: 'solid',
+        decorationColor: 'black'
+      },
+      title: {
         marginTop: 5,
         fontSize: 14,
         bold: true,
