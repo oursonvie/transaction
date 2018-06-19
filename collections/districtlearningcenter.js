@@ -60,7 +60,7 @@ DLearningCenter.attachSchema(new SimpleSchema({
   },
   'bankaccountdetail.accountno':{
     label: '账号',
-    type: Number
+    type: String
   },
   'bankaccountdetail.branchname':{
     label: '开户行',
