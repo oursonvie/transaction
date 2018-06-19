@@ -14,10 +14,10 @@ Template.pdfdownload.events({
 
     pdfMake.fonts = {
      msyh: {
-          normal: 'msyh.ttf',
-          bold: 'msyh.ttf',
-          italics: 'msyh.ttf',
-          bolditalics: 'msyh.ttf'
+           normal: 'Microsoft YaHei.ttf',
+           bold: 'Microsoft YaHei.ttf',
+           italics: 'Microsoft YaHei.ttf',
+           bolditalics: 'Microsoft YaHei.ttf'
         }
     }
 

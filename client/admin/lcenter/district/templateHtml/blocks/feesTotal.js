@@ -9,6 +9,6 @@ Template.feesTable.helpers({
     return numberWithCommas(fixed)
   },
   displayPercentage: function(number) {
-    return `${number * 100}%`
+    return `${(number * 100).toFixed(0)}%`
   }
 });
