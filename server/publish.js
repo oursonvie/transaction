@@ -37,12 +37,12 @@ Meteor.publish('DistrictLearningCenterList', function() {
 })
 
 Meteor.publish('DistrictLearningCenter', function(id) {
-  console.log(id)
+  console.log(`[DistrictLearningCenter sub] ${id}`)
   return DLearningCenter.find({_id:id})
 })
 
 Meteor.publish('DLCCode', function(lcentercode) {
-  console.log(lcentercode)
+  console.log(`[Sub, DistrictLearningCenter & Image]: ${lcentercode}`)
 
   // get image related to this district center
   let picObjArr = DLearningCenter.findOne({'sublearningcenter.lcentercode':lcentercode}).uploadedPic
@@ -50,8 +50,6 @@ Meteor.publish('DLCCode', function(lcentercode) {
   lodash.forEach(picObjArr, function(photo) {
     picIdArray.push(photo.photoid)
   })
-
-  console.log(picIdArray)
 
   return [
     DLearningCenter.find({'sublearningcenter.lcentercode':lcentercode}),

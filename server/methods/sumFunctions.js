@@ -9,7 +9,7 @@ Array.prototype.unique = function() {
 
 arrayCenterTotalFees = (lcenterListArray) => {
 
-  console.log(lcenterListArray)
+  // console.log(lcenterListArray)
 
   // applicatiable for 1 and more than 2 learning center
   let centerArrayList = []
@@ -48,7 +48,7 @@ arrayCenterTotalFees = (lcenterListArray) => {
     obj.studentcount = obj.studentcount.unique().length
   })
 
-  console.log(sortedResult)
+  // console.log(sortedResult)
 
   return sortedResult
 }

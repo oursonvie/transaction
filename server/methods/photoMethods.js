@@ -1,6 +1,6 @@
 Meteor.methods({
   updatePhotoId:function(dcenterId, batchId, photoId){
-     console.log(dcenterId, batchId, photoId)
+     // console.log(dcenterId, batchId, photoId)
 
      let updateObj = {
        batchcode: batchId,
@@ -10,6 +10,11 @@ Meteor.methods({
 
      console.log(updateObj)
 
+     // methods to keep record of all uploaded pictures
+     let picRecord = updateObj
+     updateObj.districtlearningcenter = dcenterId
+
+     Documents.insert(picRecord)
 
 
      // check if batch no already exist in the nested object
