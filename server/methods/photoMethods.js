@@ -2,6 +2,8 @@ Meteor.methods({
   updatePhotoId:function(dcenterId, batchId, photoId){
      // console.log(dcenterId, batchId, photoId)
 
+     batchId = '123'
+
      let updateObj = {
        batchcode: batchId,
        photoid: photoId,
