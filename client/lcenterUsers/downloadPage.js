@@ -2,7 +2,7 @@ Template.downloadPage.onCreated(function() {
   Session.set('feesDetail', false)
   Session.set('feesInfo', false)
   Session.set('dateRange', false)
-  Session.set('valideNumber', false)
+  Session.set('validNumber', false)
 
     var self = this;
     self.autorun(function() {
@@ -25,7 +25,7 @@ Template.downloadPage.onCreated(function() {
 
       if (DLearningCenter.find().count() != 0) {
 
-        Session.set('valideNumber', true)
+        Session.set('validNumber', true)
 
         // aggrate fees detail into batch number, sutdent count and total amount
         PromiseMeteorCall('districtCenterPersonFees', id)
@@ -62,7 +62,7 @@ Template.downloadPage.onCreated(function() {
         catch(err => {console.log(err)})
 
       } else {
-        Session.set('valideNumber', false)
+        Session.set('validNumber', false)
         console.log('no matching student')
       }
 
@@ -81,7 +81,7 @@ Template.downloadPage.helpers({
     return Session.get('dateRange')
   },
   validNumber: function() {
-    return Session.get('valideNumber')
+    return Session.get('validNumber')
   },
   feesObjects: function() {
     return Session.get('feesDetail')

@@ -57,7 +57,7 @@ Template.landingPage.onCreated(function() {
 });
 
 Template.landingPage.helpers({
-  something: function() {
+  calculationModule: function() {
 
     if (DLearningCenter.find().count() != 0) {
 

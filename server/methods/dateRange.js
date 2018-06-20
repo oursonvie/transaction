@@ -25,8 +25,6 @@ Meteor.methods({
     let startDate = settings.value.startDate
     let endDate = settings.value.endDate
 
-    console.log(startDate, endDate)
-
     return {
       startDate: moment(startDate).format('YYYY-MM-DD'), endDate: moment(endDate).format('YYYY-MM-DD')
     }
