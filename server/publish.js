@@ -84,3 +84,11 @@ Meteor.publish('districtImageStore', function(ids) {
 Meteor.publish('batchId', function() {
   return Settings.find({valuename: 'batchId'})
 })
+
+Meteor.publish('downloadLogs', function(id) {
+  if (this.userId) {
+    return Logs.find({districtcenterId:id})
+  } else {
+    throw new Meteor.Error( '500', 'No Premission' );
+  }
+})

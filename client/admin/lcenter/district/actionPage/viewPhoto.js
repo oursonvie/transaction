@@ -13,6 +13,10 @@ Template.viewPhoto.onCreated(function() {
       })
       self.subscribe('districtImageStore', picIdArray);
     }
+
+    //get logs under the districtCenter
+    self.subscribe('downloadLogs', dcenterid);
+
   })
 });
 
@@ -24,11 +28,24 @@ Template.viewPhoto.helpers({
     if (Session.get('photoSelector')) {
       return Images.findOne(Session.get('photoSelector'))
     }
-  }
+  },
+  uploadTime: function(id) {
+    let time = Images.findOne({_id:id}).uploadedAt
+    return moment(time).format('YYYY-MM-DD HH:mm:ss')
+  },
+  downloadTime: function(id) {
+    if (Logs.findOne({batchId:id}) && Logs.findOne({batchId:id}).timestamp) {
+
+      let time = Logs.findOne({batchId:id},{sort:{timestamp:-1}}).timestamp
+
+      return moment(time).format('YYYY-MM-DD HH:mm:ss')
+    }
+
+  },
 });
 
 Template.viewPhoto.events({
-  'click .list-group-item': function(events, template) {
+  'click tr': function(events, template) {
     Session.set('photoSelector', this.photoid)
   }
 })

@@ -21,7 +21,15 @@ Template.pdfdownload.events({
         }
     }
 
-    pdfMake.createPdf(makeRenderObject(renderObject)).open();
+    let downloadFileName = `${renderObject.districtCenter.name} - ${moment().format('YYYY-MM-DD')}`
+
+    let batchId = Settings.findOne({valuename:'batchId'}).value
+
+    PromiseMeteorCall('downloadLog', renderObject.districtCenter._id, batchId)
+    .then(res => console.log(res))
+    .catch(err => console.log(err))
+
+    pdfMake.createPdf(makeRenderObject(renderObject)).download(downloadFileName);
 
   }
 });

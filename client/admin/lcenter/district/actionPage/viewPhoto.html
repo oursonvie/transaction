@@ -1,17 +1,37 @@
 <template name="viewPhoto">
   <div class="row">
 
-    <div class="col-sm-4">
+    <div class="col-sm-8">
       <div class="card">
         <div class="card-header">
           {{selectDlcenter.name}} 回执单
         </div>
 
-        <ul class="list-group">
-          {{#each selectDlcenter.uploadedPic}}
-            <li class="list-group-item">{{batchcode}}</li>
-          {{/each}}
-        </ul>
+        <table class="table table-striped">
+
+          <thead>
+            <tr>
+              <th scope="col">批次</th>
+              <th scope="col">下载时间</th>
+              <th scope="col">上传时间</th>
+            </tr>
+          </thead>
+
+          {{#if Template.subscriptionsReady}}
+            <tbody>
+              {{#each selectDlcenter.uploadedPic}}
+                <tr>
+                  <th scope="row">{{batchcode}}</th>
+                  <td>{{downloadTime batchcode}}</td>
+                  <td>{{uploadTime photoid}}</td>
+                </tr>
+              {{/each}}
+            </tbody>
+          {{else}}
+            {{> loader}}
+          {{/if}}
+
+        </table>
 
       </div>
 
@@ -19,7 +39,7 @@
 
     {{#if Images}}
 
-      <div class="col-sm-8">
+      <div class="col-sm-4">
 
         <div class="card">
           {{#with Images}}
