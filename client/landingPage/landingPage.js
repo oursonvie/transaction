@@ -15,7 +15,7 @@ Template.landingPage.onCreated(function() {
   Session.set('feesDetail', false)
   Session.set('feesInfo', false)
   Session.set('dateRange', false)
-  Session.set('valideNumber', false)
+  Session.set('validNumber', false)
 
   // print methods
   let appId = FlowRouter.getParam("appId");
@@ -61,7 +61,7 @@ Template.landingPage.helpers({
 
     if (DLearningCenter.find().count() != 0) {
 
-      Session.set('valideNumber', true)
+      Session.set('validNumber', true)
 
       // aggrate fees detail into batch number, sutdent count and total amount
       let id = DLearningCenter.findOne()._id
@@ -99,7 +99,7 @@ Template.landingPage.helpers({
       catch(err => {console.log(err)})
 
     } else {
-      Session.set('valideNumber', false)
+      Session.set('validNumber', false)
       console.log('no matching student')
     }
 
@@ -114,7 +114,7 @@ Template.landingPage.helpers({
     return Session.get('dateRange')
   },
   validNumber: function() {
-    return Session.get('valideNumber')
+    return Session.get('validNumber')
   },
   feesObjects: function() {
     return Session.get('feesDetail')
