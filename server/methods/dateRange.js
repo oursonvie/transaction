@@ -34,8 +34,7 @@ Meteor.methods({
     if (this.userId) {
       let result = Transactions.remove({})
       console.log(`Removed ${result} in transaction`)
-      updateTransactionDB()
-      return 1
+      return updateTransactionDB()
     } else {
       throw new Meteor.Error( '500', 'No Premission' );
     }

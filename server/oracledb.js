@@ -56,12 +56,12 @@ updateTransactionDB = () => {
 
   // update current batchID
   Settings.upsert({
-    valuename:"oracleUpdateBy"
+    valuename:"oracleUpdateAt"
   }, {
     $set:{value:new Date}
   })
 
-  return queryingResult
+  return message
 
 }
 

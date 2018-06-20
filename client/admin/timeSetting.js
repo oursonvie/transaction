@@ -5,9 +5,14 @@ let getTotalResult = () => {
 Template.timeSetting.onCreated(function() {
   Session.set('datePicker', false)
   Session.set('totalFeeResult', false)
+  Session.set('updating', false)
 
   var self = this;
   self.autorun(function() {
+    // sub to settings
+    self.subscribe('Settings')
+
+    // date selector
     if (Session.get('datePicker')) {
 
       PromiseMeteorCall('totalFee', Session.get('datePicker').startDate, Session.get('datePicker').endDate)
@@ -45,6 +50,12 @@ Template.timeSetting.helpers({
   },
   fullResult: function() {
     return getTotalResult()
+  },
+  oracleUpdatedAt: function() {
+    if (Settings.findOne({valuename:'oracleUpdateAt'}) && Settings.findOne({valuename:'oracleUpdateAt'}).value) {
+      let dateTime = Settings.findOne({valuename:'oracleUpdateAt'}).value
+      return moment(dateTime).format('YYYY-MM-DD HH:mm:ss')
+    }
   }
 });
 
@@ -55,8 +66,8 @@ Template.timeSetting.events({
      endDate = document.getElementById('enddate').value.trim()
 
      // fast testing
-     // startDate = '2017-11-1'
-     // endDate = '2018-4-30'
+     startDate = '2017-11-1'
+     endDate = '2018-4-30'
 
      formatedStartDate = moment(startDate).toISOString()
      formatedEndDate = moment(endDate).toISOString()
@@ -81,11 +92,29 @@ Template.timeSetting.events({
     PromiseMeteorCall('copyToWorking', Session.get('datePicker').startDate, Session.get('datePicker').endDate)
     .then(res => {
       console.log(res)
+      if (res == 0) {
+        alert("数据准备完毕")
+      }
     })
     .catch(err => console.log(err))
   },
   "click .btn-update": function() {
-    PromiseMeteorCall('resetOracleDB')
-    .catch(err => console.log(err))
+    // toggle modal
+    $('#exampleModalCenter').modal('show')
+
+    PromiseMeteorCall('updateOracleDB')
+    .then(res => {
+      $('#exampleModalCenter').modal('hide')
+      console.log(res)
+      alert(res)
+    })
+    .catch(err => {
+      $('#exampleModalCenter').modal('hide')
+      console.log(err)
+      alert(err)
+    })
+  },
+  "click .test": function() {
+    $('#exampleModalCenter').modal('toggle')
   }
 });

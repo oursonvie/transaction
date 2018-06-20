@@ -92,3 +92,11 @@ Meteor.publish('downloadLogs', function(id) {
     throw new Meteor.Error( '500', 'No Premission' );
   }
 })
+
+Meteor.publish('Settings', function() {
+  if (this.userId) {
+    return Settings.find()
+  } else {
+    throw new Meteor.Error( '500', 'No Premission' );
+  }
+})

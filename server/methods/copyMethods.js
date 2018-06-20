@@ -105,12 +105,5 @@ Meteor.methods({
     })
 
     return 'checked lcenter code'
-  },
-  resetOracleDB: function() {
-    console.log('clearing db')
-    let result = Transactions.remove({})
-    console.log(`${result} transaction removed`)
-
-    updateTransactionDB()
   }
 });
