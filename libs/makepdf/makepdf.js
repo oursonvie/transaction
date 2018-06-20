@@ -21,7 +21,7 @@ makeRenderObject = (object) => {
       },
 
       {
-        text: `${object.districtCenter.name} 学习中心:`,
+        text: `${object.districtCenter.name}:`,
         alignment: 'left',
         style: 'title'
       },
@@ -68,6 +68,7 @@ makeRenderObject = (object) => {
   		},
 
       {
+        style: 'textCenter',
   			table: {
           widths: [200, 200],
   				body: [
@@ -132,6 +133,9 @@ makeRenderObject = (object) => {
         decoration: 'underline',
         decorationStyle: 'solid',
         decorationColor: 'black'
+      },
+      centerTable: {
+        alignment: 'center',
       }
     }
 

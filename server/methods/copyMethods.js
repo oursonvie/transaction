@@ -6,13 +6,25 @@ Meteor.methods({
       WorkingPlace.remove({})
     }
 
+    // update current batchID
     console.log('setting batchID to current')
 
-    // update current batchID
     Settings.upsert({
       valuename:"batchId"
     }, {
       $set:{value:currentBatchId()}
+    })
+
+    // update current date selection
+    console.log('setting date range to current')
+
+    Settings.upsert({
+      valuename:"daterange"
+    }, {
+      $set:{value:{
+        startDate: startDate,
+        endDate: endDate
+      }}
     })
 
     console.log('start copying data into working DB')

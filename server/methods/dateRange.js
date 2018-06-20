@@ -1,4 +1,7 @@
 Meteor.methods({
+
+  /*
+  // get current dateRange base on actual data
   getDateRange:function(id){
     if (this.userId) {
       let subClist = DLearningCenter.findOne({_id:id}).sublearningcenter
@@ -14,6 +17,21 @@ Meteor.methods({
       throw new Meteor.Error( '500', 'No Premission' );
     }
   },
+  */
+
+  getDateRange:function(id){
+    let settings = Settings.findOne({valuename:'daterange'})
+
+    let startDate = settings.value.startDate
+    let endDate = settings.value.endDate
+
+    console.log(startDate, endDate)
+
+    return {
+      startDate: moment(startDate).format('YYYY-MM-DD'), endDate: moment(endDate).format('YYYY-MM-DD')
+    }
+  },
+
   updateOracleDB: function() {
     if (this.userId) {
       let result = Transactions.remove({})
