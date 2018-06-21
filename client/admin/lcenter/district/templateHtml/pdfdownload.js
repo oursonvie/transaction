@@ -25,11 +25,24 @@ Template.pdfdownload.events({
 
     let batchId = Settings.findOne({valuename:'batchId'}).value
 
-    PromiseMeteorCall('downloadLog', renderObject.districtCenter._id, batchId)
-    .then(res => console.log(res))
-    .catch(err => console.log(err))
+    try {
+      // download pdf
+      pdfMake.createPdf(makeRenderObject(renderObject)).download(downloadFileName);
+      // only success download counts
+      PromiseMeteorCall('downloadLog', renderObject.districtCenter._id, batchId)
+      .then(res => console.log(res))
+      .catch(err => console.log(err))
 
-    pdfMake.createPdf(makeRenderObject(renderObject)).download(downloadFileName);
+    } catch(err) {
+      // record error
+      console.error(err)
+      console.log(err)
+      PromiseMeteorCall('errorDownloadLog', err)
+      .then(res => console.log(res))
+      .catch(err => console.log(err))
+
+      alert(err)
+    }
 
   }
 });

@@ -1,17 +1,20 @@
 <template name="modal">
 
-  <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" data-keyboard="false" data-backdrop="static" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">更新数据库</h5>
+          <h5 class="modal-title" id="exampleModalLongTitle">{{getModal.title}}</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
           {{> loader}}
-          数据库更新可能需要几分钟
+          <blockquote class="blockquote text-center">
+            <p class="mb-0">{{getModal.text}}</p>
+          </blockquote>
+
         </div>
       </div>
     </div>

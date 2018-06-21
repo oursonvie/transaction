@@ -5,7 +5,7 @@ let getTotalResult = () => {
 Template.timeSetting.onCreated(function() {
   Session.set('datePicker', false)
   Session.set('totalFeeResult', false)
-  Session.set('updating', false)
+  Session.set('updateModal', false)
 
   var self = this;
   self.autorun(function() {
@@ -17,7 +17,7 @@ Template.timeSetting.onCreated(function() {
 
       PromiseMeteorCall('totalFee', Session.get('datePicker').startDate, Session.get('datePicker').endDate)
       .then(res => {
-        console.log(res)
+        // console.log(res)
         Session.set('totalFeeResult', res)
       })
       .catch(err => console.log(err))
@@ -66,8 +66,8 @@ Template.timeSetting.events({
      endDate = document.getElementById('enddate').value.trim()
 
      // fast testing
-     startDate = '2017-11-1'
-     endDate = '2018-4-30'
+     // startDate = '2017-11-1'
+     // endDate = '2018-4-30'
 
      formatedStartDate = moment(startDate).toISOString()
      formatedEndDate = moment(endDate).toISOString()
@@ -89,32 +89,37 @@ Template.timeSetting.events({
     Session.set('datePicker', false)
   },
   "click .btn-yes": function() {
+    // toggle modal
+    Session.set('updateModal', {title:'创建数据副本', text:'复制数据到工作空间，这里会比刚才快一点'})
+
     PromiseMeteorCall('copyToWorking', Session.get('datePicker').startDate, Session.get('datePicker').endDate)
     .then(res => {
       console.log(res)
       if (res == 0) {
+        Session.set('updateModal', false)
         alert("数据准备完毕")
       }
     })
-    .catch(err => console.log(err))
+    .catch(err => {
+      Session.set('updateModal', false)
+      console.log(err)
+    })
   },
   "click .btn-update": function() {
     // toggle modal
-    $('#exampleModalCenter').modal('show')
+    Session.set('updateModal', {title:'更新数据库', text:'数据库更新可能需要几分钟'})
+
 
     PromiseMeteorCall('updateOracleDB')
     .then(res => {
-      $('#exampleModalCenter').modal('hide')
+      Session.set('updateModal', false)
       console.log(res)
       alert(res)
     })
     .catch(err => {
-      $('#exampleModalCenter').modal('hide')
+      Session.set('updateModal', false)
       console.log(err)
       alert(err)
     })
-  },
-  "click .test": function() {
-    $('#exampleModalCenter').modal('toggle')
   }
 });

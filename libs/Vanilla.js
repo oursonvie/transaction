@@ -1,5 +1,12 @@
 sum = a => a.reduce((x, y) => x + y);
 
+// promise wait function
+wait = (s) => {
+  return new Promise((resolve) => {
+    setTimeout(resolve, s*1000);
+  });
+}
+
 numberWithCommas = (x) => {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
