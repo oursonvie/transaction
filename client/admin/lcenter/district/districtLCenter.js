@@ -30,9 +30,6 @@ Template.districtLCenter.helpers({
     if (Session.get('searchQuery')) {
 
       let searchQuery = Session.get('searchQuery')
-      console.log(searchQuery)
-
-      console.log(DLearningCenter.find({"name":{"$regex":searchQuery}}).fetch())
 
       return DLearningCenter.find({"name":{"$regex":searchQuery}})
     } else {
