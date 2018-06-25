@@ -29,7 +29,7 @@ Template.pdfdownload.events({
       // download pdf
       pdfMake.createPdf(makeRenderObject(renderObject)).download(downloadFileName);
       // only success download counts
-      PromiseMeteorCall('downloadLog', renderObject.districtCenter._id, batchId)
+      PromiseMeteorCall('downloadLog', renderObject.districtCenter._id, batchId, true)
       .then(res => console.log(res))
       .catch(err => console.log(err))
 
@@ -37,7 +37,7 @@ Template.pdfdownload.events({
       // record error
       console.error(err)
       console.log(err)
-      PromiseMeteorCall('errorDownloadLog', err)
+      PromiseMeteorCall('downloadLog', renderObject.districtCenter._id, batchId, false)
       .then(res => console.log(res))
       .catch(err => console.log(err))
 
