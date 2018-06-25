@@ -65,38 +65,43 @@ Template.landingPage.helpers({
 
       // aggrate fees detail into batch number, sutdent count and total amount
       let id = DLearningCenter.findOne()._id
-      PromiseMeteorCall('districtCenterPersonFees', id)
-      .then(res => {
-        Session.set('feesDetail', res)
 
-        // calculate fees detail with ratio
-        let total = 0
-        lodash.forEach(res, function(center) {
-          total += lodash.sumBy(center.paymentdetail, 'totalFee')
+      if(DLearningCenter.findOne().allowAccess) {
+        PromiseMeteorCall('districtCenterPersonFees', id)
+        .then(res => {
+          Session.set('feesDetail', res)
+
+          // calculate fees detail with ratio
+          let total = 0
+          lodash.forEach(res, function(center) {
+            total += lodash.sumBy(center.paymentdetail, 'totalFee')
+          })
+
+          let feesInfo = {}
+          // get extra money amount first
+          feesInfo.extraAmount = DLearningCenter.findOne().extraAmount
+
+          feesInfo.total = total + feesInfo.extraAmount
+          feesInfo.extraAmount = DLearningCenter.findOne().extraAmount
+          feesInfo.lowratio = DLearningCenter.findOne().returnratio
+          feesInfo.currentratio = getRatio(feesInfo.total, feesInfo.lowratio)
+          feesInfo.xjturatio = 1 - feesInfo.currentratio
+          feesInfo.lcenterAmount = feesInfo.total * feesInfo.currentratio
+          feesInfo.xjtuamount = feesInfo.total - feesInfo.lcenterAmount
+
+          Session.set('feesInfo', feesInfo)
         })
+        .catch(err => {console.log(err)})
 
-        let feesInfo = {}
-        // get extra money amount first
-        feesInfo.extraAmount = DLearningCenter.findOne().extraAmount
-
-        feesInfo.total = total + feesInfo.extraAmount
-        feesInfo.extraAmount = DLearningCenter.findOne().extraAmount
-        feesInfo.lowratio = DLearningCenter.findOne().returnratio
-        feesInfo.currentratio = getRatio(feesInfo.total, feesInfo.lowratio)
-        feesInfo.xjturatio = 1 - feesInfo.currentratio
-        feesInfo.lcenterAmount = feesInfo.total * feesInfo.currentratio
-        feesInfo.xjtuamount = feesInfo.total - feesInfo.lcenterAmount
-
-        Session.set('feesInfo', feesInfo)
-      })
-      .catch(err => {console.log(err)})
-
-      // get start and end date for daterange
-      PromiseMeteorCall('getDateRange', id)
-      .then(res => {
-        Session.set('dateRange', res)
-      }).
-      catch(err => {console.log(err)})
+        // get start and end date for daterange
+        PromiseMeteorCall('getDateRange', id)
+        .then(res => {
+          Session.set('dateRange', res)
+        }).
+        catch(err => {console.log(err)})
+      } else {
+        FlowRouter.redirect('/disabledaccess')
+      }
 
     } else {
       Session.set('validNumber', false)

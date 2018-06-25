@@ -48,3 +48,10 @@ FlowRouter.route('/landingpage/:appId', {
         BlazeLayout.render('UserLayout', {main: 'landingPage'});
     }
 });
+
+FlowRouter.route('/disabledaccess', {
+   name: 'disabledAccess',
+    action() {
+        BlazeLayout.render('UserLayout', {main: 'disabledAccessPage'});
+    }
+});
