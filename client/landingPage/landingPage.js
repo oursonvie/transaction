@@ -28,18 +28,21 @@ Template.landingPage.onCreated(function() {
 
 
     let decrptedString = decryptStamp(query).split('&')
-    // console.log(`decrptedString: ${decrptedString}`);
 
-    let timestamp = decrptedString[1]
-    let lcentercode = decrptedString[0]
+    console.log(`decrptedString: ${decrptedString}`);
 
+    let adminuser = decrptedString[0]
+    let timestamp = decrptedString[2]
+    let lcentercode = decrptedString[1]
+
+    // if time is valid, try to subscribe dlcenter using lcenter
     if (validationTimeStamp(timestamp)) {
       console.log('valid Time')
 
-      // if time is valid, try to subscribe dlcenter using lcenter
+
       var self = this;
       self.autorun(function() {
-        self.subscribe('DLCCode', lcentercode)
+        self.subscribe('DLCCode', adminuser, lcentercode)
       })
 
     } else {

@@ -1,6 +1,6 @@
 <template name="baseInfo">
   <div class="sub-update-form">
-    {{> quickForm id="updateBaseInfo" collection="DLearningCenter" fields="name, returnratio, extraAmount" doc=selected type=formType}}
+    {{> quickForm id="updateBaseInfo" collection="DLearningCenter" fields="name, returnratio, alloweduser, extraAmount" doc=selected type=formType}}
 
     {{#if $.Session.equals 'formType' 'disabled'}}
       <button class="btn btn-primary btn-form-type-edit">编辑</button>

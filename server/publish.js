@@ -41,21 +41,27 @@ Meteor.publish('DistrictLearningCenter', function(id) {
   return DLearningCenter.find({_id:id})
 })
 
-Meteor.publish('DLCCode', function(lcentercode) {
-  console.log(`[Sub, DistrictLearningCenter & Image]: ${lcentercode}`)
+Meteor.publish('DLCCode', function(adminuser, lcentercode) {
+  console.log(`[Sub, DistrictLearningCenter & Image]: ${lcentercode} using ${adminuser}`)
 
-  // get image related to this district center
-  let picObjArr = DLearningCenter.findOne({'sublearningcenter.lcentercode':lcentercode}).uploadedPic
-  let picIdArray = []
-  lodash.forEach(picObjArr, function(photo) {
-    picIdArray.push(photo.photoid)
-  })
+  if (DLearningCenter.findOne({"sublearningcenter.lcentercode":lcentercode}).alloweduser.includes(adminuser)) {
 
-  return [
-    DLearningCenter.find({'sublearningcenter.lcentercode':lcentercode}),
-    Settings.find({valuename:'batchId'}),
-    Images.find({_id:{$in: picIdArray}})
-  ]
+    // get image related to this district center
+    let picObjArr = DLearningCenter.findOne({'sublearningcenter.lcentercode':lcentercode}).uploadedPic
+    let picIdArray = []
+    lodash.forEach(picObjArr, function(photo) {
+      picIdArray.push(photo.photoid)
+    })
+
+    return [
+      DLearningCenter.find({'sublearningcenter.lcentercode':lcentercode}),
+      Settings.find({valuename:'batchId'}),
+      Images.find({_id:{$in: picIdArray}})
+    ]
+
+  }
+
+
 
 })
 

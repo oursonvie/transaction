@@ -1,8 +1,8 @@
 Meteor.methods({
-  encryptStamp: function(lcentercode) {
+  encryptStamp: function(adminuser, lcentercode) {
     if (this.userId) {
       // encrypt string
-      let string = `${lcentercode}&${moment().unix()}`
+      let string = `${adminuser}&${lcentercode}&${moment().unix()}`
       console.log(`string: ${string}`)
 
       let encryptedString = encryptAES(string)
@@ -11,7 +11,7 @@ Meteor.methods({
       let encodedString = encodeURIComponent(encryptedString)
       console.log(`encodedString: ${encodedString}`)
 
-      let result = `query=${encodeString(string)}`
+      let result = encodeString(string)
 
       console.log(result)
 

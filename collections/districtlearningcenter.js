@@ -49,6 +49,11 @@ DLearningCenter.attachSchema(new SimpleSchema({
       }
     }
   },
+  alloweduser: {
+    type: String,
+    label: "用户白名单",
+    optional: true
+  },
   bankaccountdetail: {
     label: '',
     type: Object,
