@@ -62,7 +62,6 @@ Meteor.publish('DLCCode', function(adminuser, lcentercode) {
   }
 
 
-
 })
 
 Meteor.publish('sublearningCenter', function(id) {

@@ -29,7 +29,7 @@ Template.landingPage.onCreated(function() {
 
     let decrptedString = decryptStamp(query).split('&')
 
-    console.log(`decrptedString: ${decrptedString}`);
+    // console.log(`decrptedString: ${decrptedString}`);
 
     let adminuser = decrptedString[0]
     let timestamp = decrptedString[2]
