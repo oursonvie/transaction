@@ -32,8 +32,8 @@ Meteor.methods({
     // find document in orginal DB
     let result = Transactions.find({
       CREATEDATE:{
-        $lt: new Date('2018-04-29T16:00:00.000Z'),
-        $gte: new Date('2017-10-31T16:00:00.000Z')
+        $lt: new Date(endDate),
+        $gte: new Date(startDate)
       }
     }).fetch()
 
