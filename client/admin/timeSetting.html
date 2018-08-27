@@ -30,8 +30,13 @@
 
   {{> modal}}
 
-  {{#if ifSearch}}
+  {{#if totalFeeResult}}
     <div class="card">
+
+      <div class="card-header">
+        数据日期: {{dataRange.startDate}} 至 {{dataRange.endDate}}
+      </div>
+
       <div class="card-body">
 
         <div class="row">
@@ -98,13 +103,15 @@
 
         <div class="row">
 
-          <div class="card card-confirm">
-            <div class="card-body">
-              <h5 class="card-title">确认使用数据</h5>
-              <p class="card-text">确认使用以上数据进行返款处理</p>
-              <button class="btn btn-primary btn-yes">确定</button>
+          {{#if ifSearch}}
+            <div class="card card-confirm">
+              <div class="card-body">
+                <h5 class="card-title">确认使用数据</h5>
+                <p class="card-text">确认使用以上数据进行返款处理</p>
+                <button class="btn btn-primary btn-yes">确定</button>
+              </div>
             </div>
-          </div>
+          {{/if}}
 
         </div>
 

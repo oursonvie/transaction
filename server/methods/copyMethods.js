@@ -121,6 +121,18 @@ Meteor.methods({
         WorkingPlace.insert(item)
       })
 
+      // update current date selection
+      console.log('setting date range to current')
+
+      Settings.upsert({
+        valuename:"daterange"
+      }, {
+        $set:{value:{
+          startDate: startDate,
+          endDate: endDate
+        }}
+      })
+
       return 0
     } catch(err) {
       return err

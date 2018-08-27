@@ -1,3 +1,13 @@
+let updateResult = () => {
+  PromiseMeteorCall('totalFee')
+  .then(res => {
+    // console.log(res)
+    Session.set('totalFeeResult', res)
+
+  })
+  .catch(err => console.log(err))
+}
+
 let getTotalResult = () => {
   return Session.get('totalFeeResult')
 }
@@ -6,6 +16,11 @@ Template.timeSetting.onCreated(function() {
   Session.set('datePicker', false)
   Session.set('totalFeeResult', false)
   Session.set('updateModal', false)
+  Session.set('totalFeeResult', false)
+  Session.set('currentDataRange', false)
+
+  // check data in DB
+  updateResult()
 
   var self = this;
   self.autorun(function() {
@@ -44,6 +59,15 @@ Template.timeSetting.helpers({
       let dateTime = Settings.findOne({valuename:'oracleUpdateAt'}).value
       return moment(dateTime).format('YYYY-MM-DD HH:mm:ss')
     }
+  },
+  totalFeeResult: function() {
+    return Session.get('totalFeeResult')
+  },
+  dataRange: function() {
+    let value = Settings.findOne({valuename:'daterange'}).value
+    value.startDate = moment(value.startDate).format('YYYY-MM-DD')
+    value.endDate = moment(value.endDate).subtract(1,'days').format('YYYY-MM-DD')
+    return value
   }
 });
 
@@ -83,12 +107,7 @@ Template.timeSetting.events({
            Session.set('updateModal', false)
 
            // update date
-           PromiseMeteorCall('totalFee')
-           .then(res => {
-             // console.log(res)
-             Session.set('totalFeeResult', res)
-           })
-           .catch(err => console.log(err))
+           updateResult()
 
 
            alert("数据准备完毕")
