@@ -105,5 +105,48 @@ Meteor.methods({
     })
 
     return 'checked lcenter code'
+  },
+  copySQLtoWorking:function(startDate, endDate) {
+
+    try {
+      let result = WorkingPlace.remove({})
+      console.log(`${result} removed from WorkingPlace`)
+
+      startDate = moment(startDate).format('YYYY-MM-DD')
+      endDate = moment(endDate).format('YYYY-MM-DD')
+
+      dateset = OracleFetchWithDate(startDate, endDate)
+
+      _.forEach(dateset, function(item) {
+        WorkingPlace.insert(item)
+      })
+
+      return 0
+    } catch(err) {
+      return err
+    }
+
+
+  },
+  copySQLtoTransanction:function(startDate, endDate) {
+
+    try {
+      let result = Transactions.remove({})
+      console.log(`${result} removed from Transactions`)
+
+      startDate = moment(startDate).format('YYYY-MM-DD')
+      endDate = moment(endDate).format('YYYY-MM-DD')
+
+      dateset = OracleFetchWithDate(startDate, endDate)
+
+      _.forEach(dateset, function(item) {
+        Transactions.insert(item)
+      })
+
+      return 0
+    } catch(err) {
+      return err
+    }
+
   }
 });

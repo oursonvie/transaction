@@ -68,9 +68,6 @@ updateTransactionDB = () => {
 // get date oracle date with date
 OracleFetchWithDate = (startDate, endDate) => {
 
-  let cleanResult = WorkingPlace.remove({})
-  console.log(`Init transaction fetching by cleaning workingplace, ${cleanResult} were removed`)
-
   console.log(`Transaction data fetching between ${startDate} and ${endDate}`)
   // start timing
   let start_proc = Date.now()
@@ -101,7 +98,8 @@ OracleFetchWithDate = (startDate, endDate) => {
       singeTransaction = singleRow
       singeTransaction.updatedAt = moment().format("YYYY-MM-DD HH:mm:ss")
 
-      WorkingPlace.insert(singeTransaction)
+      // WorkingPlace.insert(singeTransaction)
+      // Transactions.insert(singeTransaction)
       queryingResult.push(singeTransaction)
 
     } else {
@@ -126,7 +124,7 @@ OracleFetchWithDate = (startDate, endDate) => {
     $set:{value:new Date}
   })
 
-  return message
+  return queryingResult
 
 }
 

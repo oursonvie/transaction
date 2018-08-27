@@ -28,15 +28,5 @@ Meteor.methods({
     return {
       startDate: moment(startDate).format('YYYY-MM-DD'), endDate: moment(endDate).format('YYYY-MM-DD')
     }
-  },
-
-  updateOracleDB: function() {
-    if (this.userId) {
-      let result = Transactions.remove({})
-      console.log(`Removed ${result} in transaction`)
-      return updateTransactionDB()
-    } else {
-      throw new Meteor.Error( '500', 'No Premission' );
-    }
   }
 });

@@ -1,15 +1,6 @@
 Meteor.methods({
-  totalFee: async function(startDate, endDate) {
-
+  totalFee: async function() {
     let pipeline = [
-      { $match :
-        { CREATEDATE:
-          {
-            $lt: new Date(endDate),
-            $gte: new Date(startDate)
-          }
-        }
-      },
       { $group:
         {
           _id:"$STUDENTSTYLE",
