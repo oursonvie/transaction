@@ -21,7 +21,7 @@ Template.pdfdownload.events({
         }
     }
 
-    let downloadFileName = `${renderObject.districtCenter.name} - ${moment().format('YYYY-MM-DD')}`
+    let downloadFileName = `${renderObject.districtCenter.name} - ${moment().format('YYYY-MM-DD')}.pdf`
 
     let batchId = Settings.findOne({valuename:'batchId'}).value
 
