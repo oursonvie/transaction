@@ -10,6 +10,9 @@ Template.districtLCenter.onCreated(function() {
   // sub to lcenter db
   var self = this;
   self.autorun(function() {
+    // get Settings
+    self.subscribe('Settings')
+
     self.subscribe('DistrictLearningCenterList')
     // filtered list when adding new dcenter, full list otherwise
     if (Session.get('actionType') == 'add') {

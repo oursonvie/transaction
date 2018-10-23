@@ -1,6 +1,24 @@
 Template.eachDLCenter.helpers({
   allowAccess: function() {
     return this.allowAccess
+  },
+  uploadedDocument: function() {
+    checkBatchNo = Settings.findOne({valuename:'batchId'}).value
+
+    let arrayBatchCode = []
+    if (this.uploadedPic) {
+      _.forEach(this.uploadedPic, function(pic) {
+        arrayBatchCode.push(pic.batchcode)
+      })
+
+      console.log(`${arrayBatchCode}, ${checkBatchNo}`)
+
+      console.log(arrayBatchCode.includes(checkBatchNo))
+      return arrayBatchCode.includes(checkBatchNo)
+    } else {
+      return false
+    }
+
   }
 })
 
