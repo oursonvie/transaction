@@ -96,12 +96,15 @@ Meteor.methods({
     let arr = LearningCenter.find().fetch()
 
     lodash.forEach(arr, function(center) {
-      let lcentercode = Transactions.findOne({LCENTERNAME:center.name}).LCENTERCODE
+      if (Transactions.findOne({LCENTERNAME:center.name}) && Transactions.findOne({LCENTERNAME:center.name}).LCENTERCODE) {
+        let lcentercode = Transactions.findOne({LCENTERNAME:center.name}).LCENTERCODE
 
-      let result = LearningCenter.update(
-        {_id: center._id},
-        {$set:{lcentercode: lcentercode}}
-      )
+        let result = LearningCenter.update(
+          {_id: center._id},
+          {$set:{lcentercode: lcentercode}}
+        )
+      }
+
     })
 
     return 'checked lcenter code'
