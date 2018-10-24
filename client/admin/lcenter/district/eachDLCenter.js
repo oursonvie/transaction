@@ -10,10 +10,6 @@ Template.eachDLCenter.helpers({
       _.forEach(this.uploadedPic, function(pic) {
         arrayBatchCode.push(pic.batchcode)
       })
-
-      console.log(`${arrayBatchCode}, ${checkBatchNo}`)
-
-      console.log(arrayBatchCode.includes(checkBatchNo))
       return arrayBatchCode.includes(checkBatchNo)
     } else {
       return false

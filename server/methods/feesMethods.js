@@ -1,3 +1,11 @@
+Array.prototype.sum = function (prop) {
+    var total = 0
+    for ( var i = 0, _len = this.length; i < _len; i++ ) {
+        total += this[i][prop]
+    }
+    return total
+}
+
 Meteor.methods({
   totalFee: async function() {
     let pipeline = [
@@ -43,5 +51,45 @@ Meteor.methods({
       array.push(result)
       return array
     }
+  },
+  getSumedTransaction: function() {
+    let list = DLearningCenter.find({},{fields:{name:1}}).fetch()
+    // console.log(list)
+
+    resultArray = []
+
+    lodash.forEach(list, function(dlcenter) {
+
+      let centerTransaction = Promise.await(PromiseMeteorCall('districtCenterPersonFees', dlcenter._id))
+
+      let totalFees = 0, studentcount = 0, currentratio = 0
+
+      lodash.forEach(centerTransaction, function(lcenter) {
+
+        if (lcenter.paymentdetail && lcenter.paymentdetail.length > 0) {
+
+          // sum student count and total payment
+          totalFees += lodash.sumBy(lcenter.paymentdetail, 'totalFee')
+          studentcount += lodash.sumBy(lcenter.paymentdetail, 'studentcount')
+        }
+
+      })
+
+      let newObj = {}
+
+      newObj.name = dlcenter.name
+      newObj.totalFee = totalFees
+      newObj.studentcount = studentcount
+
+      // get return ratio
+      let lowratio = DLearningCenter.findOne({_id:dlcenter._id}).returnratio
+      newObj.currentratio = getRatio(totalFees, lowratio)
+
+      resultArray.push(newObj)
+
+    })
+
+    return resultArray
+
   }
 });

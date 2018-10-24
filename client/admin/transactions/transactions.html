@@ -1,3 +1,20 @@
 <template name="transactions">
-  transactions
+  {{currentBatch}} <button class="btn btn-primary btn-refresh">更新</button>
+
+  {{#if sumedTransaction}}
+
+    {{#each sumedTransaction}}
+      <p>{{name}} -- {{studentcount}} -- {{totalFee}} -- {{currentratio}}</p>
+    {{/each}}
+
+  {{/if}}
+
+  {{#if Template.subscriptionsReady}}
+
+  {{else}}
+    {{> loader}}
+  {{/if}}
+
+
+
 </template>

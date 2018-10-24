@@ -10,6 +10,7 @@ Template.DLCenterDetail.onCreated(function() {
     // get view of perticular dcenter
     if (Session.get('action') && Session.get('action').type == 'view') {
       let id = Session.get('action').id
+
       PromiseMeteorCall('districtCenterPersonFees', id)
       .then(res => {
 
