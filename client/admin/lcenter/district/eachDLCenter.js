@@ -19,6 +19,13 @@ Template.eachDLCenter.helpers({
       return false
     }
 
+  },
+  uploadedCount: function() {
+    if (this.uploadedPic) {
+      return this.uploadedPic.length
+    } else {
+      return false
+    }
   }
 })
 

@@ -19,11 +19,17 @@ FlowRouter.route('/districtlcenter', {
     }
 });
 
-
 FlowRouter.route('/districtcenter/:id', {
    name: 'districtcenterID',
     action() {
         BlazeLayout.render('AdminLayout', {main: 'districtcenterID'});
+    }
+});
+
+FlowRouter.route('/admin/transactions', {
+   name: 'transactions',
+    action() {
+        BlazeLayout.render('AdminLayout', {main: 'transactions'});
     }
 });
 
