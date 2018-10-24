@@ -99,6 +99,8 @@ Template.landingPage.helpers({
         // get start and end date for daterange
         PromiseMeteorCall('getDateRange', id)
         .then(res => {
+          // miniuts one day for end date
+          res.endDate = moment(res.endDate).subtract('days', 1).format('YYYY-MM-DD')
           Session.set('dateRange', res)
         }).
         catch(err => {console.log(err)})
@@ -152,7 +154,8 @@ Template.landingPage.events({
             console.log(res)
             // refresh page upon uploaded
             if (res.result == 1) {
-              location.reload();
+              // location.reload();
+              console.log('upload complete')
             }
 
           })
