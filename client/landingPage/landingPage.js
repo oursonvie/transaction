@@ -154,7 +154,8 @@ Template.landingPage.events({
             console.log(res)
             // refresh page upon uploaded
             if (res.result == 1) {
-              // location.reload();
+
+              setTimeout(function() { location.reload(); }, 5000);
               console.log('upload complete')
             }
 

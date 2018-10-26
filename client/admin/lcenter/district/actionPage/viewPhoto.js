@@ -1,5 +1,6 @@
 Template.viewPhoto.onCreated(function() {
   Session.set('photoSelector', false)
+  Session.set('currentBatchNo', false)
 
   // subscribe photo
   let dcenterid = Session.get('action').id
@@ -42,10 +43,27 @@ Template.viewPhoto.helpers({
     }
 
   },
+  imageNaming: function(filename) {
+
+    if (DLearningCenter.findOne({_id:Session.get('action').id})) {
+      dlcentername = DLearningCenter.findOne({_id:Session.get('action').id}).name
+
+      batchcode = Session.get('currentBatchNo')
+
+      fileExtension = filename.split('.')[1]
+
+      downloadfile = `${dlcentername}_${batchcode}.${fileExtension}`
+
+      return downloadfile
+
+    }
+
+  }
 });
 
 Template.viewPhoto.events({
   'click tr': function(events, template) {
     Session.set('photoSelector', this.photoid)
+    Session.set('currentBatchNo', this.batchcode)
   }
 })

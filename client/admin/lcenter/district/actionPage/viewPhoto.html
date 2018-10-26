@@ -45,7 +45,8 @@
           {{#with Images}}
             <img src="{{this.url}}" class="img-fluid" alt="Responsive image">
 
-            <a download="{{original.name}}" class="btn btn-primary" href="{{this.url}}">下载回执</a>
+            <a download="{{imageNaming original.name}}" class="btn btn-primary" href="{{this.url}}">下载回执</a>
+
           {{/with}}
         </div>
 
