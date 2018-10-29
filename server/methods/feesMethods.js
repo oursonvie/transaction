@@ -53,8 +53,10 @@ Meteor.methods({
     }
   },
   getSumedTransaction: function() {
+    // this should return all DLearningCenters
     let list = DLearningCenter.find({},{fields:{name:1}}).fetch()
-    // console.log(list)
+
+    console.log(`Dlist length is: ${list.length}`)
 
     resultArray = []
 
@@ -85,11 +87,45 @@ Meteor.methods({
       let lowratio = DLearningCenter.findOne({_id:dlcenter._id}).returnratio
       newObj.currentratio = getRatio(totalFees, lowratio)
 
+      newObj.returnedAmount = totalFees * newObj.currentratio
+      newObj.batchId = Settings.findOne({valuename:'batchId'}).value
+
       resultArray.push(newObj)
 
     })
 
+    // update sum information in db
+    PromiseMeteorCall('updateSumAchieve', resultArray)
+    .then( res => {
+      console.log(res)
+    })
+    .catch(err => {
+      console.log(err)
+    })
+
     return resultArray
+
+  },
+  getTotalSum: function() {
+    let array = Promise.await(PromiseMeteorCall('getSumedTransaction'))
+    let totalAmount = lodash.sumBy(array, 'totalFee')
+    let totalReturnedAmount = lodash.sumBy(array, 'returnedAmount')
+    let obj = {}
+    obj.totalAmount = totalAmount
+    obj.totalReturnedAmount = totalReturnedAmount
+    return obj
+  },
+  updateSumAchieve: function(sumObjects) {
+    batchId = Settings.findOne({valuename:'batchId'}).value
+    console.log(`removing batchcode ${batchId} in achieve`)
+
+    SumAchieve.remove({batchId: batchId})
+
+    _.forEach(sumObjects, function(dlcenter) {
+      SumAchieve.insert(dlcenter)
+    })
+
+    return 'Current Achieve Updated'
 
   }
 });

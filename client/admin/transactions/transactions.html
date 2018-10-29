@@ -1,19 +1,51 @@
 <template name="transactions">
-  {{currentBatch}} <button class="btn btn-primary btn-refresh">更新</button>
 
-  {{#if sumedTransaction}}
+  <div class="card">
 
-    {{#each sumedTransaction}}
-      <p>{{name}} -- {{studentcount}} -- {{totalFee}} -- {{currentratio}}</p>
-    {{/each}}
+    <h5 class="card-header">
+      {{currentBatch}}批次缴款请款汇总
+      <button class="btn btn-primary float-right btn-sm btn-download">下载</button>
+    </h5>
 
-  {{/if}}
 
-  {{#if Template.subscriptionsReady}}
 
-  {{else}}
-    {{> loader}}
-  {{/if}}
+    <div class="card-body">
+
+      {{#if sumedTransaction}}
+
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">区域学习中心名称</th>
+            <th scope="col">缴款金额</th>
+            <th scope="col">缴款人数</th>
+            <th scope="col">返点比例</th>
+            <th scope="col">返款金额</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          {{#each sumedTransaction}}
+            <tr>
+              <th>{{name}}</th>
+              <td>{{numberFormatter totalFee}}</td>
+              <td>{{studentcount}}</td>
+              <td>{{currentratio}}</td>
+              <td>{{numberFormatter returnedAmount}}</td>
+            </tr>
+          {{/each}}
+
+        </tbody>
+      </table>
+
+      {{/if}}
+
+      {{#unless Template.subscriptionsReady}}
+        {{> loader}}
+      {{/unless}}
+
+    </div>
+  </div>
 
 
 
