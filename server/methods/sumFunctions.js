@@ -52,3 +52,47 @@ arrayCenterTotalFees = (lcenterListArray) => {
 
   return sortedResult
 }
+
+arrayCenterBatchFees = (DCenterId) => {
+
+  let lcenterObjList = DLearningCenter.findOne({_id:DCenterId}).sublearningcenter
+
+  // applicatiable for 1 and more than 2 learning center
+  let centerArrayList = []
+
+  // array with only center name
+  lodash.forEach(lcenterObjList, function(center) {
+    centerArrayList.push(center.name)
+  })
+
+  let pipeline = [
+    { $match :
+      {
+        LCENTERNAME:
+        {
+            $in: centerArrayList
+        },
+        STUDENTSTYLE:
+        {
+          $ne: '退学生'
+        }
+      }
+    },
+    { $group:
+      {
+        _id:"$RECRUITBATCHCODE",
+        studentcount: {$push: "$STUDENTCODE"},
+        totalFee:{$sum:'$MONEY'}
+      }
+    }
+  ]
+
+  let result = Promise.await(WorkingPlace.aggregate(pipeline))
+  let sortedResult = lodash.sortBy(result, ['_id']);
+
+  _.forEach(sortedResult, function(batch) {
+    batch.studentcount = batch.studentcount.length
+  })
+
+  return sortedResult
+}

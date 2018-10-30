@@ -1,6 +1,5 @@
 Template.transactions.onCreated(function() {
-  Session.set('sumedTransaction',false)
-  Session.set('TotalTransaction',false)
+  Session.set('districtCenterBatchFees',false)
 
   var self = this;
   self.autorun(function() {
@@ -10,20 +9,21 @@ Template.transactions.onCreated(function() {
   });
 
   // get sum detail in session
-  PromiseMeteorCall('getSumedTransaction')
+  PromiseMeteorCall('districtCenterBatchFees')
   .then( res => {
-    Session.set('sumedTransaction',res)
+    Session.set('districtCenterBatchFees',res)
+
+    // update sum information in db
+    PromiseMeteorCall('updateSumAchieve', res)
+    .then( res => {
+      console.log(res)
+    })
+    .catch(err => {
+      console.log(err)
+    })
+
   })
   .catch( err => {
-    console.log(err)
-  })
-
-  // get sum of sum in session
-  PromiseMeteorCall('getTotalSum')
-  .then(res => {
-    Session.set('TotalTransaction', res)
-  })
-  .catch(err => {
     console.log(err)
   })
 
@@ -35,8 +35,8 @@ Template.transactions.helpers({
       return Settings.findOne({valuename:'batchId'}).value
     }
   },
-  sumedTransaction: function() {
-    return Session.get('sumedTransaction')
+  districtCenterBatchFees: function() {
+    return Session.get('districtCenterBatchFees')
   },
   numberFormatter: function(number) {
     return numberFormatter(number)

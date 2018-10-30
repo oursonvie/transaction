@@ -52,6 +52,39 @@ Meteor.methods({
       return array
     }
   },
+  districtCenterBatchFees: function() {
+    // get full list
+    let list = DLearningCenter.find({},{fields:{name:1}}).fetch()
+
+    // create object array for result
+    resultArray = []
+
+    _.forEach(list, function(dlcenter) {
+      batchResult = arrayCenterBatchFees(dlcenter._id)
+
+      // get return ratio from total first
+      totalFees = lodash.sumBy(batchResult, 'totalFee')
+      lowratio = DLearningCenter.findOne({_id:dlcenter._id}).returnratio
+      currentratio = getRatio(totalFees, lowratio)
+
+      _.forEach(batchResult, function(batch) {
+        // construct the object
+        resultObj = {}
+        resultObj.name = dlcenter.name
+        resultObj.batchId = batch._id
+        resultObj.studentCount = batch.studentcount
+        resultObj.totalFee = batch.totalFee
+        resultObj.returnRatio = currentratio
+        resultObj.returnedFee = batch.totalFee * currentratio
+
+        // resultArray.concat(resultObj)
+        // console.log(resultObj)
+        resultArray.push(resultObj)
+      })
+
+    })
+    return resultArray
+  },
   getSumedTransaction: function() {
     // this should return all DLearningCenters
     let list = DLearningCenter.find({},{fields:{name:1}}).fetch()
@@ -64,7 +97,7 @@ Meteor.methods({
 
       let centerTransaction = Promise.await(PromiseMeteorCall('districtCenterPersonFees', dlcenter._id))
 
-      let totalFees = 0, studentcount = 0, currentratio = 0
+      let totalFees = 0, studentcount = 0, currentratio = 0, concatedpayment = []
 
       lodash.forEach(centerTransaction, function(lcenter) {
 
@@ -73,9 +106,14 @@ Meteor.methods({
           // sum student count and total payment
           totalFees += lodash.sumBy(lcenter.paymentdetail, 'totalFee')
           studentcount += lodash.sumBy(lcenter.paymentdetail, 'studentcount')
+          // put all payment into one array
+          concatedpayment = concatedpayment.concat(lcenter.paymentdetail)
         }
 
       })
+
+      // working on payment array
+
 
       let newObj = {}
 
@@ -90,38 +128,24 @@ Meteor.methods({
       newObj.returnedAmount = totalFees * newObj.currentratio
       newObj.batchId = Settings.findOne({valuename:'batchId'}).value
 
+      newObj.concatedpayment = concatedpayment
+
       resultArray.push(newObj)
 
-    })
-
-    // update sum information in db
-    PromiseMeteorCall('updateSumAchieve', resultArray)
-    .then( res => {
-      console.log(res)
-    })
-    .catch(err => {
-      console.log(err)
     })
 
     return resultArray
 
   },
-  getTotalSum: function() {
-    let array = Promise.await(PromiseMeteorCall('getSumedTransaction'))
-    let totalAmount = lodash.sumBy(array, 'totalFee')
-    let totalReturnedAmount = lodash.sumBy(array, 'returnedAmount')
-    let obj = {}
-    obj.totalAmount = totalAmount
-    obj.totalReturnedAmount = totalReturnedAmount
-    return obj
-  },
   updateSumAchieve: function(sumObjects) {
+
     batchId = Settings.findOne({valuename:'batchId'}).value
     console.log(`removing batchcode ${batchId} in achieve`)
 
-    SumAchieve.remove({batchId: batchId})
+    SumAchieve.remove({byBatch: batchId})
 
     _.forEach(sumObjects, function(dlcenter) {
+      dlcenter.byBatch = batchId
       SumAchieve.insert(dlcenter)
     })
 

@@ -11,12 +11,13 @@
 
     <div class="card-body">
 
-      {{#if sumedTransaction}}
+      {{#if districtCenterBatchFees}}
 
       <table class="table table-striped">
         <thead>
           <tr>
             <th scope="col">区域学习中心名称</th>
+            <th scope="col">批次</th>
             <th scope="col">缴款金额</th>
             <th scope="col">缴款人数</th>
             <th scope="col">返点比例</th>
@@ -25,13 +26,14 @@
         </thead>
         <tbody>
 
-          {{#each sumedTransaction}}
+          {{#each districtCenterBatchFees}}
             <tr>
               <th>{{name}}</th>
+              <th>{{batchId}}</th>
               <td>{{numberFormatter totalFee}}</td>
-              <td>{{studentcount}}</td>
-              <td>{{currentratio}}</td>
-              <td>{{numberFormatter returnedAmount}}</td>
+              <td>{{studentCount}}</td>
+              <td>{{returnRatio}}</td>
+              <td>{{numberFormatter returnedFee}}</td>
             </tr>
           {{/each}}
 
