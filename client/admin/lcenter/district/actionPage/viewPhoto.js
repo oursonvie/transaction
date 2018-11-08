@@ -50,7 +50,7 @@ Template.viewPhoto.helpers({
 
       batchcode = Session.get('currentBatchNo')
 
-      fileExtension = filename.split('.')[1]
+      fileExtension = filename.split('.').splice(-1)
 
       downloadfile = `${dlcentername}_${batchcode}.${fileExtension}`
 

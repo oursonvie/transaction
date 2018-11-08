@@ -1,6 +1,6 @@
 //check if timestamp within 10mins, 5mins before and 5 mins after
 let validationTimeStamp = (time) => {
-  let duration = 12 * 60 * 60 // 10 mins
+  let duration = 60 * 60 // 10 mins
   let current_time = moment().unix()
   let start_time = current_time - duration/2
   let end_time = current_time + duration/2
