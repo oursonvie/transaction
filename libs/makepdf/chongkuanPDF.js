@@ -24,7 +24,7 @@ printChongkuan = (object) => {
       },
 
       {
-        text: 'NO:000000',
+        text: 'NO:0000000',
         alignment: 'right',
         fontSize: 12
       },
@@ -53,8 +53,6 @@ printChongkuan = (object) => {
 
       {
         table: {
-          widths: [65,110,110,110,8,8,8,8,8,8,8,8,8,8],
-          heights: [10,10,30,40,40,20,20,20],
           body: [
             [{
                 text: '借款原因',
@@ -93,33 +91,34 @@ printChongkuan = (object) => {
             [{
               text: '暂领共计人民币(大写)',
               colSpan: 14,
-              fontSize: 12
+              fontSize: 12,
+              margin:[0,20]
             }, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}],
             [{
               text: '备注:',
-              colSpan: 7,
+              colSpan: 4,
               fontSize: 12
-            }, {}, {}, {}, {}, {}, {}, {
+            }, {}, {}, {}, {
               text: '科目',
-              colSpan: 7,
+              colSpan: 10,
               alignment: 'center',
               fontSize: 12
-            }, {}, {}, {}, {}, {}, {}],
+            }, {}, {}, {}, {}, {}, {}, {}, {}, {}],
             [{
-              text:'',
-              colSpan: 7,
+              text: '',
+              colSpan: 4,
               rowSpan: 2,
               border: [true, true, true, false]
-            }, {}, {}, {}, {}, {}, {}, {
+            }, {}, {}, {}, {
               text: '借方:',
-              colSpan: 7,
+              colSpan: 10,
               fontSize: 12
-            }, {}, {}, {}, {}, {}, {}],
-            [{}, {}, {}, {}, {}, {}, {}, {
+            }, {}, {}, {}, {}, {}, {}, {}, {}, {}, ],
+            [{}, {}, {}, {}, {
               text: '贷方:',
-              colSpan: 7,
+              colSpan: 10,
               fontSize: 12
-            }, {}, {}, {}, {}, {}, {}],
+            }, {}, {}, {}, {}, {}, {}, {}, {}, {}, ],
             [{
               columns: [{
                   width: '*',
@@ -142,16 +141,17 @@ printChongkuan = (object) => {
                   fontSize: 12
                 },
               ],
-              colSpan: 7,
+              colSpan: 4,
               border: [true, false, true, true]
-            }, {}, {}, {}, {}, {}, {}, {
+            }, {}, {}, {}, {
               text: '财务审核(章):',
-              colSpan: 7,
+              colSpan: 10,
               fontSize: 12
-            }, {}, {}, {}, {}, {}, {}],
+            }, {}, {}, {}, {}, {}, {}, {}, {}, {}, ],
           ]
         }
       }
+
     ],
     styles: {
       subtitle: {

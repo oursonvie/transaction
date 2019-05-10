@@ -81,6 +81,17 @@ Template.DLCenterDetail.events({
   },
   'click .btn-download-pdf': function() {
 
+    
+
+    // get all the data
+
+    // date
+    currentDate = moment().format('YYYY-MM-DD')
+    splitDate = currentDate.split('-')
+    date = `${splitDate[0]}年${splitDate[1]}月${splitDate[2]}日`
+    // accountInfo
+    // amount
+
     let renderObject = {
       name: this.bankaccountdetail.name
     }
