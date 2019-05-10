@@ -78,5 +78,40 @@ Template.DLCenterDetail.events({
   },
   'click .btn-baseinfo': function() {
     Session.set('subActionType', 'baseinfo')
+  },
+  'click .btn-download-pdf': function() {
+
+    let renderObject = {
+      name: this.bankaccountdetail.name
+    }
+
+    console.log(renderObject)
+
+
+    pdfMake.fonts = {
+     msyh: {
+           normal: 'Microsoft YaHei.ttf',
+           bold: 'Microsoft YaHei.ttf',
+           italics: 'Microsoft YaHei.ttf',
+           bolditalics: 'Microsoft YaHei.ttf'
+        }
+    }
+
+
+    let downloadFileName = `${renderObject.name}.pdf`
+
+    try {
+      // download pdf
+      pdfMake.createPdf(printChongkuan(renderObject)).download(downloadFileName);
+
+
+    } catch(err) {
+      // record error
+      console.error(err)
+      console.log(err)
+
+    }
+
+
   }
 })
