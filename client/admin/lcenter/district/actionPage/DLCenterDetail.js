@@ -81,24 +81,7 @@ Template.DLCenterDetail.events({
   },
   'click .btn-download-pdf': function() {
 
-    
-
-    // get all the data
-
-    // date
-    currentDate = moment().format('YYYY-MM-DD')
-    splitDate = currentDate.split('-')
-    date = `${splitDate[0]}年${splitDate[1]}月${splitDate[2]}日`
-    // accountInfo
-    // amount
-
-    let renderObject = {
-      name: this.bankaccountdetail.name
-    }
-
-    console.log(renderObject)
-
-
+    // init make pdfMake
     pdfMake.fonts = {
      msyh: {
            normal: 'Microsoft YaHei.ttf',
@@ -108,21 +91,58 @@ Template.DLCenterDetail.events({
         }
     }
 
+    // date
+    currentDate = moment().format('YYYY-MM-DD')
+    splitDate = currentDate.split('-')
+    date = `${splitDate[0]}年${splitDate[1]}月${splitDate[2]}日`
 
-    let downloadFileName = `${renderObject.name}.pdf`
+    // set target id
+    lcenterId = this._id
 
-    try {
-      // download pdf
-      pdfMake.createPdf(printChongkuan(renderObject)).download(downloadFileName);
-
-
-    } catch(err) {
-      // record error
-      console.error(err)
-      console.log(err)
-
+    // init render object
+    let renderObject = {
+      name: this.bankaccountdetail.name,
+      date: date,
+      bankDetail: DLearningCenter.findOne({_id:lcenterId}).bankaccountdetail
     }
 
+    // set download file name
+    let downloadFileName = `${renderObject.name}.pdf`
+
+    // get payment information
+    PromiseMeteorCall('districtCenterPersonFees', lcenterId)
+    .then(res => {
+      // calculate fees detail with ratio
+      let total = 0
+      lodash.forEach(res, function(center) {
+        total += lodash.sumBy(center.paymentdetail, 'totalFee')
+      })
+
+      // get feesInfo the further reference
+      let feesInfo = {}
+      feesInfo.extraAmount = DLearningCenter.findOne({_id:lcenterId}).extraAmount
+      feesInfo.unionPay = total
+      feesInfo.total = total + feesInfo.extraAmount
+      feesInfo.lowratio = DLearningCenter.findOne({_id:lcenterId}).returnratio
+      feesInfo.currentratio = getRatio(feesInfo.total, feesInfo.lowratio)
+
+      moneyShot = feesInfo.total * feesInfo.currentratio
+
+      renderObject.returnAmount = moneyShot.toFixed(2)
+      // console.log(`moneyShot: ${moneyShot.toFixed(2)}`)
+
+      try {
+        // download pdf
+        pdfMake.createPdf(printChongkuan(renderObject)).download(downloadFileName);
+
+      } catch(err) {
+        // record error
+        console.error(err)
+        console.log(err)
+      }
+
+    })
+    .catch(err => {console.log(err)})
 
   }
 })

@@ -1,6 +1,29 @@
 // render function starts here
 printChongkuan = (object) => {
 
+
+
+  // process amount into digits
+  removeDotNumberStr = object.returnAmount.replace('.','')
+  paddedNumberStr = removeDotNumberStr.padStart(10, 'x');
+
+  digis = {
+    0:paddedNumberStr[0],
+    1:paddedNumberStr[1],
+    2:paddedNumberStr[2],
+    3:paddedNumberStr[3],
+    4:paddedNumberStr[4],
+    5:paddedNumberStr[5],
+    6:paddedNumberStr[6],
+    7:paddedNumberStr[7],
+    8:paddedNumberStr[8],
+    9:paddedNumberStr[9]
+  }
+
+  object.digis = digis
+
+  console.log(object)
+
   // start pdf formatting
   let docPDF = {
 
@@ -38,7 +61,7 @@ printChongkuan = (object) => {
           },
           {
             width: '*',
-            text: '2019年04月21日',
+            text: `${object.date}`,
             fontSize: 12,
             margin: [0, 10]
           },
@@ -87,9 +110,19 @@ printChongkuan = (object) => {
               {}, {}, {}, {}, {}, {}, {}, {}, {}
             ],
             [{}, {}, {}, {}, '千', '百', '十', '万', '千', '百', '十', '元', '角', '分'],
-            ['借1903批次学费返款', 'Another one here', 'OK?', 'OK?', '1', '2', '1', '2', '1', '2', '1', '2', '1', '2'],
+            ['借1903批次学费返款', `${object.bankDetail.name}`, `${object.bankDetail.accountno}`, `${object.bankDetail.branchname}`,
+            (object.digis[0] == 'x') ? '' : object.digis[0],
+            (object.digis[1] == 'x') ? '' : object.digis[1],
+            (object.digis[2] == 'x') ? '' : object.digis[2],
+            (object.digis[3] == 'x') ? '' : object.digis[3],
+            (object.digis[4] == 'x') ? '' : object.digis[4],
+            (object.digis[5] == 'x') ? '' : object.digis[5],
+            (object.digis[6] == 'x') ? '' : object.digis[6],
+            (object.digis[7] == 'x') ? '' : object.digis[7],
+            (object.digis[8] == 'x') ? '' : object.digis[8],
+            (object.digis[9] == 'x') ? '' : object.digis[9]],
             [{
-              text: '暂领共计人民币(大写)',
+              text: `暂领共计人民币(大写) ${chineseNumberFormatter(object.returnAmount)}`,
               colSpan: 14,
               fontSize: 12,
               margin:[0,20]
