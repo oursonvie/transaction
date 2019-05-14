@@ -1,11 +1,18 @@
 // render function starts here
 printChongkuan = (object) => {
 
-
-
   // process amount into digits
   removeDotNumberStr = object.returnAmount.replace('.','')
   paddedNumberStr = removeDotNumberStr.padStart(10, 'x');
+
+  // find last x
+  replaceIndex = paddedNumberStr.lastIndexOf("x")
+  // replace the x to $
+  if (replaceIndex != -1) {
+    paddedNumberStr = replaceAt(paddedNumberStr, replaceIndex, '￥')
+  }
+
+  console.log(paddedNumberStr)
 
   digis = {
     0:paddedNumberStr[0],
@@ -122,13 +129,13 @@ printChongkuan = (object) => {
             (object.digis[8] == 'x') ? '' : object.digis[8],
             (object.digis[9] == 'x') ? '' : object.digis[9]],
             [{
-              text: `暂领共计人民币(大写) ${chineseNumberFormatter(object.returnAmount)}`,
+              text: `暂领共计人民币(大写) ${digitUppercase(object.returnAmount)}`,
               colSpan: 14,
               fontSize: 12,
               margin:[0,20]
             }, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}],
             [{
-              text: '备注:',
+              text: `备注: ${ (object.bankDetail.memo) ? object.bankDetail.memo : ''}`,
               colSpan: 4,
               fontSize: 12
             }, {}, {}, {}, {

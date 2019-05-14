@@ -1,69 +1,34 @@
-chineseNumberDict = {
-  1:'壹',
-  2:'贰',
-  3:'叁',
-  4:'肆',
-  5:'伍',
-  6:'陆',
-  7:'柒',
-  8:'捌',
-  9:'玖',
-  0:'零'
-}
+digitUppercase = (n) => {
+    var fraction = ['角', '分'];
+    var digit = [
+        '零', '壹', '贰', '叁', '肆',
+        '伍', '陆', '柒', '捌', '玖'
+    ];
+    var unit = [
+        ['元', '万', '亿'],
+        ['', '拾', '佰', '仟']
+    ];
+    var head = n < 0 ? '欠' : '';
+    n = Math.abs(n);
+    var s = '';
+    for (var i = 0; i < fraction.length; i++) {
+        s += (digit[Math.floor(n * 10 * Math.pow(10, i)) % 10] + fraction[i]).replace(/零./, '');
+    }
+    s = s || '整';
+    n = Math.floor(n);
+    for (var i = 0; i < unit[0].length && n > 0; i++) {
+        var p = '';
+        for (var j = 0; j < unit[1].length && n > 0; j++) {
+            p = digit[n % 10] + unit[1][j] + p;
+            n = Math.floor(n / 10);
+        }
+        s = p.replace(/(零.)*零$/, '').replace(/^$/, '零') + unit[0][i] + s;
+    }
+    return head + s.replace(/(零.)*零元/, '元')
+        .replace(/(零.)+/g, '零')
+        .replace(/^整$/, '零元整');
+};
 
-chineseUnitDict = {
-  0:'仟',
-  1:'佰',
-  2:'拾',
-  3:'万',
-  4:'仟',
-  5:'佰',
-  6:'拾',
-  7:'圆',
-  8:'角',
-  9:'分'
-}
-
-chineseNumberFormatter = (number) => {
-
-  // split whole number into digis
-  splitdNumber = number.split('.')
-  paddedNumber = splitdNumber[0].padStart(8, 'x');
-
-  // handle whole number
-  digis = {
-    0:paddedNumber[0],
-    1:paddedNumber[1],
-    2:paddedNumber[2],
-    3:paddedNumber[3],
-    4:paddedNumber[4],
-    5:paddedNumber[5],
-    6:paddedNumber[6],
-    7:paddedNumber[7],
-  }
-
-  wholeNumber = []
-
-  for(i=0;i<8;i++) {
-    wholeNumber+= (digis[i] == 'x') ? '' : `${chineseNumberDict[digis[i]]}${chineseUnitDict[i]}`
-  }
-
-  // handle digits
-  digits = splitdNumber[1]
-  digitsNumber = ''
-
-  if (digits[0] == '0' && digits[1] == '0') {
-    digitsNumber = ''
-  } else if ( digits[0] == '0') {
-    digitsNumber = `${chineseNumberDict[digits[1]]}分`
-  } else if ( digits[1] == '0' ) {
-    digitsNumber = `${chineseNumberDict[digits[0]]}角`
-  } else {
-    digitsNumber = `${chineseNumberDict[digits[0]]}角${chineseNumberDict[digits[1]]}分`
-  }
-
-  finalStr = `${wholeNumber}${digitsNumber}`
-
-  return finalStr
-
+replaceAt = (string, index, replace) => {
+  return string.substring(0, index) + replace + string.substring(index + 1);
 }
