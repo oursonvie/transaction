@@ -105,3 +105,11 @@ Meteor.publish('Settings', function() {
     throw new Meteor.Error( '500', 'No Premission' );
   }
 })
+
+Meteor.publish('downloadPdfs', function() {
+  if (this.userId) {
+    return DownloadPDFS.find()
+  } else {
+    throw new Meteor.Error( '500', 'No Premission' );
+  }
+})

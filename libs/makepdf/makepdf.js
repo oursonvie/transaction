@@ -6,10 +6,10 @@ makeRenderObject = (object) => {
 
     // page setting
     pageSize: 'A4',
-    pageMargins: [ 40, 20, 40, 20 ],
+    pageMargins: [ 40, 60, 40, 20 ],
     defaultStyle: {
       font: 'msyh',
-      fontSize: 10
+      fontSize: 8
     },
 
     content: [
@@ -17,7 +17,7 @@ makeRenderObject = (object) => {
       {
         text: '学费结算确认函',
         alignment: 'center',
-        fontSize: 18
+        fontSize: 14
       },
 
       {
@@ -104,7 +104,7 @@ makeRenderObject = (object) => {
       },
 
       {
-        text: '5. 返款发票抬头:西安交通大学继续教育学院; 内容:学费返还款'
+        text: '5. 返款发票抬头:西安交通大学; 内容:学费返还款'
       },
 
       {
@@ -121,14 +121,14 @@ makeRenderObject = (object) => {
     styles: {
       subtitle: {
         marginTop: 5,
-        fontSize: 14,
+        fontSize: 8,
         bold: true,
         decorationStyle: 'solid',
         decorationColor: 'black'
       },
       title: {
         marginTop: 5,
-        fontSize: 14,
+        fontSize: 10,
         bold: true,
         decoration: 'underline',
         decorationStyle: 'solid',
